@@ -13,6 +13,7 @@ class Post extends Model
         'title',
         'excerpt',
         'body'];
+    protected $with = ['category','user'];
 
     public function category(){
         return $this->belongsTo(Category::class);

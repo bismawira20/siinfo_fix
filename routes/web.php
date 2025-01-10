@@ -33,15 +33,15 @@ Route::get('/categories', function(){
 Route::get('/categories/{category:slug}', function(Category $category){
     return view('berita',[
         "title" => "Kategori Berita : $category->name",
-        "posts" => $category->posts,
-        "category" => $category->name,
+        "posts" => $category->posts->load('category','user'),
+        // "category" => $category->name,
     ]);
 });
 
 Route::get('/authors/{user:username}', function(User $user){
     return view('berita',[
         "title" => "Berita oleh : $user->name",
-        "posts" => $user->posts,
+        "posts" => $user->posts->load('category','user'),
     ]);
 });
 
