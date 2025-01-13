@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Models\Post;
 use App\Models\User;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Middleware\IsAdmin;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('home',[
@@ -43,14 +46,16 @@ Route::post('/logout',[LoginController::class,'logout']);
 Route::get('/register',[RegisterController::class,'index'])->middleware('guest');
 Route::post('/register',[RegisterController::class,'store']);
 
-// Route::get('/dashboard',function(){
-//     return view('dashboard.index');
-// })->middleware('auth');
+Route::get('/dashboard',function(){
+    return view('dashboard.index');})->middleware('auth');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
-});
+Route::middleware(IsAdmin::class)->resource('/dashboard/categories', AdminCategoryController::class)
+->except('show');    
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/dashboard', [DashboardController::class, 'index'])
+//         ->name('dashboard');
+// });
 
 // Route::get('/categories/{category:slug}', function(Category $category){
 //     return view('berita',[
