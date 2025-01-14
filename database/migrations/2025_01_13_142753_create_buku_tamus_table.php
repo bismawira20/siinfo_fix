@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('buku_tamus', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->string('nama');
+            $table->foreignId('user_id');
+            $table->foreignId('bidang_id');
+            $table->string('instansi');
+            $table->text('tujuan');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('buku_tamus');
     }
 };

@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Tambah Kategori</h1>
+  <h1 class="h2">Tambah Bidang</h1>
 </div>
 
 <div class="table-responsive small col-lg-6">
@@ -14,23 +14,23 @@
   </div>
   
   @endif
-    <a href="/dashboard/categories/create" class="btn btn-primary mb-3">Tambah Kategori Berita</a>
+    <a href="/dashboard/bidangs/create" class="btn btn-primary mb-3">Tambah Bidang Kerja</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Nama Kategori</th>
+          <th scope="col">Nama Bidang</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($categories as $category)
+        @foreach ($bidangs as $bidang)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $category->name }}</td>
+          <td>{{ $bidang->name }}</td>
           <td>
-            <a href="/dashboard/categories/{{ $category->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
-            <form action="/dashboard/categories/{{ $category->id }}" method="post" class="d-inline">
+            <a href="/dashboard/bidangs/{{ $bidang->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
+            <form action="/dashboard/bidangs/{{ $bidang->id }}" method="post" class="d-inline">
               @method('delete')
                 <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">
                   <i class="bi bi-trash fs-6"></i></button>

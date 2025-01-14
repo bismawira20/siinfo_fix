@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\AdminCategoryController;
-use App\Http\Controllers\DashboardController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Middleware\IsAdmin;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminBidangController;
+use App\Http\Controllers\AdminCategoryController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -51,7 +52,9 @@ Route::get('/dashboard',function(){
 
 Route::middleware(IsAdmin::class)->resource('/dashboard/categories', AdminCategoryController::class)
 ->except('show');    
-
+Route::middleware(IsAdmin::class)->resource('/dashboard/bidangs', AdminBidangController::class)
+->except('show');
+   
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', [DashboardController::class, 'index'])
 //         ->name('dashboard');
