@@ -11,6 +11,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\BukuTamuController;
+use App\Http\Middleware\IsUser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -55,6 +57,25 @@ Route::middleware(IsAdmin::class)->resource('/dashboard/categories', AdminCatego
 Route::middleware(IsAdmin::class)->resource('/dashboard/bidangs', AdminBidangController::class)
 ->except('show');
    
+Route::middleware(['auth', IsUser::class])->group(function () {
+    // Route untuk Buku Tamu
+    Route::prefix('dashboard/bukutamu')->group(function () {
+        Route::get('/', [BukuTamuController::class, 'index'])->name('bukutamu.index');
+        Route::get('/create', [BukuTamuController::class, 'create'])->name('bukutamu.create');
+        Route::post('/store', [BukuTamuController::class, 'store'])->name('bukutamu.store');
+        Route::delete('/{bukutamu}/destroy', [BukuTamuController::class, 'destroy'])->name('bukutamu.destroy');
+        Route::get('/{bukutamu}/edit', [BukuTamuController::class, 'edit'])->name('bukutamu.edit');
+        Route::put('/{bukutamu}/update', [BukuTamuController::class, 'update'])->name('bukutamu.update');
+    });
+});
+
+// Route::middleware(IsUser::class)->get('/dashboard/bukutamu', [BukuTamuController::class,'index']);
+// Route::middleware(IsUser::class)->get('/dashboard/bukutamu/create', [BukuTamuController::class,'create']);
+// Route::middleware(IsUser::class)->post('/dashboard/bukutamu/store', [BukuTamuController::class,'store']);
+// Route::middleware(IsUser::class)->delete('/dashboard/bukutamu/destroy', [BukuTamuController::class,'destroy']);
+
+
+
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/dashboard', [DashboardController::class, 'index'])
 //         ->name('dashboard');

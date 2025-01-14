@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Bidang;
 use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -54,6 +55,16 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'name' =>'Informasi',
             'slug' =>'informasi',
+        ]);
+
+        Bidang::create([
+            'name' =>'Pengembangan Komunikasi Publik',
+        ]);
+        Bidang::create([
+            'name' =>'Pengelolaan Informasi dan Saluran Komunikasi Publik',
+        ]);
+        Bidang::create([
+            'name' =>'Pengelolaan Infrastruktur',
         ]);
 
         Post::factory(10)->create();

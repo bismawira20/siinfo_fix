@@ -20,6 +20,21 @@
           </li>
         </ul>
         {{-- <hr class="my-3"> --}}
+        @can('user')
+        <h6 class ="sidebar-heading d-flex justify-content-between align-items-center 
+        px-3 mt-4 mb-1 text-muted">
+          <span>USER</span>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" 
+            aria-current="page" href="/dashboard/bukutamu">
+              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              Kunjungan
+            </a>
+          </li>
+        </ul>
+        @endcan
 
         @can('admin')
         <h6 class ="sidebar-heading d-flex justify-content-between align-items-center 

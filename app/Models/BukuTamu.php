@@ -12,9 +12,12 @@ class BukuTamu extends Model
     protected $fillable = [
         'nama',
         'no_telp',
+        'user_id',
+        'bidang_id',
         'instansi',
         'tujuan',
-        'tanggal'];
+        'tanggal',
+        'status'];
     protected $with = ['bidang','user'];
 
     public function bidang(){

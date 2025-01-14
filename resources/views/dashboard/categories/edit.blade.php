@@ -19,7 +19,7 @@
         </div>
         @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update Kategori</button>
     </form>
 </div>
   
