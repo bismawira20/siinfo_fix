@@ -2,10 +2,13 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Kunjungan Anda</h1>
+  <h1 class="h2">Dashboard Kunjungan</h1>
 </div>
-
-<div class="table-responsive small">
+{{-- <div class="input-group mb-3 col-lg-30">
+  <input type="text" class="form-control" placeholder="Cari" name ="search">
+  <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Cari</button>
+</div> --}}
+<div class="table-responsive small col-lg-15">
   @if(session()->has('success'))
   </div>
     <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
@@ -37,7 +40,7 @@
           <td>{{ $b->instansi }}</td>
           <td>{{ $b->bidang->name }}</td>
           <td>{{ $b->tujuan }}</td>
-          <td>{{ $b->tanggal }}</td>
+          <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
           <td>{{ $b->status }}</td>
           <td>
             <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
@@ -49,7 +52,7 @@
             <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
               @csrf
               @method('put')
-                <button class="badge bg-danger border-0">
+                <button class="badge bg-danger border-0 mt-1">
                     <i class="bi bi-x-lg fs-6"></i></button>
             </form>
           </td>
@@ -58,4 +61,13 @@
       </tbody>
     </table>
   </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline">
+      @csrf
+      @method('put')
+      <button class="btn btn-success rounded">Setujui Semua</button>
+    </form>
+    
+    <div class="d-inline">{{ $bukutamu->links() }}</div>
+</div>
 @endsection

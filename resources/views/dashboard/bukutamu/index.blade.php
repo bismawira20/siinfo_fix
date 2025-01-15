@@ -37,7 +37,7 @@
           <td>{{ $b->instansi }}</td> --}}
           <td>{{ $b->bidang->name }}</td>
           <td>{{ $b->tujuan }}</td>
-          <td>{{ $b->tanggal }}</td>
+          <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
           <td>
             <a href="/dashboard/bukutamu/{{ $b->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
             <form action="/dashboard/bukutamu/{{ $b->id }}/destroy" method="post" class="d-inline">
@@ -52,5 +52,8 @@
         @endforeach
       </tbody>
     </table>
+  </div>
+  <div>
+    {{ $bukutamu->links() }}
   </div>
 @endsection

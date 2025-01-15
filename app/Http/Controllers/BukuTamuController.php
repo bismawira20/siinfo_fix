@@ -13,7 +13,7 @@ class BukuTamuController extends Controller
         // return 'uji';
         $bukutamu = BukuTamu::where('user_id', Auth::id())
                          ->with('bidang') // Tambahkan eager loading
-                         ->get();
+                         ->paginate(10);
         return view('dashboard.bukutamu.index', compact('bukutamu'));
     }
 
@@ -73,7 +73,7 @@ class BukuTamuController extends Controller
     }
 
     public function adminIndex(){
-        $bukutamu = BukuTamu::all();
+        $bukutamu = BukuTamu::paginate(10);
         return view('dashboard.bukutamu.admin.index', compact('bukutamu'));
     }
 
@@ -91,5 +91,13 @@ class BukuTamuController extends Controller
         ]);
 
         return redirect('/dashboard/bukutamu/admin')->with("success", "Agenda kunjungan ditolak!");
+    }
+
+    public function setujuSemua(){
+        BukuTamu::where('status', 'pending')->update([
+            'status' => 'disetujui'
+        ]);
+
+        return redirect('/dashboard/bukutamu/admin')->with("success", "Agenda kunjungan disetujui!");
     }
 }

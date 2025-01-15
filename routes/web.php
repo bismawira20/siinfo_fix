@@ -74,6 +74,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/',[BukuTamuController::class, 'adminIndex'])->name('bukutamu.admin.index');
         Route::put('/{bukutamu}/setuju',[BukuTamuController::class,'setuju'])->name('bukutamu.admin.setuju');
         Route::put('/{bukutamu}/tolak',[BukuTamuController::class,'tolak'])->name('bukutamu.admin.tolak');
+        Route::put('/setujuSemua',[BukuTamuController::class,'setujuSemua'])->name('bukutamu.admin.setujuSemua');
     });
 });
 
