@@ -13,41 +13,46 @@
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   @endif
-    <a href="/dashboard/bukutamu/create" class="btn btn-primary mb-3">Agendakan Kunjungan</a>
+    {{-- <a href="/dashboard/bukutamu/create" class="btn btn-primary mb-3">Agendakan Kunjungan</a> --}}
     <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th scope="col">No</th>
-          {{-- <th scope="col">Nama</th>
+          <th scope="col">Nama</th>
           <th scope="col">No Telepon</th>
-          <th scope="col">Instansi</th> --}}
+          <th scope="col">Instansi</th>
           <th scope="col">Tujuan Bidang</th>
           <th scope="col">Tujuan Kunjungan</th>
           <th scope="col">Tanggal</th>
-          <th scope="col">Aksi</th>
           <th scope="col">Status</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
         @foreach ($bukutamu as $b)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          {{-- <td>{{ $b->nama }}</td>
+          <td>{{ $b->nama }}</td>
           <td>{{ $b->no_telp }}</td>
-          <td>{{ $b->instansi }}</td> --}}
+          <td>{{ $b->instansi }}</td>
           <td>{{ $b->bidang->name }}</td>
           <td>{{ $b->tujuan }}</td>
           <td>{{ $b->tanggal }}</td>
+          <td>{{ $b->status }}</td>
           <td>
-            <a href="/dashboard/bukutamu/{{ $b->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
-            <form action="/dashboard/bukutamu/{{ $b->id }}/destroy" method="post" class="d-inline">
+            <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
+            @csrf
+            @method('put')
+            <button class="badge bg-success border-0">
+                <i class="bi bi-check-lg fs-6"></i></button>
+            </form>
+            <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
               @csrf
-              @method('delete')
-                <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">
-                  <i class="bi bi-trash fs-6"></i></button>
+              @method('put')
+                <button class="badge bg-danger border-0">
+                    <i class="bi bi-x-lg fs-6"></i></button>
             </form>
           </td>
-          <td>{{ $b->status }}</td>
         </tr>
         @endforeach
       </tbody>

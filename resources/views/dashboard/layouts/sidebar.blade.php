@@ -56,6 +56,13 @@
               Bidang
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/bidangs*') ? 'active' : '' }}" 
+            aria-current="page" href="/dashboard/bukutamu/admin">
+              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              Kunjungan
+            </a>
+          </li>
         </ul>
         @endcan
         

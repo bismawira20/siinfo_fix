@@ -12,7 +12,6 @@
     <span>{{ session('success') }}</span>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-  
   @endif
     <a href="/dashboard/categories/create" class="btn btn-primary mb-3">Tambah Kategori Berita</a>
     <table class="table table-striped table-sm">

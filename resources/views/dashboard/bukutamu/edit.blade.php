@@ -11,9 +11,9 @@
 </div>
 
 <div class="col-lg-7">
-    <form method="post" action="/dashboard/bukutamu/{{ $bukutamu->id }}/put" class="mb-5">
-        @method('put')
+    <form method="post" action="/dashboard/bukutamu/{{ $bukutamu->id }}/update" class="mb-5">
         @csrf
+        @method('put')
         <div class="mb-3">
         <label for="nama" class="form-label @error('nama') is-invalid @enderror">Nama</label>
         <input type="text" class="form-control" 

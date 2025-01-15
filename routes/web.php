@@ -64,8 +64,16 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::get('/create', [BukuTamuController::class, 'create'])->name('bukutamu.create');
         Route::post('/store', [BukuTamuController::class, 'store'])->name('bukutamu.store');
         Route::delete('/{bukutamu}/destroy', [BukuTamuController::class, 'destroy'])->name('bukutamu.destroy');
-        Route::get('/{bukutamu}/edit', [BukuTamuController::class, 'edit'])->name('bukutamu.edit');
         Route::put('/{bukutamu}/update', [BukuTamuController::class, 'update'])->name('bukutamu.update');
+        Route::get('/{bukutamu}/edit', [BukuTamuController::class, 'edit'])->name('bukutamu.edit');
+    });
+});
+
+Route::middleware(['auth', IsAdmin::class])->group(function (){
+    Route::prefix('dashboard/bukutamu/admin')->group(function () {
+        Route::get('/',[BukuTamuController::class, 'adminIndex'])->name('bukutamu.admin.index');
+        Route::put('/{bukutamu}/setuju',[BukuTamuController::class,'setuju'])->name('bukutamu.admin.setuju');
+        Route::put('/{bukutamu}/tolak',[BukuTamuController::class,'tolak'])->name('bukutamu.admin.tolak');
     });
 });
 

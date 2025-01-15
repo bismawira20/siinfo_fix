@@ -71,4 +71,25 @@ class BukuTamuController extends Controller
 
         return redirect('/dashboard/bukutamu')->with("success", "Agenda kunjungan berhasil diupdate!");
     }
+
+    public function adminIndex(){
+        $bukutamu = BukuTamu::all();
+        return view('dashboard.bukutamu.admin.index', compact('bukutamu'));
+    }
+
+    public function setuju(BukuTamu $bukutamu){
+        BukuTamu::where('id', $bukutamu->id)->update([
+            'status' => 'disetujui'
+        ]);
+
+        return redirect('/dashboard/bukutamu/admin')->with("success", "Agenda kunjungan disetujui!");
+    }
+
+    public function tolak(BukuTamu $bukutamu){
+        BukuTamu::where('id', $bukutamu->id)->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect('/dashboard/bukutamu/admin')->with("success", "Agenda kunjungan ditolak!");
+    }
 }
