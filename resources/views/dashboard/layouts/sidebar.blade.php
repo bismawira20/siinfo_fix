@@ -33,6 +33,13 @@
               Kunjungan
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" 
+            aria-current="page" href="/dashboard/post">
+              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              Berita Kunjungan
+            </a>
+          </li>
         </ul>
         @endcan
 
@@ -61,6 +68,13 @@
             aria-current="page" href="/dashboard/bukutamu/admin">
               <svg class="bi"><use xlink:href="#puzzle"/></svg>
               Kunjungan
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2" 
+            aria-current="page" href="/dashboard/post/admin">
+              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              Berita
             </a>
           </li>
         </ul>

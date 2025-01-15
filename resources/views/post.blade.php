@@ -9,7 +9,7 @@
                         in <a href="/berita?category={{ $post->category->slug }}"  class="text-decoration-none">
                             {{$post->category->name}}</a></p>
                     {{-- <h5>{{ $post["author"] }}</h5> --}}
-                    <image src = "https://th.bing.com/th/id/OIP.O5ZhPx6rW1FRKx6o2pXgvAHaCe?w=314&h=116&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                    <image src = "https://picsum.photos/1200/400"
                     alt="{{ $post->category->name }}" class="img-fluid"></image>
                     
                     <article class="my-3 fs-6">

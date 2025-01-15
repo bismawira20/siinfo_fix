@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\BukuTamuController;
+use App\Http\Controllers\PostDashboardController;
 use App\Http\Middleware\IsUser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -52,6 +53,7 @@ Route::post('/register',[RegisterController::class,'store']);
 Route::get('/dashboard',function(){
     return view('dashboard.index');})->middleware('auth');
 
+// Route untuk Bagian Admin
 Route::middleware(IsAdmin::class)->resource('/dashboard/categories', AdminCategoryController::class)
 ->except('show');    
 Route::middleware(IsAdmin::class)->resource('/dashboard/bidangs', AdminBidangController::class)
@@ -67,43 +69,28 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{bukutamu}/update', [BukuTamuController::class, 'update'])->name('bukutamu.update');
         Route::get('/{bukutamu}/edit', [BukuTamuController::class, 'edit'])->name('bukutamu.edit');
     });
+    //Route untuk Berita
+    Route::prefix('dashboard/post')->group(function(){
+        Route::get('/',[PostDashboardController::class, 'index'])->name('post.index');
+        Route::get('/create',[PostDashboardController::class, 'create'])->name('post.create');
+        Route::post('/store', [PostDashboardController::class, 'store'])->name('post.store');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
+    // Route untuk Buku Tamu  
     Route::prefix('dashboard/bukutamu/admin')->group(function () {
         Route::get('/',[BukuTamuController::class, 'adminIndex'])->name('bukutamu.admin.index');
         Route::put('/{bukutamu}/setuju',[BukuTamuController::class,'setuju'])->name('bukutamu.admin.setuju');
         Route::put('/{bukutamu}/tolak',[BukuTamuController::class,'tolak'])->name('bukutamu.admin.tolak');
         Route::put('/setujuSemua',[BukuTamuController::class,'setujuSemua'])->name('bukutamu.admin.setujuSemua');
     });
+    //Route untuk Berita
+    Route::prefix('dashboard/post/admin')->group(function(){
+        Route::get('/',[PostDashboardController::class, 'adminIndex'])->name('post.admin.index');
+        Route::get('/create',[PostDashboardController::class, 'adminCreate'])->name('post.admin.create');
+        Route::post('/store', [PostDashboardController::class, 'adminStore'])->name('post.admin.store');
+        Route::get('/{post}/show',[PostDashboardController::class, 'adminShow'])->name('post.admin.show');
+    });
 });
-
-// Route::middleware(IsUser::class)->get('/dashboard/bukutamu', [BukuTamuController::class,'index']);
-// Route::middleware(IsUser::class)->get('/dashboard/bukutamu/create', [BukuTamuController::class,'create']);
-// Route::middleware(IsUser::class)->post('/dashboard/bukutamu/store', [BukuTamuController::class,'store']);
-// Route::middleware(IsUser::class)->delete('/dashboard/bukutamu/destroy', [BukuTamuController::class,'destroy']);
-
-
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/dashboard', [DashboardController::class, 'index'])
-//         ->name('dashboard');
-// });
-
-// Route::get('/categories/{category:slug}', function(Category $category){
-//     return view('berita',[
-//         "title" => "Kategori Berita : $category->name",
-//         "posts" => $category->posts->load('category','user'),
-//         "active" => 'category',
-//         // "category" => $category->name,
-//     ]);
-// });
-
-// Route::get('/authors/{user:username}', function(User $user){
-//     return view('berita',[
-//         "title" => "Berita oleh : $user->name",
-//         "posts" => $user->posts->load('category','user'),
-//         "active" => 'berita',
-//     ]);
-// });
 

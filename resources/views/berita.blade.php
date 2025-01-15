@@ -22,7 +22,7 @@
 
     @if ($posts->count())
         <div class="card mb-3">
-            <img src="https://th.bing.com/th/id/OIP.O5ZhPx6rW1FRKx6o2pXgvAHaCe?w=314&h=116&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+            <img src="https://picsum.photos/1200/400"
             class="card-img-top" alt="{{ $posts[0]->category->name }}">
             <div class="card-body text-center">
                 <a href="/posts/{{$posts[0]->slug}}" class="text-decoration-none text-dark">
@@ -52,7 +52,7 @@
                             {{ $post->category->name }}
                         </a>
                         </div>
-                        <img src="https://th.bing.com/th/id/OIP.W6IfZ9U8aIW8ox3um1Ou9wHaHa?w=188&h=188&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                        <img src="https://picsum.photos/500/500"
                         class="card-img-top" alt="{{ $post->category->name }}">
                         <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>

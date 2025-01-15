@@ -4,13 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\HasSlug;
 
 class Post extends Model
 {
     use HasFactory;
+    use HasSlug;
 
     protected $fillable = [
         'title',
+        'category_id',
+        'user_id',
+        'slug',
         'excerpt',
         'body'];
     protected $with = ['category','user'];
@@ -39,5 +45,12 @@ class Post extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug');
     }
 }
