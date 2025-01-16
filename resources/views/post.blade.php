@@ -9,8 +9,15 @@
                         in <a href="/berita?category={{ $post->category->slug }}"  class="text-decoration-none">
                             {{$post->category->name}}</a></p>
                     {{-- <h5>{{ $post["author"] }}</h5> --}}
+                    @if ($post->image)
+                    <div style="max-height: 350px; overflow:hidden">
+                      <image src = "{{ asset('storage/'. $post->image) }}"
+                      alt="{{ $post->category->name }}" class="img-fluid"></image>
+                    </div>
+                    @else
                     <image src = "https://picsum.photos/1200/400"
-                    alt="{{ $post->category->name }}" class="img-fluid"></image>
+                    alt="{{ $post->category->name }}" class="img-fluid mt-3"></image>
+                    @endif
                     
                     <article class="my-3 fs-6">
                         <p>{!! $post->body !!}</p>

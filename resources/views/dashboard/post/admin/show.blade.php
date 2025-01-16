@@ -18,8 +18,15 @@
                     <i class="bi bi-trash fs-6"></i></button>
               </form>
 
+              @if ($post->image)
+              <div style="max-height: 350px; overflow:hidden">
+                <image src = "{{ asset('storage/'. $post->image) }}"
+                alt="{{ $post->category->name }}" class="img-fluid mt-3"></image>
+              </div>
+              @else
               <image src = "https://picsum.photos/1200/400"
               alt="{{ $post->category->name }}" class="img-fluid mt-3"></image>
+              @endif
               
               <article class="my-3 fs-6">
                   <p>{!! $post->body !!}</p>

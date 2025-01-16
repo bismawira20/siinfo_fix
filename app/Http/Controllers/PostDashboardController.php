@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostDashboardController extends Controller
 {
@@ -49,8 +50,13 @@ class PostDashboardController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'category_id' =>'required',
+            'image' => 'image|file|max:1024',
             'body' => 'required'
         ]);
+
+        if($request->file('image')){
+            $validatedData['image'] = $request->file('image')->store('post-image');
+        }
 
         $validatedData['user_id'] = Auth::id();
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
@@ -61,6 +67,9 @@ class PostDashboardController extends Controller
     }
 
     public function adminDestroy(Post $post){
+        if($post->image){
+            Storage::delete($post->image);
+        }
         Post::destroy($post->id);
         return redirect('/dashboard/post/admin')->with("success", "Berita berhasil dihapus!");
 
@@ -77,12 +86,19 @@ class PostDashboardController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'category_id' =>'required',
-            'body' => 'required'
+            'body' => 'required',
+            'image' => 'image|file|max:1024',
         ]);
 
         $validatedData['user_id'] = Auth::id();
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
-
+        
+        if($request->file('image')){
+            if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-image');
+        }
         Post::where('id', $post->id)->update($validatedData);
 
         return redirect('/dashboard/post/admin')->with("success", "Berita berhasil diupdate!");

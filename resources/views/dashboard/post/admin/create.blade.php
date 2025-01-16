@@ -43,8 +43,14 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Foto Berita</label>
-            <input class="form-control" type="file" id="image" name="image">
+            <label for="image" class="form-label @error('image') is-invalid @enderror">Foto Berita</label>
+            <img class="img-preview img-fluid mb-3 col-sm-5">
+            <input class="form-control" type="file" id="image" name="image" onchange="previewImage()">
+            @error('image')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Tulisan Anda</label>
@@ -59,5 +65,22 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+<script>
+    function previewImage() {
+    const image = document.querySelector('#image');
+    const imgPreview = document.querySelector('.img-preview');
+
+    imgPreview.style.display = 'block';
+
+    const oFReader = new FileReader();
+    oFReader.readAsDataURL(image.files[0]);
+
+    oFReader.onload = function(oFEvent){
+        // Perbaiki penulisan variabel
+        imgPreview.src = oFEvent.target.result;
+    }
+}
+</script>
   
 @endsection

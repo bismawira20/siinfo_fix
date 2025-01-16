@@ -22,8 +22,18 @@
 
     @if ($posts->count())
         <div class="card mb-3">
+
+            @if ($posts[0]->image)
+            <div style="max-height: 350px; overflow:hidden">
+              <image src = "{{ asset('storage/'. $posts[0]->image) }}"
+              alt="{{ $posts[0]->category->name }}" class="img-fluid"></image>
+            </div>
+            @else
             <img src="https://picsum.photos/1200/400"
             class="card-img-top" alt="{{ $posts[0]->category->name }}">
+            @endif
+
+
             <div class="card-body text-center">
                 <a href="/posts/{{$posts[0]->slug}}" class="text-decoration-none text-dark">
                 <h3 class="card-title">{{ $posts[0]->title }}</h3>
@@ -52,8 +62,15 @@
                             {{ $post->category->name }}
                         </a>
                         </div>
+
+                        @if ($post->image)
+                          <image src = "{{ asset('storage/'. $post->image) }}"
+                          alt="{{ $post->category->name }}" class="img-fluid"></image>
+                        @else
                         <img src="https://picsum.photos/500/500"
                         class="card-img-top" alt="{{ $post->category->name }}">
+                        @endif
+
                         <div class="card-body">
                         <h5 class="card-title">{{ $post->title }}</h5>
                         <p>
