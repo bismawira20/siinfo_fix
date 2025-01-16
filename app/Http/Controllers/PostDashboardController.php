@@ -59,4 +59,32 @@ class PostDashboardController extends Controller
 
         return redirect('/dashboard/post/admin')->with("success", "Berita berhasil ditambahkan!");
     }
+
+    public function adminDestroy(Post $post){
+        Post::destroy($post->id);
+        return redirect('/dashboard/post/admin')->with("success", "Berita berhasil dihapus!");
+
+    }
+
+    public function adminEdit(Post $post){
+        return view('dashboard.post.admin.edit',[
+            'post' => $post,
+            'categories' =>Category::all()
+        ]);
+    }
+
+    public function adminUpdate(Request $request, Post $post){
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'category_id' =>'required',
+            'body' => 'required'
+        ]);
+
+        $validatedData['user_id'] = Auth::id();
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 100);
+
+        Post::where('id', $post->id)->update($validatedData);
+
+        return redirect('/dashboard/post/admin')->with("success", "Berita berhasil diupdate!");
+    }
 }

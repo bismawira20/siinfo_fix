@@ -17,16 +17,17 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h2>Tambah Berita</h2>
+    <h2>Edit Berita</h2>
 </div>
 
 <div class="col-lg-8">
-    <form method="post" action="/dashboard/post/admin/store" class="mb-5" enctype="multipart/form-data">
+    <form method="post" action="/dashboard/post/admin/{{ $post->id }}/update" class="mb-5">
         @csrf
+        @method('put')
         <div class="mb-3">
         <label for="title" class="form-label">Judul</label>
         <input type="text" class="form-control @error('title') is-invalid @enderror" 
-        id="title" name="title">
+        id="title" name="title" value="{{ old('title', $post->title) }}">
         @error('title')
         <div class="invalid-feedback">
             {{ $message }}
@@ -38,17 +39,17 @@
             <select class="form-select" name="category_id">
                 <option selected disabled>Silahkan Pilih Kategori Berita</option>
                 @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>  
+                @if(old('category_id', $post->category_id) == $category->id)
+                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                @else
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endif  
                 @endforeach
             </select>
         </div>
         <div class="mb-3">
-            <label for="image" class="form-label">Foto Berita</label>
-            <input class="form-control" type="file" id="image" name="image">
-        </div>
-        <div class="mb-3">
             <label for="body" class="form-label">Tulisan Anda</label>
-            <input id="body" type="hidden" name="body">
+            <input id="body" type="hidden" name="body" value="{{ old('body', $post->body) }}">
             <trix-editor input="body"></trix-editor>
             @error('body')
             <p class="text-danger">
@@ -56,7 +57,7 @@
             </p>
             @enderror
         </div>  
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Edit Berita</button>
     </form>
 </div>
   

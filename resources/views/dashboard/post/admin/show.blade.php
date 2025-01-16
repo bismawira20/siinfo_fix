@@ -9,9 +9,14 @@
       <div class="col-md-8">
               <h1 class="mb-3">{{ $post->title }}</h1>
             
-              <a href="/dashboard/post/admin" class="btn btn-success">Kembali ke Berita</a>
-              <a href="" class="btn btn-warning">Edit</a>
-              <a href="" class="btn btn-danger">Delete</a>
+              <a href="/dashboard/post/admin" class="btn btn-success border-0 text-white"><i class="bi bi-arrow-left fs-6"></i></a>
+              <a href="{{ route('post.admin.edit', $post->id) }}" class="btn btn-warning border-0 text-white"><i class="bi bi-pencil-square fs-6"></i></a>
+              <form action="{{ route('post.admin.destroy', $post->id) }}" method="post" class="d-inline">
+                @csrf
+                @method('delete')
+                  <button class="btn btn-danger border-0" onclick="return confirm('Anda yakin?')">
+                    <i class="bi bi-trash fs-6"></i></button>
+              </form>
 
               <image src = "https://picsum.photos/1200/400"
               alt="{{ $post->category->name }}" class="img-fluid mt-3"></image>

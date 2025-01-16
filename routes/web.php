@@ -91,6 +91,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/create',[PostDashboardController::class, 'adminCreate'])->name('post.admin.create');
         Route::post('/store', [PostDashboardController::class, 'adminStore'])->name('post.admin.store');
         Route::get('/{post}/show',[PostDashboardController::class, 'adminShow'])->name('post.admin.show');
+        Route::delete('/{post}/destroy',[PostDashboardController::class, 'adminDestroy'])->name('post.admin.destroy');
+        Route::put('/{post}/update', [PostDashboardController::class, 'adminUpdate'])->name('post.admin.update');
+        Route::get('/{post}/edit', [PostDashboardController::class, 'adminEdit'])->name('post.admin.edit');
     });
 });
 
