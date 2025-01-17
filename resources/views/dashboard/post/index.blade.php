@@ -19,7 +19,6 @@
         <tr>
           <th scope="col">No</th>
           <th scope="col">Judul</th>
-          <th scope="col">Kategori</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
@@ -28,11 +27,10 @@
         <tr>
           <td>{{ $loop->iteration }}</td>
           <td>{{ $post->title }}</td>
-          <td>{{ $post->category->name }}</td>
           <td>
-            <a href="" class="badge bg-primary mx-1"><i class="bi bi-eye fs-6"></i>
-            <a href="" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
-            <form action="" method="post" class="d-inline">
+            <a href="{{ route('post.tampil', $post->id) }}" class="badge bg-primary mx-1"><i class="bi bi-eye fs-6"></i>
+            <a href="{{ route('post.edit', $post->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
+            <form action="{{ route('post.destroy', $post->id) }}" method="post" class="d-inline">
               @csrf
               @method('delete')
                 <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">

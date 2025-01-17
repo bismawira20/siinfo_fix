@@ -74,6 +74,10 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::get('/',[PostDashboardController::class, 'index'])->name('post.index');
         Route::get('/create',[PostDashboardController::class, 'create'])->name('post.create');
         Route::post('/store', [PostDashboardController::class, 'store'])->name('post.store');
+        Route::get('/{post}/tampil',[PostDashboardController::class, 'tampil'])->name('post.tampil');
+        Route::delete('/{post}/destroy',[PostDashboardController::class, 'destroy'])->name('post.destroy');
+        Route::put('/{post}/update', [PostDashboardController::class, 'update'])->name('post.update');
+        Route::get('/{post}/edit', [PostDashboardController::class, 'edit'])->name('post.edit');
     });
 });
 
