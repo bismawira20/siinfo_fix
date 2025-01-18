@@ -61,6 +61,10 @@ class User extends Authenticatable
         return $this->hasMany(BukuTamu::class);
     }
 
+    public function passphrase(){
+        return $this->hasMany(Passphrase::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;

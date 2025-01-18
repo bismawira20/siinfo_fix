@@ -59,7 +59,7 @@
                 <li><a href="#">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan">Pengajuan TTE</a></li>
                 <li><a href="#">Pembuatan Aplikasi</a></li>
-                <li><a href="#">Passphrase TTE</a></li>
+                <li><a href="/dashboard/passphrase">Passphrase TTE</a></li>
                 <li><a href="#">CPANEL</a></li>
             </ul>      
         </li>
@@ -121,7 +121,7 @@
                 <li><a href="#">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan/admin">Pengajuan TTE</a></li>
                 <li><a href="#">Pembuatan Aplikasi</a></li>
-                <li><a href="#">Passphrase TTE</a></li>
+                <li><a href="/dashboard/passphrase/admin">Passphrase TTE</a></li>
                 <li><a href="#">CPANEL</a></li>
             </ul>      
         </li>
