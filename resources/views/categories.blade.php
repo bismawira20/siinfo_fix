@@ -6,9 +6,9 @@
         <div class="row">
             @foreach ($categories as $category)
             <div class="col-md-4">
-                <a href="/categories/{{ $category->slug}}">
+                <a href="/berita?category={{ $category->slug }}">
                     <div class="card text-bg-dark">
-                        <img src="https://th.bing.com/th/id/OIP.W6IfZ9U8aIW8ox3um1Ou9wHaHa?w=188&h=188&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+                        <img src="https://picsum.photos/seed/government/500/500"
                         class="card-img" alt="{{ $category->name }}">
                         <div class="card-img-overlay d-flex align-items-center p-0">
                         <h5 class="card-title text-center flex-fill p-4 fs-3" 

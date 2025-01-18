@@ -1,6 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
     <div class="container">
-      <a class="navbar-brand" href="#">SI-INFO</a>
+      <a class="navbar-brand" href="/">
+        <img src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" alt="Logo" 
+        style="width: 100px; height: auto;" class="d-inline-block align-text-top me-2">
+        SI-INFO
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -13,7 +17,7 @@
             <a class="nav-link {{ ($active === "berita") ? 'active' : '' }}" href="/berita">Berita</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ ($active === "category") ? 'active' : '' }}" href="/categories">Kategori</a>
+            <a class="nav-link {{ Request::is('/categories*') ? 'active' : '' }}" href="/categories">Kategori</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ ($active === "about") ? 'active' : '' }}" href="/about">About</a>

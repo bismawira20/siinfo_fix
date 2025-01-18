@@ -67,7 +67,7 @@
                           <image src = "{{ asset('storage/'. $post->image) }}"
                           alt="{{ $post->category->name }}" class="img-fluid"></image>
                         @else
-                        <img src="https://picsum.photos/500/500"
+                        <img src="https://picsum.photos/seed/office/500/500"
                         class="card-img-top" alt="{{ $post->category->name }}">
                         @endif
 

@@ -4,8 +4,9 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <main class="form-registration">
-            <img class="mb-4 mx-auto d-block" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal text-center">Register Form</h1>
+            <img class="mb-4 mx-auto d-block" src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" 
+            alt="" style="max-width: 100%; height: auto;">
+            <h1 class="h3 mb-3 fw-normal text-center">Register Akun | SI-INFO</h1>
             <form action="/register" method="post">
                 @csrf
                 <div class="form-floating mb-2">

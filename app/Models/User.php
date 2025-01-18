@@ -53,6 +53,14 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function pengajuan(){
+        return $this->hasMany(Pengajuan::class);
+    }
+
+    public function bukutamu(){
+        return $this->hasMany(BukuTamu::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;

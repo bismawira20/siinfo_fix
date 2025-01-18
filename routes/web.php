@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\BukuTamuController;
+use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PostDashboardController;
 use App\Http\Middleware\IsUser;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -79,6 +80,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{post}/update', [PostDashboardController::class, 'update'])->name('post.update');
         Route::get('/{post}/edit', [PostDashboardController::class, 'edit'])->name('post.edit');
     });
+    //Route untuk Pengajuan TTE
+    Route::prefix('dashboard/pengajuan')->group(function () {
+        Route::get('/', [PengajuanController::class, 'index'])->name('pengajuan.index');
+        Route::get('/create', [PengajuanController::class, 'create'])->name('pengajuan.create');
+        Route::post('/store', [PengajuanController::class, 'store'])->name('pengajuan.store');
+        Route::delete('/{pengajuan}/destroy',[PengajuanController::class, 'destroy'])->name('pengajuan.destroy');
+        Route::put('/{pengajuan}/update', [PengajuanController::class, 'update'])->name('pengajuan.update');
+        Route::get('/{pengajuan}/edit', [PengajuanController::class, 'edit'])->name('pengajuan.edit');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
@@ -98,6 +108,13 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::delete('/{post}/destroy',[PostDashboardController::class, 'adminDestroy'])->name('post.admin.destroy');
         Route::put('/{post}/update', [PostDashboardController::class, 'adminUpdate'])->name('post.admin.update');
         Route::get('/{post}/edit', [PostDashboardController::class, 'adminEdit'])->name('post.admin.edit');
+    });
+    //Route Pengajuan TTE
+    Route::prefix('dashboard/pengajuan/admin')->group(function () {
+        Route::get('/',[PengajuanController::class, 'adminIndex'])->name('pengajuan.admin.index');
+        Route::put('/{pengajuan}/selesai',[PengajuanController::class,'selesai'])->name('pengajuan.admin.selesai');
+        // Route::put('/{pengajuan}/tolak',[PengajuanController::class,'tolak'])->name('pengajuan.admin.tolak');
+        Route::put('/selesaiSemua',[PengajuanController::class,'selesaiSemua'])->name('pengajuan.admin.selesaiSemua');
     });
 });
 

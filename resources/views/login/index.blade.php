@@ -19,8 +19,9 @@
           </div>
           @endif
 
-            <img class="mb-4 mx-auto d-block" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-            <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+            <img class="mb-4 mx-auto d-block" src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" 
+            alt="" style="max-width: 100%; height: auto;">
+            <h1 class="h3 mb-3 fw-normal text-center">Login | SI-INFO</h1>
             <form action="/login" method="post">
               @csrf
               <div class="form-floating mb-2">
