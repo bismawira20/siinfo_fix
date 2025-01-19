@@ -65,6 +65,10 @@ class User extends Authenticatable
         return $this->hasMany(Passphrase::class);
     }
 
+    public function pengaduan(){
+        return $this->hasMany(Pengaduan::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;

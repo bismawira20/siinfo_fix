@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PassphraseController;
 use App\Http\Controllers\AdminBidangController;
@@ -81,6 +82,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{post}/update', [PostDashboardController::class, 'update'])->name('post.update');
         Route::get('/{post}/edit', [PostDashboardController::class, 'edit'])->name('post.edit');
     });
+    //Route Pengaduan Masyarakat
+    Route::prefix('dashboard/pengaduan')->group(function () {
+        Route::get('/', [PengaduanController::class, 'index'])->name('pengaduan.index');
+        Route::get('/create', [PengaduanController::class, 'create'])->name('pengaduan.create');
+        Route::post('/store', [PengaduanController::class, 'store'])->name('pengaduan.store');
+        Route::delete('/{pengaduan}/destroy', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
+        Route::put('/{pengaduan}/update', [PengaduanController::class, 'update'])->name('pengaduan.update');
+        Route::get('/{pengaduan}/edit', [PengaduanController::class, 'edit'])->name('pengaduan.edit');
+    });
     //Route untuk Pengajuan TTE
     Route::prefix('dashboard/pengajuan')->group(function () {
         Route::get('/', [PengajuanController::class, 'index'])->name('pengajuan.index');
@@ -118,6 +128,15 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::delete('/{post}/destroy',[PostDashboardController::class, 'adminDestroy'])->name('post.admin.destroy');
         Route::put('/{post}/update', [PostDashboardController::class, 'adminUpdate'])->name('post.admin.update');
         Route::get('/{post}/edit', [PostDashboardController::class, 'adminEdit'])->name('post.admin.edit');
+    });
+    //Route untuk Pengaduan
+    Route::prefix('dashboard/pengaduan/admin')->group(function(){
+        Route::get('/',[PengaduanController::class, 'adminIndex'])->name('pengaduan.admin.index');
+        Route::get('/{pengaduan}/tanggapi',[PengaduanController::class, 'adminTanggapi'])->name('pengaduan.admin.tanggapi');
+        Route::put('/{pengaduan}/update', [PengaduanController::class, 'adminUpdate'])->name('pengaduan.admin.update');
+        Route::put('/{pengaduan}/setuju',[PengaduanController::class,'setuju'])->name('pengaduan.admin.setuju');
+        Route::put('/{pengaduan}/tolak',[PengaduanController::class,'tolak'])->name('pengaduan.admin.tolak');
+        Route::put('/setujuSemua',[PengaduanController::class,'setujuSemua'])->name('pengaduan.admin.setujuSemua');
     });
     //Route Pengajuan TTE
     Route::prefix('dashboard/pengajuan/admin')->group(function () {
