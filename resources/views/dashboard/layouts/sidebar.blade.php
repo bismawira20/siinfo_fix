@@ -11,13 +11,6 @@
               <svg class="bi"><use xlink:href="#house-fill"/></svg>
               Dashboard
             </a>
-          {{-- </li>
-          <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" href="/dashboard/">
-              <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-              Berita
-            </a>
-          </li> --}}
         </ul>
         {{-- <hr class="my-3"> --}}
         @can('user')
@@ -27,30 +20,35 @@
         </h6>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" 
-            aria-current="page" href="/dashboard/bukutamu">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+            <a class="nav-link d-flex align-items-center gap-2 
+            {{ Request::is('dashboard/bukutamu*') ? 'active' : '' }}" 
+            aria-current="page"  href="/dashboard/bukutamu">
+              <svg class="bi"><use xlink:href="#people"/></svg>
               Kunjungan
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2
+            {{ Request::is('dashboard/post*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/post">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#news"/></svg>
               Berita Kunjungan
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2 
+            {{ Request::is('dashboard/pengaduan*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/pengaduan">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#megaphone"/></svg>
               Pengaduan
             </a>
           </li>
           <li class="nav-item dropdown-submenu">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2
+            {{ Request::is('dashboard/pengajuan*') ? 'active' : '' }} ||
+             {{ Request::is('dashboard/passphrase*') ? 'active' : '' }}" 
               aria-current="page" href="#" id="toggleLayanan">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#wrench"/></svg>
               Layanan
               <svg class="bi" style="width: 12px; height: 12px; margin-left: 0px; margin-top: 3px;"><use xlink:href="#chevron-down"/></svg>
             </a>
@@ -89,30 +87,32 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/bidangs*') ? 'active' : '' }}" 
+            <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/bukutamu/admin*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/bukutamu/admin">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#people"/></svg>
               Kunjungan
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/post/admin*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/post/admin">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#news"/></svg>
               Berita
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/pengaduan/admin*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/pengaduan/admin">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#megaphone"/></svg>
               Pengaduan
             </a>
           </li>
           <li class="nav-item dropdown-submenu">
-            <a class="nav-link d-flex align-items-center gap-2" 
+            <a class="nav-link d-flex align-items-center gap-2 
+            {{ Request::is('dashboard/pengajuan/admin*') ? 'active' : '' }} ||
+             {{ Request::is('dashboard/passphrase/admin*') ? 'active' : '' }}" 
                aria-current="page" href="#" id="toggleLayanan">
-               <svg class="bi"><use xlink:href="#puzzle"/></svg>
+               <svg class="bi"><use xlink:href="#wrench"/></svg>
                Layanan
                <svg class="bi" style="width: 12px; height: 12px; margin-left: 0px; margin-top: 3px;"><use xlink:href="#chevron-down"/></svg>
             </a>
@@ -133,6 +133,14 @@
   </div>
 
   <style>
+    .nav-link {
+    color: inherit; /* Gunakan warna default */
+}
+
+    .nav-link.active {
+    color: blue; /* Atau warna biru sesuai kebutuhan */
+}
+
     .dropdown-submenu {
     position: relative;
 }

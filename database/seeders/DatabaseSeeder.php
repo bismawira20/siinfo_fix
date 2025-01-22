@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Category;
+use App\Models\JenisPengaduan;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -48,13 +49,53 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Bidang::create([
+            'name' =>'Sekretariat',
+        ]);
+        Bidang::create([
             'name' =>'Pengembangan Komunikasi Publik',
+        ]);
+        Bidang::create([
+            'name' =>'Sistem Pemerintahan Berbasis Elektronik',
         ]);
         Bidang::create([
             'name' =>'Pengelolaan Informasi dan Saluran Komunikasi Publik',
         ]);
         Bidang::create([
             'name' =>'Pengelolaan Infrastruktur',
+        ]);
+        Bidang::create([
+            'name' =>'Statistik',
+        ]);
+
+        JenisPengaduan::create([
+            'name' => 'Sub Domain, Hosting, & VPS (Virtual Private Server)'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Pembuatan & Pengembangan Aplikasi'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Pengajuan TTE'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Pembuatan Email Dinas'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Pembuatan Email Dinas'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Reset Password Email Dinas'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Reset Passphrase TTE'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Reset/Permintaan Akun CPANEL'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Lupa Password Website OPD'
+        ]);
+        JenisPengaduan::create([
+            'name' => 'Permohonan Video Conference'
         ]);
 
         Post::factory(10)->create();
