@@ -8,6 +8,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CpanelController;
 use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -109,6 +110,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{passphrase}/update', [PassphraseController::class, 'update'])->name('passphrase.update');
         Route::get('/{passphrase}/edit', [PassphraseController::class, 'edit'])->name('passphrase.edit');
     });
+    //Route untuk CPANEL
+    Route::prefix('dashboard/cpanel')->group(function () {
+        Route::get('/', [CpanelController::class, 'index'])->name('cpanel.index');
+        Route::get('/create', [CpanelController::class, 'create'])->name('cpanel.create');
+        Route::post('/store', [CpanelController::class, 'store'])->name('cpanel.store');
+        Route::delete('/{cpanel}/destroy',[CpanelController::class, 'destroy'])->name('cpanel.destroy');
+        Route::put('/{cpanel}/update', [CpanelController::class, 'update'])->name('cpanel.update');
+        Route::get('/{cpanel}/edit', [CpanelController::class, 'edit'])->name('cpanel.edit');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
@@ -142,15 +152,19 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     Route::prefix('dashboard/pengajuan/admin')->group(function () {
         Route::get('/',[PengajuanController::class, 'adminIndex'])->name('pengajuan.admin.index');
         Route::put('/{pengajuan}/selesai',[PengajuanController::class,'selesai'])->name('pengajuan.admin.selesai');
-        // Route::put('/{pengajuan}/tolak',[PengajuanController::class,'tolak'])->name('pengajuan.admin.tolak');
         Route::put('/selesaiSemua',[PengajuanController::class,'selesaiSemua'])->name('pengajuan.admin.selesaiSemua');
     });
     //Route untuk Passphrase TTE
     Route::prefix('dashboard/passphrase/admin')->group(function () {
         Route::get('/',[PassphraseController::class, 'adminIndex'])->name('passphrase.admin.index');
         Route::put('/{passphrase}/selesai',[PassphraseController::class,'selesai'])->name('passphrase.admin.selesai');
-        // Route::put('/{passphrase}/tolak',[PassphraseController::class,'tolak'])->name('passphrase.admin.tolak');
         Route::put('/selesaiSemua',[PassphraseController::class,'selesaiSemua'])->name('passphrase.admin.selesaiSemua');
+    });
+    //Route untuk CPANEL
+    Route::prefix('dashboard/cpanel/admin')->group(function () {
+        Route::get('/',[CpanelController::class, 'adminIndex'])->name('cpanel.admin.index');
+        Route::put('/{cpanel}/selesai',[CpanelController::class,'selesai'])->name('cpanel.admin.selesai');
+        Route::put('/selesaiSemua',[CpanelController::class,'selesaiSemua'])->name('cpanel.admin.selesaiSemua');
     });
 });
 

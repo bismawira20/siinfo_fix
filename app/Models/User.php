@@ -69,6 +69,10 @@ class User extends Authenticatable
         return $this->hasMany(Pengaduan::class);
     }
 
+    public function cpanel(){
+        return $this->hasMany(Cpanel::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;
