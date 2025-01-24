@@ -14,6 +14,12 @@
             <a class="nav-link {{ ($active === "home") ? 'active' : '' }}" href="/">Beranda</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {{ ($active === "profile") ? 'active' : '' }}" href="/profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ ($active === "layanan") ? 'active' : '' }}" href="/layanan">Layanan</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {{ ($active === "berita") ? 'active' : '' }}" href="/berita">Berita</a>
           </li>
           {{-- <li class="nav-item">

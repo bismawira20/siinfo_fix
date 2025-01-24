@@ -26,6 +26,18 @@ Route::get('/', function () {
         "active" => "home",
     ]);
 });
+Route::get('/profile', function () {
+    return view('profile',[
+        "title" => 'Profile',
+        "active" => "profile",
+    ]);
+});
+Route::get('/layanan', function () {
+    return view('layanan',[
+        "title" => 'Layanan',
+        "active" => "layanan",
+    ]);
+});
 Route::get('/about', function () {
     return view('about', [
         "title" => 'About',
