@@ -14,6 +14,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\EmailDinasController;
 use App\Http\Controllers\PassphraseController;
 use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
@@ -131,6 +132,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{cpanel}/update', [CpanelController::class, 'update'])->name('cpanel.update');
         Route::get('/{cpanel}/edit', [CpanelController::class, 'edit'])->name('cpanel.edit');
     });
+    //Route Email Dinas
+    Route::prefix('dashboard/emaildinas')->group(function () {
+        Route::get('/', [EmailDinasController::class, 'index'])->name('emaildinas.index');
+        Route::get('/create', [EmailDinasController::class, 'create'])->name('emaildinas.create');
+        Route::post('/store', [EmailDinasController::class, 'store'])->name('emaildinas.store');
+        Route::delete('/{emaildinas}/destroy',[EmailDinasController::class, 'destroy'])->name('emaildinas.destroy');
+        Route::put('/{emaildinas}/update', [EmailDinasController::class, 'update'])->name('emaildinas.update');
+        Route::get('/{emaildinas}/edit', [EmailDinasController::class, 'edit'])->name('emaildinas.edit');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
@@ -177,6 +187,12 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/',[CpanelController::class, 'adminIndex'])->name('cpanel.admin.index');
         Route::put('/{cpanel}/selesai',[CpanelController::class,'selesai'])->name('cpanel.admin.selesai');
         Route::put('/selesaiSemua',[CpanelController::class,'selesaiSemua'])->name('cpanel.admin.selesaiSemua');
+    });
+    //Route untuk EmailDinas
+    Route::prefix('dashboard/emaildinas/admin')->group(function () {
+        Route::get('/',[EmailDinasController::class, 'adminIndex'])->name('emaildinas.admin.index');
+        Route::put('/{emaildinas}/selesai',[EmailDinasController::class,'selesai'])->name('emaildinas.admin.selesai');
+        Route::put('/selesaiSemua',[EmailDinasController::class,'selesaiSemua'])->name('emaildinas.admin.selesaiSemua');
     });
 });
 

@@ -20,7 +20,7 @@
     <table class="table table-striped table-sm">
       <thead>
         <tr>
-            <th scope="col">No</th>
+          <th scope="col">No</th>
           <th scope="col">Nama Pemohon</th>
           <th scope="col">No Telp</th>
           <th scope="col">Asal OPD</th>

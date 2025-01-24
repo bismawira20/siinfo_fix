@@ -73,6 +73,10 @@ class User extends Authenticatable
         return $this->hasMany(Cpanel::class);
     }
 
+    public function emaildinas(){
+        return $this->hasMany(EmailDinas::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;
