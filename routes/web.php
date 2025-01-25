@@ -23,9 +23,11 @@ use App\Http\Controllers\PostDashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
+    $posts = Post::latest()->take(3)->get();
     return view('home',[
-        "title" => 'Home',
+        "title" => 'Beranda',
         "active" => "home",
+        "posts" => $posts
     ]);
 });
 Route::get('/profile', function () {
