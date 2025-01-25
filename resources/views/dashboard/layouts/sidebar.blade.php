@@ -48,7 +48,8 @@
             {{ Request::is('dashboard/pengajuan*') ? 'active' : '' }} ||
              {{ Request::is('dashboard/passphrase*') ? 'active' : '' }} ||
               {{ Request::is('dashboard/cpanel*') ? 'active' : '' }} ||
-               {{ Request::is('dashboard/emaildinas*') ? 'active' : '' }}" 
+               {{ Request::is('dashboard/emaildinas*') ? 'active' : '' }} ||
+                {{ Request::is('dashboard/aplikasi*') ? 'active' : '' }}" 
               aria-current="page" href="#" id="toggleLayanan">
               <svg class="bi"><use xlink:href="#wrench"/></svg>
               Layanan
@@ -58,7 +59,7 @@
                 <li><a href="#">Sub Domain, Hosting, & VPS</a></li>
                 <li><a href="/dashboard/emaildinas">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan">Pengajuan TTE</a></li>
-                <li><a href="#">Pembuatan Aplikasi</a></li>
+                <li><a href="/dashboard/aplikasi">Pembuatan Aplikasi</a></li>
                 <li><a href="/dashboard/passphrase">Passphrase TTE</a></li>
                 <li><a href="/dashboard/cpanel">CPANEL</a></li>
             </ul>      
@@ -114,7 +115,8 @@
             {{ Request::is('dashboard/pengajuan/admin*') ? 'active' : '' }} ||
              {{ Request::is('dashboard/passphrase/admin*') ? 'active' : '' }} ||
               {{ Request::is('dashboard/cpanel/admin*') ? 'active' : '' }} ||
-              {{ Request::is('dashboard/emaildinas/admin*') ? 'active' : '' }}" 
+              {{ Request::is('dashboard/emaildinas/admin*') ? 'active' : '' }} ||
+               {{ Request::is('dashboard/aplikasi/admin*') ? 'active' : '' }}" 
                aria-current="page" href="#" id="toggleLayanan">
                <svg class="bi"><use xlink:href="#wrench"/></svg>
                Layanan
@@ -124,7 +126,7 @@
                 <li><a href="#">Sub Domain, Hosting, & VPS</a></li>
                 <li><a href="/dashboard/emaildinas/admin">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan/admin">Pengajuan TTE</a></li>
-                <li><a href="#">Pembuatan Aplikasi</a></li>
+                <li><a href="/dashboard/aplikasi/admin">Pembuatan Aplikasi</a></li>
                 <li><a href="/dashboard/passphrase/admin">Passphrase TTE</a></li>
                 <li><a href="/dashboard/cpanel/admin">CPANEL</a></li>
             </ul>      

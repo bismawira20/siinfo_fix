@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CpanelController;
+use App\Http\Controllers\AplikasiController;
 use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -141,6 +142,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{emaildinas}/update', [EmailDinasController::class, 'update'])->name('emaildinas.update');
         Route::get('/{emaildinas}/edit', [EmailDinasController::class, 'edit'])->name('emaildinas.edit');
     });
+    //Route Aplikasi
+    Route::prefix('dashboard/aplikasi')->group(function () {
+        Route::get('/', [AplikasiController::class, 'index'])->name('aplikasi.index');
+        Route::get('/create', [AplikasiController::class, 'create'])->name('aplikasi.create');
+        Route::post('/store', [AplikasiController::class, 'store'])->name('aplikasi.store');
+        Route::delete('/{aplikasi}/destroy',[AplikasiController::class, 'destroy'])->name('aplikasi.destroy');
+        Route::put('/{aplikasi}/update', [AplikasiController::class, 'update'])->name('aplikasi.update');
+        Route::get('/{aplikasi}/edit', [AplikasiController::class, 'edit'])->name('aplikasi.edit');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
@@ -193,6 +203,13 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/',[EmailDinasController::class, 'adminIndex'])->name('emaildinas.admin.index');
         Route::put('/{emaildinas}/selesai',[EmailDinasController::class,'selesai'])->name('emaildinas.admin.selesai');
         Route::put('/selesaiSemua',[EmailDinasController::class,'selesaiSemua'])->name('emaildinas.admin.selesaiSemua');
+    });
+    //Route untuk Aplikasi
+    Route::prefix('dashboard/aplikasi/admin')->group(function () {
+        Route::get('/',[AplikasiController::class, 'adminIndex'])->name('aplikasi.admin.index');
+        Route::get('/{aplikasi}/show',[AplikasiController::class, 'adminShow'])->name('aplikasi.admin.show');
+        Route::put('/{aplikasi}/selesai',[AplikasiController::class,'selesai'])->name('aplikasi.admin.selesai');
+        Route::put('/selesaiSemua',[AplikasiController::class,'selesaiSemua'])->name('aplikasi.admin.selesaiSemua');
     });
 });
 

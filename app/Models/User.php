@@ -77,6 +77,10 @@ class User extends Authenticatable
         return $this->hasMany(EmailDinas::class);
     }
 
+    public function aplikasi(){
+        return $this->hasMany(Aplikasi::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;
