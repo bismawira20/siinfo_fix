@@ -81,6 +81,10 @@ class User extends Authenticatable
         return $this->hasMany(Aplikasi::class);
     }
 
+    public function domain(){
+        return $this->hasMany(Domain::class);
+    }
+
     public function isAdmin()
     {
         return $this->is_admin;

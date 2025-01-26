@@ -49,14 +49,15 @@
              {{ Request::is('dashboard/passphrase*') ? 'active' : '' }} ||
               {{ Request::is('dashboard/cpanel*') ? 'active' : '' }} ||
                {{ Request::is('dashboard/emaildinas*') ? 'active' : '' }} ||
-                {{ Request::is('dashboard/aplikasi*') ? 'active' : '' }}" 
+                {{ Request::is('dashboard/aplikasi*') ? 'active' : '' }} ||
+                 {{ Request::is('dashboard/domain*') ? 'active' : '' }}" 
               aria-current="page" href="#" id="toggleLayanan">
               <svg class="bi"><use xlink:href="#wrench"/></svg>
               Layanan
               <svg class="bi" style="width: 12px; height: 12px; margin-left: 0px; margin-top: 3px;"><use xlink:href="#chevron-down"/></svg>
             </a>
             <ul class="submenu" id="submenuLayanan">
-                <li><a href="#">Sub Domain, Hosting, & VPS</a></li>
+                <li><a href="/dashboard/domain">Sub Domain, Hosting, & VPS</a></li>
                 <li><a href="/dashboard/emaildinas">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan">Pengajuan TTE</a></li>
                 <li><a href="/dashboard/aplikasi">Pembuatan Aplikasi</a></li>
@@ -116,14 +117,15 @@
              {{ Request::is('dashboard/passphrase/admin*') ? 'active' : '' }} ||
               {{ Request::is('dashboard/cpanel/admin*') ? 'active' : '' }} ||
               {{ Request::is('dashboard/emaildinas/admin*') ? 'active' : '' }} ||
-               {{ Request::is('dashboard/aplikasi/admin*') ? 'active' : '' }}" 
+               {{ Request::is('dashboard/aplikasi/admin*') ? 'active' : '' }} ||
+                {{ Request::is('dashboard/domain/admin*') ? 'active' : '' }}" 
                aria-current="page" href="#" id="toggleLayanan">
                <svg class="bi"><use xlink:href="#wrench"/></svg>
                Layanan
                <svg class="bi" style="width: 12px; height: 12px; margin-left: 0px; margin-top: 3px;"><use xlink:href="#chevron-down"/></svg>
             </a>
             <ul class="submenu" id="submenuLayanan">
-                <li><a href="#">Sub Domain, Hosting, & VPS</a></li>
+                <li><a href="/dashboard/domain/admin">Sub Domain, Hosting, & VPS</a></li>
                 <li><a href="/dashboard/emaildinas/admin">Email Dinas</a></li>
                 <li><a href="/dashboard/pengajuan/admin">Pengajuan TTE</a></li>
                 <li><a href="/dashboard/aplikasi/admin">Pembuatan Aplikasi</a></li>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CpanelController;
+use App\Http\Controllers\DomainController;
 use App\Http\Controllers\AplikasiController;
 use App\Http\Controllers\BukuTamuController;
 use App\Http\Controllers\RegisterController;
@@ -153,6 +154,15 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::put('/{aplikasi}/update', [AplikasiController::class, 'update'])->name('aplikasi.update');
         Route::get('/{aplikasi}/edit', [AplikasiController::class, 'edit'])->name('aplikasi.edit');
     });
+    //Route Domain
+    Route::prefix('dashboard/domain')->group(function () {
+        Route::get('/', [DomainController::class, 'index'])->name('domain.index');
+        Route::get('/create', [DomainController::class, 'create'])->name('domain.create');
+        Route::post('/store', [DomainController::class, 'store'])->name('domain.store');
+        Route::delete('/{domain}/destroy',[DomainController::class, 'destroy'])->name('domain.destroy');
+        Route::put('/{domain}/update', [DomainController::class, 'update'])->name('domain.update');
+        Route::get('/{domain}/edit', [DomainController::class, 'edit'])->name('domain.edit');
+    });
 });
 
 Route::middleware(['auth', IsAdmin::class])->group(function (){
@@ -212,6 +222,13 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/{aplikasi}/show',[AplikasiController::class, 'adminShow'])->name('aplikasi.admin.show');
         Route::put('/{aplikasi}/selesai',[AplikasiController::class,'selesai'])->name('aplikasi.admin.selesai');
         Route::put('/selesaiSemua',[AplikasiController::class,'selesaiSemua'])->name('aplikasi.admin.selesaiSemua');
+    });
+    //Route untuk Domain
+    Route::prefix('dashboard/domain/admin')->group(function () {
+        Route::get('/',[DomainController::class, 'adminIndex'])->name('domain.admin.index');
+        Route::get('/{domain}/show',[DomainController::class, 'adminShow'])->name('domain.admin.show');
+        Route::put('/{domain}/selesai',[DomainController::class,'selesai'])->name('domain.admin.selesai');
+        Route::put('/selesaiSemua',[DomainController::class,'selesaiSemua'])->name('domain.admin.selesaiSemua');
     });
 });
 
