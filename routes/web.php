@@ -72,7 +72,7 @@ Route::get('/register',[RegisterController::class,'index'])->middleware('guest')
 Route::post('/register',[RegisterController::class,'store']);
 
 Route::get('/dashboard',function(){
-    return view('dashboard.index');})->middleware('auth');
+    return view('dashboard.index');})->name('dashboard')->middleware('auth');
 
 // Route untuk Bagian Admin
 Route::middleware(IsAdmin::class)->resource('/dashboard/categories', AdminCategoryController::class)

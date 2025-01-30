@@ -41,7 +41,15 @@
           <td>{{ $b->bidang->name }}</td>
           <td>{{ $b->tujuan }}</td>
           <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
-          <td>{{ $b->status }}</td>
+          <td>
+            <span class="badge {{ 
+            $b->status == 'pending' ? 'bg-warning' : 
+            ($b->status == 'disetujui' ? 'bg-success' : 
+            ($b->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $b->status }}
+            </span>
+          </td>
           <td>
             <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
             @csrf

@@ -45,17 +45,19 @@
 
 @foreach($services as $service)
 <div class="col">
-    <div class="card h-100 shadow border-0 ">
-        <div class="card-body text-center">
-            <div class="mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-danger">
-                    {!! $service['svg'] !!}
-                </svg>
+    <a href="/layanan" class="text-decoration-none">
+        <div class="card h-100 shadow border-0 ">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-danger">
+                        {!! $service['svg'] !!}
+                    </svg>
+                </div>
+                <h5 class="card-title mb-3">{{ $service['title'] }}</h5>
+                <p class="card-text text-muted">{{ $service['body'] }}</p>
             </div>
-            <h5 class="card-title mb-3">{{ $service['title'] }}</h5>
-            <p class="card-text text-muted">{{ $service['body'] }}</p>
         </div>
-    </div>
+    </a>
 </div>
 @endforeach
 </div>

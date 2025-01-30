@@ -36,7 +36,15 @@
           <td>{{ $p->nama }}</td>
           <td>{{ $p->no_telp }}</td>
           <td>{{ $p->jenispengaduan->nama }}</td>
-          <td>{{ $p->status }}</td>
+          <td>
+            <span class="badge {{ 
+            $p->status == 'pending' ? 'bg-warning' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
+            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $p->status }}
+            </span>
+          </td>
           <td>
             <a href="{{ route('pengaduan.admin.tanggapi', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
           </td>

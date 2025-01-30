@@ -47,6 +47,7 @@
     
         @foreach($services as $service)
         <div class="col">
+            <a href="{{ Auth::check() ? route('dashboard') : route('login') }}" class="text-decoration-none">
             <div class="card h-100 shadow border-0 ">
                 <div class="card-body text-center">
                     <div class="mb-3">
@@ -58,13 +59,14 @@
                     <p class="card-text text-muted">{{ $service['body'] }}</p>
                 </div>
             </div>
+            </a>
         </div>
         @endforeach
     </div>
 
     {{-- Penjelasan Layanan --}}
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <h3 class="text-center mb-4">Prosedur Mengakses Layanan</h3>
             <hr class="mb-4">
             <div class="card shadow-sm">
@@ -92,7 +94,15 @@
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">Tambah Layanan</div>
-                                Pilih layanan yang ingin Anda gunakan dan klik tombol tambah.
+                                Pilih layanan yang ingin Anda gunakan dan klik tombol tambah. 
+                                Isi form layanan dengan benar.
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Edit Form</div>
+                               Jika dirasa perlu untuk mengedit isian form, 
+                               edit dapat dilakukan 1x1 jam setelah pengisian, begitu pula dengan penghapusan.
                             </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">

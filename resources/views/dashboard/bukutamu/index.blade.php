@@ -39,15 +39,25 @@
           <td>{{ $b->tujuan }}</td>
           <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
           <td>
-            <a href="/dashboard/bukutamu/{{ $b->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
-            <form action="/dashboard/bukutamu/{{ $b->id }}/destroy" method="post" class="d-inline">
-              @csrf
-              @method('delete')
-                <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">
-                  <i class="bi bi-trash fs-6"></i></button>
-            </form>
+            @if($b->created_at->diffInHours() < 1 && $b->status == 'pending')
+              <a href="/dashboard/bukutamu/{{ $b->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
+              <form action="/dashboard/bukutamu/{{ $b->id }}/destroy" method="post" class="d-inline">
+                @csrf
+                @method('delete')
+                  <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">
+                    <i class="bi bi-trash fs-6"></i></button>
+              </form>
+            @endif
           </td>
-          <td>{{ $b->status }}</td>
+          <td>              
+            <span class="badge {{ 
+            $b->status == 'pending' ? 'bg-warning' : 
+            ($b->status == 'disetujui' ? 'bg-success' : 
+            ($b->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $b->status }}
+            </span>
+          </td>
         </tr>
         @endforeach
       </tbody>

@@ -43,7 +43,15 @@
           <td>{{ $p->nama_opd }}</td>
           <td>{{ $p->email_domain }}</td>
           <td>{{ $p->jabatan }}</td>
-          <td>{{ $p->status }}</td>
+          <td>              
+            <span class="badge {{ 
+            $p->status == 'diproses' ? 'bg-warning' : 
+            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $p->status }}
+            </span>
+          </td>
           <td>
             <form action="/dashboard/pengajuan/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
             @csrf

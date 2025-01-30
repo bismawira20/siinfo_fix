@@ -5,6 +5,6 @@
   <h1 class="h2">Selamat datang, {{ auth()->user()->name }}!</h1>
 </div>
 <div class="">
-    cobain gate
+    ini dashboard
 </div>
 @endsection

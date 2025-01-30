@@ -72,7 +72,15 @@
                 <i class="bi bi-check-lg fs-6"></i></button>
             </form>
           </td>
-          <td>{{ $p->status }}</td>
+          <td>              
+            <span class="badge {{ 
+            $p->status == 'diproses' ? 'bg-warning' : 
+            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $p->status }}
+            </span>
+          </td>
         </tr>
         @endforeach
       </tbody>

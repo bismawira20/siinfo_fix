@@ -35,6 +35,7 @@
           <td>{{ $p->asal_opd }}</td>
           <td>{{ $p->jabatan}}</td>
           <td>
+            @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
             <a href="{{ route('cpanel.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
             <form action="{{ route('cpanel.destroy', $p->id) }}" method="post" class="d-inline">
               @csrf
@@ -42,8 +43,17 @@
                 <button class="badge bg-danger border-0" onclick="return confirm('Anda yakin?')">
                   <i class="bi bi-trash fs-6"></i></button>
             </form>
+            @endif
           </td>
-          <td>{{ $p->status }}</td>
+          <td>              
+            <span class="badge {{ 
+            $p->status == 'diproses' ? 'bg-warning' : 
+            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $p->status }}
+            </span>
+          </td>
         </tr>
         @endforeach
       </tbody>
