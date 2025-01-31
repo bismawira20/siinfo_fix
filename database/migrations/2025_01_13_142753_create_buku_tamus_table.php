@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('instansi')->nullable();;
             $table->text('tujuan');
             $table->date('tanggal');
+            $table->enum('waktu', ['08:00', '10:00', '13:00']);
             $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
             $table->timestamps();
         });

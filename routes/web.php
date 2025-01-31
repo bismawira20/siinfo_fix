@@ -89,6 +89,10 @@ Route::middleware(['auth', IsUser::class])->group(function () {
         Route::delete('/{bukutamu}/destroy', [BukuTamuController::class, 'destroy'])->name('bukutamu.destroy');
         Route::put('/{bukutamu}/update', [BukuTamuController::class, 'update'])->name('bukutamu.update');
         Route::get('/{bukutamu}/edit', [BukuTamuController::class, 'edit'])->name('bukutamu.edit');
+
+        // Route untuk pengecekan ajax
+        Route::get('/check-tanggal', [BukuTamuController::class, 'checkTanggal'])->name('bukutamu.check-tanggal');
+        Route::get('/get-waktu-options', [BukuTamuController::class, 'getWaktuOptions'])->name('bukutamu.get-waktu-options');
     });
     //Route untuk Berita
     Route::prefix('dashboard/post')->group(function(){

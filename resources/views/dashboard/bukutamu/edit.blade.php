@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -79,24 +80,96 @@
                 class="form-control" 
                 id="tanggal" 
                 name="tanggal"
-                value = {{ old('nama', $bukutamu->tanggal) }}
-            >
+                value="{{ old('tanggal', $bukutamu->tanggal) }}">
             @error('tanggal')
             <div class="invalid-feedback">
                 {{ $message }}
             </div>
             @enderror
         </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Waktu Kunjungan</label>
+            <div id="waktu-options">
+                <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="waktu" 
+                        id="waktu-08:00" 
+                        value="08:00" 
+                        {{ old('waktu', $bukutamu->waktu) == '08:00' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="waktu-08:00">08:00</label>
+                </div>
+                <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="waktu" 
+                        id="waktu-10:00" 
+                        value="10:00" 
+                        {{ old('waktu', $bukutamu->waktu) == '10:00' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="waktu-10:00">10:00</label>
+                </div>
+                <div class="form-check">
+                    <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="waktu" 
+                        id="waktu-13:00" 
+                        value="13:00" 
+                        {{ old('waktu', $bukutamu->waktu) == '13:00' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="waktu-13:00">13:00</label>
+                </div>
+            </div>
+            @error('waktu')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+        
         <button type="submit" class="btn btn-primary">Update Agenda</button>
-    </form>
-</div>
-
-<script>
-    flatpickr("#tanggal", {
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        // Tambahan opsi
-        // disableMobile: true // Nonaktifkan datepicker di mobile
-    });
-</script>
+        </form>
+        
+        <script>
+            // Inisialisasi Flatpickr untuk input tanggal
+            flatpickr("#tanggal", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: [
+                function(date) {
+                    // Disable Saturday and Sunday
+                    return (date.getDay() === 6 || date.getDay() === 0);
+                    }
+                ],
+                onChange: function(selectedDates, dateStr, instance) {
+                    showWaktuOptions(dateStr); // Panggil fungsi untuk menampilkan waktu yang tersedia
+                }
+            });
+        
+            // Fungsi untuk menampilkan opsi waktu yang tersedia
+            function showWaktuOptions(tanggal) {
+                $.ajax({
+                    url: "{{ route('bukutamu.get-waktu-options') }}",
+                    method: 'GET',
+                    data: { tanggal: tanggal },
+                    success: function(response) {
+                        // Sembunyikan semua radio button
+                        $('#waktu-options .form-check-input').prop('disabled', true)
+                            .parent().addClass('text-muted');
+        
+                        // Tampilkan hanya waktu yang tersedia
+                        response.waktu_tersedia.forEach(function(waktu) {
+                            $(`#waktu-${waktu}`)
+                                .prop('disabled', false)
+                                .parent().removeClass('text-muted');
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", status, error);
+                    }
+                });
+            }
+        </script>
 @endsection

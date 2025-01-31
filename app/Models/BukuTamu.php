@@ -18,6 +18,7 @@ class BukuTamu extends Model
         'instansi',
         'tujuan',
         'tanggal',
+        'waktu',
         'status'];
         
     protected $with = ['bidang','user'];

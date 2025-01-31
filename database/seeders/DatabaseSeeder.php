@@ -68,34 +68,34 @@ class DatabaseSeeder extends Seeder
         ]);
 
         JenisPengaduan::create([
-            'name' => 'Sub Domain, Hosting, & VPS (Virtual Private Server)'
+            'nama' => 'Sub Domain, Hosting, & VPS (Virtual Private Server)'
         ]);
         JenisPengaduan::create([
-            'name' => 'Pembuatan & Pengembangan Aplikasi'
+            'nama' => 'Pembuatan & Pengembangan Aplikasi'
         ]);
         JenisPengaduan::create([
-            'name' => 'Pengajuan TTE'
+            'nama' => 'Pengajuan TTE'
         ]);
         JenisPengaduan::create([
-            'name' => 'Pembuatan Email Dinas'
+            'nama' => 'Pembuatan Email Dinas'
         ]);
         JenisPengaduan::create([
-            'name' => 'Pembuatan Email Dinas'
+            'nama' => 'Pembuatan Email Dinas'
         ]);
         JenisPengaduan::create([
-            'name' => 'Reset Password Email Dinas'
+            'nama' => 'Reset Password Email Dinas'
         ]);
         JenisPengaduan::create([
-            'name' => 'Reset Passphrase TTE'
+            'nama' => 'Reset Passphrase TTE'
         ]);
         JenisPengaduan::create([
-            'name' => 'Reset/Permintaan Akun CPANEL'
+            'nama' => 'Reset/Permintaan Akun CPANEL'
         ]);
         JenisPengaduan::create([
-            'name' => 'Lupa Password Website OPD'
+            'nama' => 'Lupa Password Website OPD'
         ]);
         JenisPengaduan::create([
-            'name' => 'Permohonan Video Conference'
+            'nama' => 'Permohonan Video Conference'
         ]);
 
         Post::factory(10)->create();
