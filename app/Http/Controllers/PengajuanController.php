@@ -101,8 +101,24 @@ class PengajuanController extends Controller
 
     // Admin
 
-    public function adminIndex(){
-        $pengajuan = Pengajuan::paginate(10);
+    public function adminIndex(Request $request) {
+        $pengajuan = Pengajuan::query();
+    
+        // Filter berdasarkan tanggal awal dan akhir
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $pengajuan->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
+                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
+            ]);
+        }
+    
+        // Filter berdasarkan status
+        if ($request->filled('status')) {
+            $pengajuan->where('status', $request->status);
+        }
+
+        $pengajuan = $pengajuan->paginate(10)->withQueryString();
+
         return view('dashboard.pengajuan.admin.index', compact('pengajuan'));
     }
 

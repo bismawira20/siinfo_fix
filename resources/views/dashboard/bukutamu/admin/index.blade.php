@@ -4,6 +4,42 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard Kunjungan</h1>
 </div>
+<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
+  <!-- Filter Waktu -->
+  <div class="text-center">
+        <label class="form-label">Tanggal Awal:</label>
+        <input type="date" name="start_date" class="form-control" style="width: 200px;" value="{{ request('start_date', '2024-01-01') }}">
+    </div>
+    <div class="text-center">
+        <label class="form-label">Tanggal Akhir:</label>
+        <input type="date" name="end_date" class="form-control" style="width: 200px;" value="{{ request('end_date', '2024-12-31') }}">
+    </div>
+
+    <!-- Filter Status -->
+    <div style="flex-grow: 1;">
+        <!-- <label class="form-label">Status:</label> -->
+        <select name="status" class="form-select" style="min-width: 10px;">
+            <option value="" disabled selected hidden>Status</option>
+            <option value="diproses" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="selesai" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+            <option value="selesai" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+        </select>
+    </div>
+
+    <!-- Filter Bidang --> 
+    <div style="flex-grow: 1;">
+        <!-- <label class="form-label">Bidang:</label> -->
+        <select name="bidang" class="form-select" style="min-width: 10px;">
+            <option value="" disabled selected hidden>Bidang</option>
+            @foreach ($bidang as $b)
+                <option value="{{ $b->id }}" {{ request('bidang') == $b->id ? 'selected' : '' }}>{{ $b->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
 {{-- <div class="input-group mb-3 col-lg-30">
   <input type="text" class="form-control" placeholder="Cari" name ="search">
   <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Cari</button>

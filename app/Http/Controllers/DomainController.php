@@ -89,8 +89,24 @@ class DomainController extends Controller
         return redirect('/dashboard/domain/')->with("success", "Pengajuan Domain berhasil dihapus!");
     }
 
-    public function adminIndex(){
-        $domain = Domain::paginate(10);
+    public function adminIndex(Request $request) {
+        $domain = Domain::query();
+    
+        // Filter berdasarkan tanggal awal dan akhir
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $domain->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
+                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
+            ]);
+        }
+    
+        // Filter berdasarkan status
+        if ($request->filled('status')) {
+            $domain->where('status', $request->status);
+        }
+
+        $domain = $domain->paginate(10)->withQueryString();
+        
         return view('dashboard.domain.admin.index', compact('domain'));
     }
 

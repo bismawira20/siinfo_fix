@@ -122,8 +122,24 @@ class EmailDinasController extends Controller
         return redirect('/dashboard/emaildinas/')->with("success", "Pengajuan Email Dinas berhasil dihapus!");
     }
 
-    public function adminIndex(){
-        $emaildinas = EmailDinas::paginate(10);
+    public function adminIndex(Request $request) {
+        $emaildinas = EmailDinas::query();
+    
+        // Filter berdasarkan tanggal awal dan akhir
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $emaildinas->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
+                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
+            ]);
+        }
+    
+        // Filter berdasarkan status
+        if ($request->filled('status')) {
+            $emaildinas->where('status', $request->status);
+        }
+
+        $emaildinas = $emaildinas->paginate(10)->withQueryString();
+        
         return view('dashboard.emaildinas.admin.index', compact('emaildinas'));
     }
 
