@@ -1,55 +1,83 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <main class="form-signin w-100 m-auto">
+<style>
+    body {
+        background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
+        background-size: cover;
+    }
+    
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .login-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+    .login-card img {
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    .login-card h2 {
+        color: black;
+        font-weight: bold;
+    }
+    .login-card button {
+        background-color: red;
+        border: none;
+    }
+    .login-card a {
+        text-decoration: none;
+    }
+</style>
 
-          @if(session()->has('success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-              <span>{{ session('success') }}</span>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          @endif
+<div class="login-container">
+    <div class="login-card">
+        @if(session()->has('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span>{{ session('success') }}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
-          @if(session()->has('loginError'))
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-              <span>{{ session('loginError') }}</span>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          @endif
+        @if(session()->has('loginError'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span>{{ session('loginError') }}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
 
-            <img class="mb-4 mx-auto d-block" src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" 
-            alt="" style="max-width: 100%; height: auto;">
-            <h1 class="h3 mb-3 fw-normal text-center">Login | SI-INFO</h1>
-            <form action="/login" method="post">
-              @csrf
-              <div class="form-floating mb-2">
-                <input type="email" name="email" class="form-control @error ('email') is-invalid @enderror" id="email"
+        <img src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" alt="Logo">
+        <h2>Login | SI-INFO</h2>
+        <form action="/login" method="post">
+            @csrf
+            <div class="form-floating mb-2">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
                 placeholder="name@example.com" autofocus required value="{{ old('email') }}">
-                <label for="email" class="text-end">Email address</label>
+                <label for="email">Email</label>
                 @error('email')
                 <div class="invalid-feedback">
-                  {{ $message }}
+                    {{ $message }}
                 </div>
                 @enderror
-              </div>
-              <div class="form-floating mb-2">
-                <input type="password"  name="password" class="form-control" id="password" placeholder="Password" required>
-                <label for="password" class="text-end">Password</label>
-              </div>
-          
-              {{-- <div class="form-check my-3">
-                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Remember me
-                </label>
-              </div> --}}
-              <button class="btn btn-danger w-100 py-2" type="submit">Login</button>
-            </form>
-            <small class="d-block text-center mt-3">Belum punya akun? 
-                <a href="/register">Daftar Akun</a></small>
-          </main>
+            </div>
+            <div class="form-floating mb-2">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+            <button class="btn btn-success w-100 py-2" type="submit">LOGIN</button>
+        </form>
+        <small class="d-block text-center mt-3">Belum punya akun? 
+            <a href="/register">Daftar Akun</a></small>
+      </main>
     </div>
 </div>
 @endsection

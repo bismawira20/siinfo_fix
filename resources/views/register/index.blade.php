@@ -1,8 +1,46 @@
 @extends('layouts.main')
 
 @section('container')
-<div class="row justify-content-center">
-    <div class="col-md-4">
+<style>
+    body {
+        background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
+        background-size: cover;
+    }
+    
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .login-card {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+    .login-card img {
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+    .login-card h2 {
+        color: black;
+        font-weight: bold;
+    }
+    .login-card button {
+        background-color: red;
+        border: none;
+    }
+    .login-card a {
+        text-decoration: none;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
         <main class="form-registration">
             <img class="mb-4 mx-auto d-block" src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" 
             alt="" style="max-width: 100%; height: auto;">
