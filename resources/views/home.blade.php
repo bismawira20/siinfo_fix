@@ -1,7 +1,46 @@
 @extends('layouts.main')
 @section('container')
+<style>
+.carousel {
+}
+
+.carousel-inner img {
+    object-fit: cover; /* Menjaga proporsi gambar */
+    width: 100vw; /* Full width */
+    height: 75vh;
+    display: block; 
+    margin: auto; 
+}
+</style>
+<div class="container-fluid p-0">
+  <div id="headerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ asset('backend/img/slide1.webp') }}" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('backend/img/slide2.png') }}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ asset('backend/img/diskominfo.jpg') }}" class="d-block w-100" alt="Slide 3">
+        </div>
+        <div class="carousel-item">
+          <img src="{{ asset('backend/img/tugumuda.jpg') }}" class="d-block w-100" alt="Slide 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#headerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#headerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+</div>
+
 <div class="container">
-    <h2 class="text-center mb-5">Layanan Diskominfo</h2>
+    <h2 class="text-center mt-5 mb-5">Layanan Diskominfo</h2>
 
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
         @php
