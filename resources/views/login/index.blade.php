@@ -3,8 +3,22 @@
 @section('container')
 <style>
     body {
-        background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
-        background-size: cover;
+    position: relative;
+    background: none;
+    }
+
+    body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3; /* Ubah nilai ini untuk transparansi */
+    filter: blur(3px); /* Efek blur */
+    z-index: -1;
     }
     
     .login-container {
@@ -37,24 +51,32 @@
     .login-card a {
         text-decoration: none;
     }
+    .alert-container {
+    width: 100%;
+    max-width: 400px; /* Sesuaikan dengan lebar .login-card */
+    margin: 0 auto 1px auto; /* Tengah & beri jarak ke bawah */
+    text-align: center;
+    }
 </style>
+
+<div class="alert-container">
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if(session()->has('loginError'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span>{{ session('loginError') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+</div>
 
 <div class="login-container">
     <div class="login-card">
-        @if(session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <span>{{ session('success') }}</span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
-        @if(session()->has('loginError'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <span>{{ session('loginError') }}</span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        @endif
-
         <img src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" alt="Logo">
         <h2>Login | SI-INFO</h2>
         <form action="/login" method="post">
@@ -73,7 +95,7 @@
                 <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                 <label for="password">Password</label>
             </div>
-            <button class="btn btn-success w-100 py-2" type="submit">LOGIN</button>
+            <button class="btn btn-danger w-100 py-2" type="submit">LOGIN</button>
         </form>
         <small class="d-block text-center mt-3">Belum punya akun? 
             <a href="/register">Daftar Akun</a></small>

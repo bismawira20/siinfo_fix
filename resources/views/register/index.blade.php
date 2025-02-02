@@ -3,8 +3,22 @@
 @section('container')
 <style>
     body {
-        background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
-        background-size: cover;
+    position: relative;
+    background: none;
+    }
+
+    body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('{{ asset("backend/img/diskominfo.jpg") }}') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3; /* Ubah nilai ini untuk transparansi */
+    filter: blur(3px); /* Efek blur */
+    z-index: -1;
     }
     
     .login-container {
