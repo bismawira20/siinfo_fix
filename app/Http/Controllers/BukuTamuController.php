@@ -191,9 +191,32 @@ class BukuTamuController extends Controller
         return redirect('/dashboard/bukutamu')->with("success", "Agenda kunjungan berhasil diupdate!");
     }
 
-    public function adminIndex(){
-        $bukutamu = BukuTamu::paginate(10);
-        return view('dashboard.bukutamu.admin.index', compact('bukutamu'));
+    public function adminIndex(Request $request){ 
+        $bukutamu = BukuTamu::query();
+
+        // Filter berdasarkan tanggal awal dan akhir
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $bukutamu->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
+                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
+            ]);
+        }
+    
+        // Filter berdasarkan status
+        if ($request->filled('status')) {
+            $bukutamu->where('status', $request->status);
+        }
+
+        // Filter by bidang
+        if ($request->filled('bidang')) {
+            $bukutamu->where('bidang_id', $request->bidang);
+        }
+    
+        $bukutamu = $bukutamu->paginate(10)->withQueryString();
+        
+        $bidang = Bidang::all();
+    
+        return view('dashboard.bukutamu.admin.index', compact('bukutamu', 'bidang'));
     }
 
     public function setuju(BukuTamu $bukutamu){

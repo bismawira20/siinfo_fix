@@ -5,6 +5,29 @@
   <h1 class="h2">Dashboard Permintaan Email Dinas</h1>
 </div>
 
+<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
+  <!-- Filter Waktu -->
+  <div class="text-center">
+        <label class="form-label">Tanggal Awal:</label>
+        <input type="date" name="start_date" class="form-control" style="width: 200px;" value="{{ request('start_date', '2024-01-01') }}">
+    </div>
+    <div class="text-center">
+        <label class="form-label">Tanggal Akhir:</label>
+        <input type="date" name="end_date" class="form-control" style="width: 200px;" value="{{ request('end_date', '2024-12-31') }}">
+    </div>
+
+    <!-- Filter Status -->
+    <div style="flex-grow: 1;">
+        <!-- <label class="form-label">Status:</label> -->
+        <select name="status" class="form-select" style="min-width: 200px;">
+            <option value="" disabled selected hidden>Status</option>
+            <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
+            <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
 <div class="table-responsive small">
   @if(session()->has('success'))
   </div>

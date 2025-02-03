@@ -99,8 +99,24 @@ class AplikasiController extends Controller
         return redirect('/dashboard/aplikasi/')->with("success", "Pengajuan Aplikasi berhasil dihapus!");
     }
 
-    public function adminIndex(){
-        $aplikasi = Aplikasi::paginate(10);
+    public function adminIndex(Request $request) {
+        $aplikasi = Aplikasi::query();
+    
+        // Filter berdasarkan tanggal awal dan akhir
+        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
+            $aplikasi->whereBetween('created_at', [
+                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
+                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
+            ]);
+        }
+    
+        // Filter berdasarkan status
+        if ($request->filled('status')) {
+            $aplikasi->where('status', $request->status);
+        }
+
+        $aplikasi = $aplikasi->paginate(10)->withQueryString();
+
         return view('dashboard.aplikasi.admin.index', compact('aplikasi'));
     }
 
