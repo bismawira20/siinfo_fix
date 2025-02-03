@@ -85,8 +85,15 @@ class PengaduanController extends Controller
         return redirect('/dashboard/pengaduan/')->with("success", "Pengaduan berhasil dihapus!");
     }
 
-    public function adminIndex(){
-        $pengaduan = Pengaduan::paginate(10);
+    public function adminIndex(Request $request){
+        $pengaduan = Pengaduan::query();
+
+        if ($request->filled('status')) {
+            $pengaduan->where('status', $request->status);
+        }
+
+        $pengaduan = $pengaduan->paginate(10);
+
         return view('dashboard.pengaduan.admin.index', compact('pengaduan'));
     }
 

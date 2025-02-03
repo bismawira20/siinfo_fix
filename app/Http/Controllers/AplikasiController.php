@@ -102,20 +102,12 @@ class AplikasiController extends Controller
     public function adminIndex(Request $request) {
         $aplikasi = Aplikasi::query();
     
-        // Filter berdasarkan tanggal awal dan akhir
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $aplikasi->whereBetween('created_at', [
-                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
-                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
-            ]);
-        }
-    
         // Filter berdasarkan status
         if ($request->filled('status')) {
             $aplikasi->where('status', $request->status);
         }
 
-        $aplikasi = $aplikasi->paginate(10)->withQueryString();
+        $aplikasi = $aplikasi->paginate(10);
 
         return view('dashboard.aplikasi.admin.index', compact('aplikasi'));
     }

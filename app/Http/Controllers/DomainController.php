@@ -91,21 +91,12 @@ class DomainController extends Controller
 
     public function adminIndex(Request $request) {
         $domain = Domain::query();
-    
-        // Filter berdasarkan tanggal awal dan akhir
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $domain->whereBetween('created_at', [
-                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
-                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
-            ]);
-        }
-    
         // Filter berdasarkan status
         if ($request->filled('status')) {
             $domain->where('status', $request->status);
         }
 
-        $domain = $domain->paginate(10)->withQueryString();
+        $domain = $domain->paginate(10);
         
         return view('dashboard.domain.admin.index', compact('domain'));
     }

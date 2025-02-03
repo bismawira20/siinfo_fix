@@ -1,33 +1,51 @@
 @extends('dashboard.layouts.main')
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      flatpickr('.flatpickr', {
+          dateFormat: "Y-m-d", // Format tanggal yang diinginkan
+          // Anda dapat menambahkan opsi lain di sini
+      });
+  });
+</script>
+
+
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard Kunjungan</h1>
 </div>
-<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
-  <!-- Filter Waktu -->
-  <div class="text-center">
-        <label class="form-label">Tanggal Awal:</label>
-        <input type="date" name="start_date" class="form-control" style="width: 200px;" value="{{ request('start_date', '2024-01-01') }}">
-    </div>
-    <div class="text-center">
-        <label class="form-label">Tanggal Akhir:</label>
-        <input type="date" name="end_date" class="form-control" style="width: 200px;" value="{{ request('end_date', '2024-12-31') }}">
-    </div>
 
-    <!-- Filter Status -->
-    <div style="flex-grow: 1;">
+<div class="">
+  @if(session()->has('success'))
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  @endif
+</div>
+
+<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
+  <!-- Filter Tanggal -->
+  <div class="col-lg-3 d-flex align-items-end">
+    <input type="tanggal" name="tanggal" class="form-control flatpickr" value="{{ request('tanggal') }}" placeholder="Tanggal">
+  </div>
+  
+  <!-- Filter Status -->
+    <div class="col-lg-3 d-flex align-items-end">
         <!-- <label class="form-label">Status:</label> -->
         <select name="status" class="form-select" style="min-width: 10px;">
             <option value="" disabled selected hidden>Status</option>
-            <option value="diproses" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-            <option value="selesai" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
-            <option value="selesai" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+            <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
     </div>
 
     <!-- Filter Bidang --> 
-    <div style="flex-grow: 1;">
+    <div class="col-lg-5 d-flex align-items-end">
         <!-- <label class="form-label">Bidang:</label> -->
         <select name="bidang" class="form-select" style="min-width: 10px;">
             <option value="" disabled selected hidden>Bidang</option>
@@ -40,19 +58,8 @@
     <button type="submit" class="btn btn-primary">Filter</button>
 </form>
 
-{{-- <div class="input-group mb-3 col-lg-30">
-  <input type="text" class="form-control" placeholder="Cari" name ="search">
-  <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Cari</button>
-</div> --}}
+
 <div class="table-responsive small col-lg-15">
-  @if(session()->has('success'))
-  </div>
-    <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-      <span>{{ session('success') }}</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  @endif
-    {{-- <a href="/dashboard/bukutamu/create" class="btn btn-primary mb-3">Agendakan Kunjungan</a> --}}
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -105,13 +112,14 @@
       </tbody>
     </table>
   </div>
+
   <div class="d-flex justify-content-between align-items-center">
     <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline">
       @csrf
       @method('put')
-      <button class="btn btn-success rounded">Setujui Semua</button>
+      <button class="btn btn-success rounded mt-1">Setujui Semua</button>
     </form>
-    
+
     <div class="d-inline">{{ $bukutamu->links() }}</div>
 </div>
 @endsection

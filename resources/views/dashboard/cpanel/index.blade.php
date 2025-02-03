@@ -5,14 +5,17 @@
   <h1 class="h2">Permintaan Akses Cpanel </h1>
 </div>
 
-<div class="table-responsive small">
+
+<div class="">
   @if(session()->has('success'))
-  </div>
-    <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-      <span>{{ session('success') }}</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
   @endif
+</div>
+
+<div class="table-responsive small">
     <a href="/dashboard/cpanel/create" class="btn btn-primary mb-3">Tambah Permintaan</a>
     <table class="table table-striped table-sm">
       <thead>

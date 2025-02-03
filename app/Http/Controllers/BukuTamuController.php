@@ -193,15 +193,11 @@ class BukuTamuController extends Controller
 
     public function adminIndex(Request $request){ 
         $bukutamu = BukuTamu::query();
-
-        // Filter berdasarkan tanggal awal dan akhir
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $bukutamu->whereBetween('created_at', [
-                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
-                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
-            ]);
+        //Filter berdasarkan tanggal
+        if ($request->filled('tanggal')) {
+            $bukutamu->where('tanggal', $request->tanggal);
         }
-    
+
         // Filter berdasarkan status
         if ($request->filled('status')) {
             $bukutamu->where('status', $request->status);
@@ -212,7 +208,7 @@ class BukuTamuController extends Controller
             $bukutamu->where('bidang_id', $request->bidang);
         }
     
-        $bukutamu = $bukutamu->paginate(10)->withQueryString();
+        $bukutamu = $bukutamu->paginate(10);
         
         $bidang = Bidang::all();
     

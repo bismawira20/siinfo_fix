@@ -1,11 +1,13 @@
 @extends('layouts.main')
 
+
 @section('container')
 <style>
     body {
     position: relative;
     background: none;
     }
+
 
     body::before {
     content: "";
@@ -20,7 +22,7 @@
     filter: blur(3px); /* Efek blur */
     z-index: -1;
     }
-    
+   
     .login-container {
         display: flex;
         justify-content: center;
@@ -59,31 +61,36 @@
     }
 </style>
 
+
 <div class="alert-container">
-    @if(session()->has('success'))
+    @if(session()->has('status'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <span>{{ session('success') }}</span>
+        <span>{{ session('status') }}</span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
 
-    @if(session()->has('loginError'))
+
+   	@if($errors->any())
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <span>{{ session('loginError') }}</span>
+        <span>{{ $errors->first() }}</span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
 </div>
 
+
 <div class="login-container">
     <div class="login-card">
         <img src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" alt="Logo">
-        <h2>Login | SI-INFO</h2>
-        <form action="/login" method="post">
+        <h2>Reset Password</h2>
+        <form action="{{ route('password.update') }}
+" method="post">
             @csrf
+<input type="hidden" name="token" value="{{ $token }}">
             <div class="form-floating mb-2">
                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                placeholder="name@example.com" autofocus required value="{{ old('email') }}">
+                placeholder="name@example.com" required value="{{ old('email', $email) }}">
                 <label for="email">Email</label>
                 @error('email')
                 <div class="invalid-feedback">
@@ -92,14 +99,21 @@
                 @enderror
             </div>
             <div class="form-floating mb-2">
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
-                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
+                <label for="password">Password Baru</label>
+                @error('password')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
             </div>
-            <button class="btn btn-danger w-100 py-2" type="submit">LOGIN</button>
+            <div class="form-floating mb-2">
+                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Konfirmasi Password" required>
+                <label for="password_confirmation">Konfirmasi Password</label>
+            </div>
+            <button class="btn btn-danger w-100 py-2" type="submit">Reset Password</button>
         </form>
-        <small class="d-block mt-3">Lupa Password? 
-            <a href="/password/reset">Reset Password</a></small>
-        <small class="d-block text-center mt-2">Belum punya akun? 
+              <small class="d-block text-center mt-2">Belum punya akun?
             <a href="/register" class="text-danger">Daftar Akun</a></small>
     </div>
 </div>

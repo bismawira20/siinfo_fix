@@ -4,19 +4,31 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard Pengaduan</h1>
 </div>
-{{-- <div class="input-group mb-3 col-lg-30">
-  <input type="text" class="form-control" placeholder="Cari" name ="search">
-  <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Cari</button>
-</div> --}}
-<div class="table-responsive small col-lg-15">
+
+<div class="container">
   @if(session()->has('success'))
-  </div>
-    <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-      <span>{{ session('success') }}</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
   @endif
-    {{-- <a href="/dashboard/bukutamu/create" class="btn btn-primary mb-3">Agendakan Kunjungan</a> --}}
+</div>
+
+<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
+  <!-- Filter Status -->
+  <div class="col-lg-3 d-flex align-items-end">
+    <!-- <label class="form-label">Status:</label> -->
+    <select name="status" class="form-select" style="min-width: 10px;">
+        <option value="" disabled selected hidden>Status</option>
+        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+        <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+
+<div class="table-responsive small col-lg-15">
     <table class="table table-striped table-sm">
       <thead>
         <tr>

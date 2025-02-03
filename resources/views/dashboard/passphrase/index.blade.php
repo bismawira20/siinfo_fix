@@ -4,19 +4,18 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Pengajuan Reset Password Email Dinas/Passphrase TTE</h1>
 </div>
-{{-- <div class="input-group mb-3 col-lg-30">
-  <input type="text" class="form-control" placeholder="Cari" name ="search">
-  <button class="btn btn-primary" type="submit" style="margin-left: 5px;">Cari</button>
-</div> --}}
-<div class="table-responsive small col-lg-15">
+
+<div class="">
   @if(session()->has('success'))
-  </div>
-    <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-      <span>{{ session('success') }}</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
   @endif
-    <a href="/dashboard/passphrase/create" class="btn btn-primary mb-3">Ajukan Passphrase</a>
+</div>
+
+<div class="table-responsive small col-lg-15">
+  <a href="/dashboard/passphrase/create" class="btn btn-primary mb-3">Ajukan Passphrase</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>

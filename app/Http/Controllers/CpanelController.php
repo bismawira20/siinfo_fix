@@ -85,20 +85,12 @@ class CpanelController extends Controller
     public function adminIndex(Request $request){
         $cpanel = Cpanel::query();
     
-        // Filter berdasarkan tanggal awal dan akhir
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $cpanel->whereBetween('created_at', [
-                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
-                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
-            ]);
-        }
-    
         // Filter berdasarkan status
         if ($request->filled('status')) {
             $cpanel->where('status', $request->status);
         }
 
-        $cpanel = $cpanel->paginate(10)->withQueryString();
+        $cpanel = $cpanel->paginate(10);
 
         return view('dashboard.cpanel.admin.index', compact('cpanel'));
     }

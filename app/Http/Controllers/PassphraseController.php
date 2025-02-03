@@ -102,20 +102,12 @@ class PassphraseController extends Controller
     public function adminIndex(Request $request) {
         $passphrase = Passphrase::query();
     
-        // Filter berdasarkan tanggal awal dan akhir
-        if ($request->filled('tanggal_awal') && $request->filled('tanggal_akhir')) {
-            $passphrase->whereBetween('created_at', [
-                date('Y-m-d 00:00:00', strtotime($request->tanggal_awal)),
-                date('Y-m-d 23:59:59', strtotime($request->tanggal_akhir))
-            ]);
-        }
-    
         // Filter berdasarkan status
         if ($request->filled('status')) {
             $passphrase->where('status', $request->status);
         }
 
-        $passphrase = $passphrase->paginate(10)->withQueryString();
+        $passphrase = $passphrase->paginate(10);
 
         return view('dashboard.passphrase.admin.index', compact('passphrase'));
     }

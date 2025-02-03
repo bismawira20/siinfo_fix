@@ -5,19 +5,18 @@
   <h1 class="h2">Dashboard Permintaan Sub Domain dan VPS</h1>
 </div>
 
-<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
-  <!-- Filter Waktu -->
-  <div class="text-center">
-        <label class="form-label">Tanggal Awal:</label>
-        <input type="date" name="start_date" class="form-control" style="width: 200px;" value="{{ request('start_date', '2024-01-01') }}">
-    </div>
-    <div class="text-center">
-        <label class="form-label">Tanggal Akhir:</label>
-        <input type="date" name="end_date" class="form-control" style="width: 200px;" value="{{ request('end_date', '2024-12-31') }}">
-    </div>
+<div class="">
+  @if(session()->has('success'))
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  @endif
+</div>
 
+<form method="GET" action="{{ url()->current() }}" class="mb-3 d-flex gap-2 align-items-end">
     <!-- Filter Status -->
-    <div style="flex-grow: 1;">
+    <div class="col-lg-3 d-flex align-items-end">
         <!-- <label class="form-label">Status:</label> -->
         <select name="status" class="form-select" style="min-width: 200px;">
             <option value="" disabled selected hidden>Status</option>
@@ -30,13 +29,6 @@
 </form>
 
 <div class="table-responsive small">
-  @if(session()->has('success'))
-  </div>
-    <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-      <span>{{ session('success') }}</span>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  @endif
     <table class="table table-striped table-sm">
       <thead>
         <tr>

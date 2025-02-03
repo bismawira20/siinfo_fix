@@ -20,6 +20,7 @@ use App\Http\Controllers\EmailDinasController;
 use App\Http\Controllers\PassphraseController;
 use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostDashboardController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -67,6 +68,9 @@ Route::get('/categories', function(){
 Route::get('/login',[LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
+
+Route::get('/password/reset', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [PasswordResetController::class, 'reset'])->name('password.update');
 
 Route::get('/register',[RegisterController::class,'index'])->middleware('guest');
 Route::post('/register',[RegisterController::class,'store']);

@@ -5,16 +5,16 @@
   <h1 class="h2">Tambah Bidang</h1>
 </div>
 
-<div class="table-responsive small col-lg-6">
-  
+<div class="">
   @if(session()->has('success'))
-  </div>
-  <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
-    <span>{{ session('success') }}</span>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+      <div class="alert alert-success alert-dismissible fade show col-lg-6" role="alert">
+        <span>{{ session('success') }}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
   @endif
+</div>
 
+<div class="table-responsive small col-lg-6">
     <a href="/dashboard/bidangs/create" class="btn btn-primary mb-3">Tambah Bidang Kerja</a>
     <table class="table table-striped table-sm">
       <thead>
