@@ -6,6 +6,12 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<style>
+    .is-invalid {
+        border-color: red; /* Mengubah warna batas menjadi merah */
+    }
+</style>
+
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2> Agendakan Kunjungan Anda</h2>
@@ -16,7 +22,7 @@
         @csrf
         <div class="mb-3">
         <label for="nama" class="form-label @error('nama') is-invalid @enderror">Nama</label>
-        <input type="text" class="form-control" 
+        <input type="text" class="form-control @error('nama') is-invalid @enderror" 
         id="nama" name="nama" value="{{ old('nama') }}">
         @error('nama')
             <div class="invalid-feedback">
@@ -31,7 +37,7 @@
                     Harap menggunakan Nomor WhatsApp Anda!
                 </small>
             </label>
-            <input type="tel" class="form-control" 
+            <input type="tel" class="form-control @error('no_telp') is-invalid @enderror" 
             id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
             @error('no_telp')
             <div class="invalid-feedback">
@@ -43,7 +49,7 @@
             <label for="instansi" class="form-label @error('instansi') is-invalid @enderror">
                 Instansi 
             </label>
-            <input type="text" class="form-control" 
+            <input type="text" class="form-control @error('instansi') is-invalid @enderror" 
             id="instansi" name="instansi" value="{{ old('instasi') }}">
             @error('instansi')
             <div class="invalid-feedback">
@@ -53,7 +59,7 @@
         </div>
         <div class="mb-3">
             <label for="bidang_id" class="form-label">Tujuan Bidang</label>
-            <select class="form-select" name="bidang_id">
+            <select class="form-select {{ $errors->has('bidang_id') ? 'is-invalid' : '' }}" name="bidang_id">
                 <option selected disabled>Silahkan Pilih Bidang Tujuan</option>
                 @foreach ($bidangs as $bidang)
                 <option value="{{ $bidang->id }}" {{ old('bidang_id') == $bidang->id ? 'selected' : '' }}>
@@ -61,10 +67,15 @@
                 </option>  
                 @endforeach
             </select>
+            @error('bidang_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
         <div class="mb-3">
             <label for="tujuan" class="form-label @error('tujuan') is-invalid @enderror">Tujuan Kunjungan</label>
-            <textarea class="form-control" id="tujuan" rows="3" name="tujuan">{{ old('tujuan') }}</textarea>
+            <textarea class="form-control @error('tujuan') is-invalid @enderror" id="tujuan" rows="3" name="tujuan">{{ old('tujuan') }}</textarea>
             @error('tujuan')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -75,7 +86,7 @@
             <label for="tanggal" class="form-label @error('tanggal') is-invalid @enderror">Tanggal Kunjungan</label>
             <input 
                 type="text" 
-                class="form-control" 
+                class="form-control @error('tanggal') is-invalid @enderror" 
                 id="tanggal" 
                 name="tanggal"
                 value="{{ old('tanggal') }}"

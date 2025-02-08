@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('user',function (User $user) {
             return !$user->is_admin;
         });
+
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
     }
 }

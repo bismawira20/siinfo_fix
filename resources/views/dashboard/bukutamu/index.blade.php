@@ -27,7 +27,9 @@
           <th scope="col">Tujuan Bidang</th>
           <th scope="col">Tujuan Kunjungan</th>
           <th scope="col">Tanggal</th>
-          <th scope="col">Aksi</th>
+          <th scope="col">Waktu</th>
+          <th scope="col">Tanggapan Admin</th>
+          {{-- <th scope="col">Aksi</th> --}}
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -41,7 +43,9 @@
           <td>{{ $b->bidang->name }}</td>
           <td>{{ $b->tujuan }}</td>
           <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
-          <td>
+          <td>{{ $b->waktu }}</td>
+          <td>{{ $b->tanggapan }}</td>
+          {{-- <td>
             @if($b->created_at->diffInHours() < 1 && $b->status == 'pending')
               <a href="/dashboard/bukutamu/{{ $b->id }}/edit" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
               <form action="/dashboard/bukutamu/{{ $b->id }}/destroy" method="post" class="d-inline">
@@ -51,7 +55,7 @@
                     <i class="bi bi-trash fs-6"></i></button>
               </form>
             @endif
-          </td>
+          </td> --}}
           <td>              
             <span class="badge {{ 
             $b->status == 'pending' ? 'bg-warning' : 

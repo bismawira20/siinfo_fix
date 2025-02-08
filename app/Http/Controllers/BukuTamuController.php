@@ -73,9 +73,17 @@ class BukuTamuController extends Controller
     
     public function store(Request $request){
         $validatedData = $request->validate([
-            'nama' => 'required|max:255',
+            'nama' => [
+                'required',
+                'max:255',
+                'regex:/^[a-zA-Z\s]+$/', // Hanya huruf dan spasi
+            ],
             'bidang_id' => 'required',
-            'no_telp' => 'required|max:15',
+            'no_telp' => [
+                'required',
+                'max:15',
+                'regex:/^[0-9]+$/', // Hanya angka
+            ],
             'instansi' => 'required|max:255',
             'tujuan' => 'required',
             'tanggal' => [
@@ -87,12 +95,12 @@ class BukuTamuController extends Controller
                     if ($carbonDate->isWeekend()) {
                         $fail('Tanggal harus di hari kerja (Senin-Jumat)');
                     }
-
+    
                     // Cek jumlah pendaftaran pada tanggal tersebut
                     $count = DB::table('buku_tamus')
                         ->where('tanggal', $value)
                         ->count();
-
+    
                     if ($count >= 3) {
                         $fail('Tanggal sudah mencapai batas maksimum pendaftaran');
                     }
@@ -107,13 +115,27 @@ class BukuTamuController extends Controller
                         ->where('tanggal', $request->input('tanggal'))
                         ->where('waktu', $value)
                         ->count();
-
+    
                     if ($count > 0) {
                         $fail('Waktu sudah dipilih pada tanggal tersebut');
                     }
                 },
             ],
-            // tambahkan validasi lain sesuai kebutuhan
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'nama.regex' => 'Nama hanya boleh mengandung huruf dan spasi.',
+            'bidang_id.required' => 'Bidang harus dipilih.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
+            'no_telp.regex' => 'Nomor telepon hanya boleh mengandung angka.',
+            'instansi.required' => 'Instansi harus diisi.',
+            'instansi.max' => 'Instansi tidak boleh lebih dari 255 karakter.',
+            'tujuan.required' => 'Tujuan harus diisi.',
+            'tanggal.required' => 'Tanggal harus diisi.',
+            'tanggal.date' => 'Format tanggal tidak valid.',
+            'waktu.required' => 'Waktu harus dipilih.',
+            'waktu.in' => 'Waktu yang dipilih tidak valid.',
         ]);
 
         $validatedData['user_id'] = Auth::id();
@@ -237,5 +259,33 @@ class BukuTamuController extends Controller
         ]);
 
         return redirect('/dashboard/bukutamu/admin')->with("success", "Agenda kunjungan disetujui!");
+    }
+
+    public function adminShow(BukuTamu $bukutamu){
+        return view('dashboard.bukutamu.admin.show',[
+            'bukutamu' => $bukutamu
+        ]);
+    }
+
+    public function adminTanggapi(BukuTamu $bukutamu){
+        return view('dashboard.bukutamu.admin.tanggapan',[
+            'bukutamu' => $bukutamu
+        ]);
+    }
+
+    public function adminUpdate(Request $request, BukuTamu $bukutamu)
+    {
+        // Validasi input dari admin
+        $validatedData = $request->validate([
+            'tanggapan' => 'required', // Sesuaikan dengan kebutuhan
+        ]);
+    
+        // Update tanggapan bukutamu
+        $bukutamu->update([
+            'tanggapan' => $validatedData['tanggapan']
+        ]);
+    
+        // Redirect dengan pesan sukses
+        return redirect('/dashboard/bukutamu/admin')->with('success', 'Tanggapan berhasil disimpan!');
     }
 }

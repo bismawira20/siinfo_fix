@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('nama');
             $table->foreignId('user_id');
             $table->foreignId('bidang_id');
-            $table->string('no_telp')->nullable();;
-            $table->string('instansi')->nullable();;
+            $table->string('no_telp')->nullable();
+            $table->string('instansi')->nullable();
             $table->text('tujuan');
             $table->date('tanggal');
+            $table->text('tanggapan')->nullable();
             $table->enum('waktu', ['08:00', '10:00', '13:00']);
             $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
             $table->timestamps();

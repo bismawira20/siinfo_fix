@@ -22,6 +22,7 @@ use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostDashboardController;
+use App\Models\BukuTamu;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -180,6 +181,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{bukutamu}/setuju',[BukuTamuController::class,'setuju'])->name('bukutamu.admin.setuju');
         Route::put('/{bukutamu}/tolak',[BukuTamuController::class,'tolak'])->name('bukutamu.admin.tolak');
         Route::put('/setujuSemua',[BukuTamuController::class,'setujuSemua'])->name('bukutamu.admin.setujuSemua');
+        Route::get('/{bukutamu}/show', [BukuTamuController::class, 'adminShow'])->name('bukutamu.admin.show');
+        Route::get('/{bukutamu}/tanggapi',[BukuTamuController::class, 'adminTanggapi'])->name('bukutamu.admin.tanggapan');
+        Route::put('/{bukutamu}/update', [BukuTamuController::class, 'adminUpdate'])->name('bukutamu.admin.update');
     });
     //Route untuk Berita
     Route::prefix('dashboard/post/admin')->group(function(){

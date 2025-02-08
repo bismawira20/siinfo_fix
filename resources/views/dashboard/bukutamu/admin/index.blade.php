@@ -58,7 +58,6 @@
     <button type="submit" class="btn btn-primary">Filter</button>
 </form>
 
-
 <div class="table-responsive small col-lg-15">
     <table class="table table-striped table-sm">
       <thead>
@@ -66,10 +65,11 @@
           <th scope="col">No</th>
           <th scope="col">Nama</th>
           <th scope="col">No Telepon</th>
-          <th scope="col">Instansi</th>
-          <th scope="col">Tujuan Bidang</th>
-          <th scope="col">Tujuan Kunjungan</th>
+          {{-- <th scope="col">Instansi</th> --}}
+          <th scope="col">Bidang</th>
+          {{-- <th scope="col">Tujuan Kunjungan</th> --}}
           <th scope="col">Tanggal</th>
+          <th scope="col">Waktu</th>
           <th scope="col">Status</th>
           <th scope="col">Aksi</th>
         </tr>
@@ -80,10 +80,11 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $b->nama }}</td>
           <td>{{ $b->no_telp }}</td>
-          <td>{{ $b->instansi }}</td>
+          {{-- <td>{{ $b->instansi }}</td> --}}
           <td>{{ $b->bidang->name }}</td>
-          <td>{{ $b->tujuan }}</td>
+          {{-- <td>{{ $b->tujuan }}</td> --}}
           <td>{{ Carbon\Carbon::parse($b->tanggal)->translatedFormat('d F Y') }}</td>
+          <td>{{ $b->waktu }}</td>
           <td>
             <span class="badge {{ 
             $b->status == 'pending' ? 'bg-warning' : 
@@ -94,19 +95,32 @@
             </span>
           </td>
           <td>
-            <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
-            @csrf
-            @method('put')
-            <button class="badge bg-success border-0">
-                <i class="bi bi-check-lg fs-6"></i></button>
-            </form>
-            <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
-              @csrf
-              @method('put')
-                <button class="badge bg-danger border-0 mt-1">
-                    <i class="bi bi-x-lg fs-6"></i></button>
-            </form>
+            <div class="d-flex align-items-center gap-2">
+              <a href="{{ route('bukutamu.admin.tanggapan', $b->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
+                <i class="bi bi-pencil-square fs-6 m-0"></i>
+              </a>
+              <a href="{{ route('bukutamu.admin.show', $b->id) }}" class="badge bg-primary d-flex align-items-center justify-content-center">
+                <i class="bi bi-eye fs-6 m-0"></i>
+              </a>
+            </div>
+            <div class="d-flex align-items-center gap-2 mt-1">
+              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
+                @csrf
+                @method('put')
+                <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                  <i class="bi bi-check-lg fs-6 m-0"></i>
+                </button>
+              </form>
+              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
+                @csrf
+                @method('put')
+                <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                  <i class="bi bi-x-lg fs-6 m-0"></i>
+                </button>
+              </form>
+            </div>
           </td>
+          
         </tr>
         @endforeach
       </tbody>

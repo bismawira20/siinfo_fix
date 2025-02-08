@@ -17,6 +17,7 @@ class BukuTamu extends Model
         'bidang_id',
         'instansi',
         'tujuan',
+        'tanggapan',
         'tanggal',
         'waktu',
         'status'];
