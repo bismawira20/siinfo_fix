@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->text('tanggapan')->nullable();
             $table->enum('waktu', ['08:00', '10:00', '13:00']);
-            $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
+            $table->enum('status', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
             $table->timestamps();
         });
     }

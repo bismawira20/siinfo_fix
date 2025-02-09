@@ -58,7 +58,7 @@
           </td> --}}
           <td>              
             <span class="badge {{ 
-            $b->status == 'pending' ? 'bg-warning' : 
+            $b->status == 'diproses' ? 'bg-warning' : 
             ($b->status == 'disetujui' ? 'bg-success' : 
             ($b->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">

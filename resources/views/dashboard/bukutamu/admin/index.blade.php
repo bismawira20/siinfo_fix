@@ -38,7 +38,7 @@
         <!-- <label class="form-label">Status:</label> -->
         <select name="status" class="form-select" style="min-width: 10px;">
             <option value="" disabled selected hidden>Status</option>
-            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+            <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
             <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
             <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
@@ -87,7 +87,7 @@
           <td>{{ $b->waktu }}</td>
           <td>
             <span class="badge {{ 
-            $b->status == 'pending' ? 'bg-warning' : 
+            $b->status == 'diproses' ? 'bg-warning' : 
             ($b->status == 'disetujui' ? 'bg-success' : 
             ($b->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">

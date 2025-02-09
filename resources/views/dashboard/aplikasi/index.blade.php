@@ -22,9 +22,10 @@
           <th scope="col">No</th>
           <th scope="col">Nama PIC</th>
           <th scope="col">No Telp PIC</th>
-          <th scope="col">Nama OPD</th>
+          {{-- <th scope="col">Nama OPD</th> --}}
           <th scope="col">Nama Aplikasi</th>
-          <th scope="col">Aksi</th>
+          <th scope="col">Tanggapan Admin</th>
+          {{-- <th scope="col">Aksi</th> --}}
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -34,9 +35,10 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $p->nama_pic }}</td>
           <td>{{ $p->no_telp}}</td>
-          <td>{{ $p->opd }}</td>
+          {{-- <td>{{ $p->opd }}</td> --}}
           <td>{{ $p->nama_app}}</td>
-          <td>
+          <td>{{ $p->tanggapan}}</td>
+          {{-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
               <a href="{{ route('aplikasi.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
               <form action="{{ route('aplikasi.destroy', $p->id) }}" method="post" class="d-inline">
@@ -46,11 +48,11 @@
                     <i class="bi bi-trash fs-6"></i></button>
               </form>
             @endif
-          </td>
+          </td> --}}
           <td>
               <span class="badge {{ 
               $p->status == 'diproses' ? 'bg-warning' : 
-              ($p->status == 'selesai' ? 'bg-success' : 
+              ($p->status == 'disetujui' ? 'bg-success' : 
               ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
               }}" style="font-size: 0.9em;">
               {{ $p->status }}

@@ -22,6 +22,7 @@ use App\Http\Controllers\AdminBidangController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostDashboardController;
+use App\Models\Aplikasi;
 use App\Models\BukuTamu;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -234,6 +235,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/{aplikasi}/show',[AplikasiController::class, 'adminShow'])->name('aplikasi.admin.show');
         Route::put('/{aplikasi}/selesai',[AplikasiController::class,'selesai'])->name('aplikasi.admin.selesai');
         Route::put('/selesaiSemua',[AplikasiController::class,'selesaiSemua'])->name('aplikasi.admin.selesaiSemua');
+        Route::put('/{aplikasi}/tolak',[AplikasiController::class,'tolak'])->name('aplikasi.admin.tolak');
+        Route::get('/{aplikasi}/tanggapi',[AplikasiController::class, 'adminTanggapi'])->name('aplikasi.admin.tanggapan');
+        Route::put('/{aplikasi}/update', [AplikasiController::class, 'adminUpdate'])->name('aplikasi.admin.update');
     });
     //Route untuk Domain
     Route::prefix('dashboard/domain/admin')->group(function () {

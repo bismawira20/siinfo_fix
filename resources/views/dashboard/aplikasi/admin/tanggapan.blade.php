@@ -117,6 +117,33 @@
                 </tbody>
             </table>    
         </div>
+        <div class="mt-3">
+            <h4>Tanggapan Admin</h4>
+
+            <form action="{{ route('aplikasi.admin.update', $aplikasi->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <div class="mb-3">
+                    <textarea 
+                        class="form-control @error('tanggapan') is-invalid @enderror" 
+                        id="tanggapan" 
+                        name="tanggapan" 
+                        rows="5" 
+                        placeholder="Masukkan tanggapan Anda..."
+                    >{{ old('tanggapan', $aplikasi->tanggapan) }}</textarea>
+                    
+                    @error('tanggapan')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-primary">
+                     Kirim Tanggapan
+                </button>
+            </form>
+        </div>
   </div>
 </div>
 @endsection

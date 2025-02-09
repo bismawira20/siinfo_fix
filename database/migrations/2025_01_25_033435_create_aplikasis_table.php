@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string('sistem_operasi');
             $table->enum('instalasi', ['Data Center Diskominfo Kota Semarang', 'Server OPD', 'Server Pihak Ketiga']);
             $table->string('dokumen');
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->text('tanggapan')->nullable();
+            $table->enum('status', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
             $table->timestamps();
         });
     }
