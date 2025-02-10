@@ -17,7 +17,7 @@
         <div class="mb-3">
         <label for="nama" class="form-label @error('nama') is-invalid @enderror">Nama Pemohon</label>
         <input type="text" class="form-control" 
-        id="nama" name="nama">
+        id="nama" name="nama" value="{{ old('nama') }}">
         @error('nama')
         <div class="invalid-feedback">
             {{ $message }}
@@ -31,7 +31,7 @@
                 </small> 
             </label>
             <input type="tel" class="form-control" 
-            id="no_telp" name="no_telp">
+            id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
             @error('no_telp')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -46,7 +46,7 @@
             </small>
             </label>
             <input type="text" class="form-control" 
-            id="nip" name="nip">
+            id="nip" name="nip" value="{{ old('nip') }}">
             @error('nip')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -58,7 +58,7 @@
                 Jabatan 
             </label>
             <input type="text" class="form-control" 
-            id="jabatan" name="jabatan">
+            id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
             @error('jabatan')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -69,7 +69,7 @@
             <label for="asal_opd" class="form-label @error('asal_opd') 
             is-invalid @enderror">Asal OPD</label>
             <input type="text" class="form-control" 
-            id="asal_opd" name="asal_opd">
+            id="asal_opd" name="asal_opd" value="{{ old('asal_opd') }}">
             @error('asal_opd')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -84,7 +84,7 @@
                 </small> 
             </label>
             <input type="text" class="form-control" 
-            id="url" name="url">
+            id="url" name="url" value="{{ old('url') }}">
             @error('url')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -95,10 +95,19 @@
             <label for="file" class="form-label @error('file') is-invalid @enderror">Surat Tugas Pengambilan Berita Acara
                 <small class="form-text text-muted d-block">
                     (Contoh template klik <a href="https://docs.google.com/document/d/1yMXzjmWdXelyIk06wam9qMPnrTlvFoiZ4cdaX7eW8oM/edit?usp=sharing"
-                    target="_blank" rel="noopener noreferrer">disini</a> (.pdf maksimal 5MB))
+                    target="_blank" rel="noopener noreferrer">disini</a> (.pdf maksimal 1MB))
                 </small> 
             </label>
-            <input class="form-control" type="file" id="file" name="file">
+            <input class="form-control" type="file" id="file" name="file" value="{{ old('file') }}" accept=".pdf">
+            @if(old('file') || isset($existingFileName))
+                <small class="form-text text-muted">
+                    @if(old('file'))
+                        File yang diunggah sebelumnya: {{ old('file') }}
+                    @else
+                        File yang diunggah sebelumnya: {{ $existingFileName }}
+                    @endif
+                </small>
+            @endif
             @error('file')
             <div class="invalid-feedback">
                 {{ $message }}

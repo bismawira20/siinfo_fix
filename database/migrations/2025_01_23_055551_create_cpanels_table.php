@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('asal_opd');
             $table->string('url');
             $table->string('file')->nullable();
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->text('tanggapan')->nullable();
+            $table->enum('status', ['diproses', 'disetujui','ditolak'])->default('diproses');
             $table->timestamps();
         });
     }

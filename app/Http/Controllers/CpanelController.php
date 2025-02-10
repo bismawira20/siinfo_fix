@@ -24,13 +24,27 @@ class CpanelController extends Controller
 
     public function store(Request $request){
         $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'no_telp' => 'required|max:15',
-            'nip' => 'required',
+            'nama' => 'required|max:255|regex:/^[\p{L} ]+$/u', // Nama tidak boleh mengandung angka dan simbol
+            'no_telp' => 'required|digits_between:10,15', // No telp harus diisi angka dan memiliki panjang antara 10 hingga 15 digit
+            'nip' => 'required|digits:18', // NIP harus terdiri dari 18 digit
             'jabatan' => 'required|max:255',
             'asal_opd' => 'required|max:255',
-            'url' =>'required|max:255',
-            'file' => 'nullable|file|mimes:pdf|max:1024',
+            'url' => 'required|max:255|regex:/^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)$/i', // Pastikan URL valid
+            'file' => 'required|file|mimes:pdf|max:1024',
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'nama.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
+            'nip.required' => 'NIP harus diisi.',
+            'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+            'jabatan.required' => 'Jabatan harus diisi.',
+            'asal_opd.required' => 'Asal OPD harus diisi.',
+            'url.required' => 'URL harus diisi.',
+            'url.regex' => 'URL harus dalam format yang valid, seperti bongsari.semarangkota.go.id.',
+            'file.required' => 'File harus diisi',
+            'file.mimes' => 'File harus berupa dokumen PDF.',
+            'file.max' => 'File tidak boleh lebih dari 1 MB.',
         ]);
 
         if($request->file('file')){
@@ -97,17 +111,53 @@ class CpanelController extends Controller
 
     public function selesai(Cpanel $cpanel){
         Cpanel::where('id', $cpanel->id)->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/cpanel/admin')->with("success", "Pengajuan CPANEL selesai!");
+        return redirect('/dashboard/cpanel/admin')->with("success", "Pengajuan CPANEL disetujui!");
     }
 
     public function selesaiSemua(){
         Cpanel::where('status', 'diproses')->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/cpanel/admin')->with("success", "Pengajuan CPANEL selesai!");
+        return redirect('/dashboard/cpanel/admin')->with("success", "Pengajuan CPANEL disetujui!");
+    }
+
+    public function tolak(Cpanel $cpanel){
+        Cpanel::where('id', $cpanel->id)->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect('/dashboard/cpanel/admin')->with("success", "Pengajuan CPANEL ditolak!");
+    }
+
+    public function adminShow(Cpanel $cpanel){
+        return view('dashboard.cpanel.admin.show',[
+            'cpanel' => $cpanel
+        ]);
+    }
+
+    public function adminTanggapi(Cpanel $cpanel){
+        return view('dashboard.cpanel.admin.tanggapan',[
+            'cpanel' => $cpanel
+        ]);
+    }
+
+    public function adminUpdate(Request $request, Cpanel $cpanel)
+    {
+        // Validasi input dari admin
+        $validatedData = $request->validate([
+            'tanggapan' => 'required', // Sesuaikan dengan kebutuhan
+        ]);
+    
+        // Update tanggapan bukutamu
+        $cpanel->update([
+            'tanggapan' => $validatedData['tanggapan']
+        ]);
+    
+        // Redirect dengan pesan sukses
+        return redirect('/dashboard/cpanel/admin')->with('success', 'Tanggapan berhasil disimpan!');
     }
 }

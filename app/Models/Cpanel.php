@@ -18,6 +18,7 @@ class Cpanel extends Model
         'asal_opd',
         'url',
         'file',
+        'tanggapan',
         'status'];
 
     protected $with = ['user'];

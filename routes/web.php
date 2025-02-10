@@ -220,8 +220,12 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     //Route untuk CPANEL
     Route::prefix('dashboard/cpanel/admin')->group(function () {
         Route::get('/',[CpanelController::class, 'adminIndex'])->name('cpanel.admin.index');
+        Route::get('/{cpanel}/show',[CpanelController::class, 'adminShow'])->name('cpanel.admin.show');
         Route::put('/{cpanel}/selesai',[CpanelController::class,'selesai'])->name('cpanel.admin.selesai');
         Route::put('/selesaiSemua',[CpanelController::class,'selesaiSemua'])->name('cpanel.admin.selesaiSemua');
+        Route::put('/{cpanel}/tolak',[CpanelController::class,'tolak'])->name('cpanel.admin.tolak');
+        Route::get('/{cpanel}/tanggapi',[CpanelController::class, 'adminTanggapi'])->name('cpanel.admin.tanggapan');
+        Route::put('/{cpanel}/update', [CpanelController::class, 'adminUpdate'])->name('cpanel.admin.update');
     });
     //Route untuk EmailDinas
     Route::prefix('dashboard/emaildinas/admin')->group(function () {

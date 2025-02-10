@@ -23,9 +23,9 @@
           <th scope="col">No</th>
           <th scope="col">Nama Pemohon</th>
           <th scope="col">No Telp</th>
-          <th scope="col">Asal OPD</th>
-          <th scope="col">Jabatan</th>
-          <th scope="col">Aksi</th>
+          <th scope="col">URL</th>
+          <th scope="col">Tanggapan Admin</th>
+          {{-- <th scope="col">Aksi</th> --}}
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -35,9 +35,9 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $p->nama }}</td>
           <td>{{ $p->no_telp}}</td>
-          <td>{{ $p->asal_opd }}</td>
-          <td>{{ $p->jabatan}}</td>
-          <td>
+          <td>{{ $p->url}}</td>
+          <td>{{ $p->tanggapan}}</td>
+          {{-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
             <a href="{{ route('cpanel.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
             <form action="{{ route('cpanel.destroy', $p->id) }}" method="post" class="d-inline">
@@ -47,11 +47,11 @@
                   <i class="bi bi-trash fs-6"></i></button>
             </form>
             @endif
-          </td>
+          </td> --}}
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $p->status }}
