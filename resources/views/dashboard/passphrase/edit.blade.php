@@ -19,7 +19,7 @@
             Nama Lengkap Pemohon
         </label>
         <input type="text" class="form-control" 
-        id="nama" name="nama" value ="{{ old('nama', $passphrase->nama) }}">
+        id="nama" name="nama" value ="{{ old('nama', $passphrase->nama) }}"pattern="[a-zA-Z\s]+">
         @error('nama')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -33,7 +33,8 @@
             </small>
             </label>
             <input type="text" class="form-control" 
-            id="nip_pemohon" name="nip_pemohon" value ="{{ old('nip_pemohon', $passphrase->nip_pemohon) }}">
+            id="nip_pemohon" name="nip_pemohon" value ="{{ old('nip_pemohon', $passphrase->nip_pemohon) }}"
+            pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
             @error('nip_pemohon')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -48,7 +49,8 @@
                 </small> 
             </label>
             <input type="tel" class="form-control" 
-            id="no_telp" name="no_telp" value ="{{ old('no_telp', $passphrase->no_telp) }}">
+            id="no_telp" name="no_telp" value ="{{ old('no_telp', $passphrase->no_telp) }}"
+            pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
             @error('no_telp')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -60,7 +62,7 @@
                 Nama User/Pemilik Akun
             </label>
             <input type="text" class="form-control" 
-            id="nama_user" name="nama_user" value ="{{ old('nama_user', $passphrase->nama_user) }}">
+            id="nama_user" name="nama_user" value ="{{ old('nama_user', $passphrase->nama_user) }}"pattern="[a-zA-Z\s]+">
             @error('nama_user')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -74,7 +76,8 @@
             </small>
             </label>
             <input type="text" class="form-control" 
-            id="nik_user" name="nik_user" value ="{{ old('nik_user', $passphrase->nik_user) }}">
+            id="nik_user" name="nik_user" value ="{{ old('nik_user', $passphrase->nik_user) }}"
+            pattern="\d{16}" title="NIK harus terdiri dari 16 angka">
             @error('nik_user')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -88,7 +91,8 @@
             </small>
             </label>
             <input type="text" class="form-control" 
-            id="nip_user" name="nip_user" value ="{{ old('nip_user', $passphrase->nip_user) }}">
+            id="nip_user" name="nip_user" value ="{{ old('nip_user', $passphrase->nip_user) }}"
+            pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
             @error('nip_user')
                 <div class="invalid-feedback">
                     {{ $message }}

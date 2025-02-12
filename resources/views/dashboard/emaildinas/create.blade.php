@@ -17,7 +17,7 @@
         <div class="mb-3">
         <label for="nama_opd" class="form-label @error('nama_opd') is-invalid @enderror">Nama OPD</label>
         <input type="text" class="form-control" 
-        id="nama_opd" name="nama_opd">
+        id="nama_opd" name="nama_opd" value="{{ old('nama_opd') }}" pattern="[a-zA-Z\s]+">
         @error('nama_opd')
         <div class="invalid-feedback">
             {{ $message }}
@@ -26,7 +26,7 @@
         <div class="mb-3">
             <label for="nama_pic" class="form-label @error('nama_pic') is-invalid @enderror">Nama PIC</label>
             <input type="text" class="form-control" 
-            id="nama_pic" name="nama_pic">
+            id="nama_pic" name="nama_pic" value="{{ old('nama_pic') }}" pattern="[a-zA-Z\s]+">
             @error('nama_pic')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -40,7 +40,8 @@
                 </small> 
             </label>
             <input type="tel" class="form-control" 
-            id="no_telp_pic" name="no_telp_pic">
+            id="no_telp_pic" name="no_telp_pic"value="{{ old('no_telp_pic') }}"
+            pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
             @error('no_telp_pic')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -88,7 +89,7 @@
                 <label for="nama_pemohon" class="form-label  @error('nama_pemohon') is-invalid @enderror">Nama Pemohon
                 </label>
                 <input type="text" class="form-control  @error('nama_pemohon') is-invalid @enderror" 
-                       id="nama_pemohon" name="nama_pemohon" value="{{ old('nama_pemohon') }}">
+                       id="nama_pemohon" name="nama_pemohon" value="{{ old('nama_pemohon') }}"pattern="[a-zA-Z\s]+" >
                 @error('nama_pemohon')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -99,7 +100,8 @@
                 <label for="nip_pemohon" class="form-label @error('nip_pemohon') is-invalid @enderror">NIP Pemohon
                 </label>
                 <input type="text" class="form-control @error('nip_pemohon') is-invalid @enderror" 
-                       id="nip_pemohon" name="nip_pemohon" value="{{ old('nip_pemohon') }}">
+                       id="nip_pemohon" name="nip_pemohon" value="{{ old('nip_pemohon') }}"
+                       pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
                 @error('nip_pemohon')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -109,7 +111,8 @@
             <div class="col-md-4 mb-3">
                 <label for="no_telp_pemohon" class="form-label @error('no_telp_pemohon') is-invalid @enderror">No. WA Pemohon</label>
                 <input type="text" class="form-control @error('no_telp_pemohon') is-invalid @enderror" 
-                       id="no_telp_pemohon" name="no_telp_pemohon" value="{{ old('no_telp_pemohon') }}">
+                       id="no_telp_pemohon" name="no_telp_pemohon" value="{{ old('no_telp_pemohon') }}"
+                       pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
                 @error('no_telp_pemohon')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -121,7 +124,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control  @error('nama_2') is-invalid @enderror" 
-                       id="nama_2" name="nama_2" value="{{ old('nama_2') }}">
+                       id="nama_2" name="nama_2" value="{{ old('nama_2') }}"pattern="[a-zA-Z\s]+">
                 @error('nama_2')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -130,7 +133,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('nip_2') is-invalid @enderror" 
-                       id="nip_2" name="nip_2" value="{{ old('nip_2') }}">
+                       id="nip_2" name="nip_2" value="{{ old('nip_2') }}"
+                       pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
                 @error('nip_2')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -139,7 +143,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('no_telp_2') is-invalid @enderror" 
-                       id="no_telp_2" name="no_telp_2" value="{{ old('no_telp_2') }}">
+                       id="no_telp_2" name="no_telp_2" value="{{ old('no_telp_2') }}"
+                       pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
                 @error('no_telp_2')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -151,7 +156,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control  @error('nama_3') is-invalid @enderror" 
-                       id="nama_3" name="nama_3" value="{{ old('nama_3') }}">
+                       id="nama_3" name="nama_3" value="{{ old('nama_3') }}"pattern="[a-zA-Z\s]+">
                 @error('nama_3')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -160,7 +165,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('nip_3') is-invalid @enderror" 
-                       id="nip_3" name="nip_3" value="{{ old('nip_3') }}">
+                       id="nip_3" name="nip_3" value="{{ old('nip_3') }}"
+                       pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
                 @error('nip_3')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -169,7 +175,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('no_telp_3') is-invalid @enderror" 
-                       id="no_telp_3" name="no_telp_3" value="{{ old('no_telp_3') }}">
+                       id="no_telp_3" name="no_telp_3" value="{{ old('no_telp_3') }}"
+                       pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
                 @error('no_telp_3')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -181,7 +188,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control  @error('nama_4') is-invalid @enderror" 
-                       id="nama_4" name="nama_4" value="{{ old('nama_4') }}">
+                       id="nama_4" name="nama_4" value="{{ old('nama_4') }}"pattern="[a-zA-Z\s]+">
                 @error('nama_4')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -190,7 +197,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('nip_4') is-invalid @enderror" 
-                       id="nip_4" name="nip_4" value="{{ old('nip_4') }}">
+                       id="nip_4" name="nip_4" value="{{ old('nip_4') }}"
+                       pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
                 @error('nip_4')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -199,7 +207,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('no_telp_4') is-invalid @enderror" 
-                       id="no_telp_4" name="no_telp_4" value="{{ old('no_telp_4') }}">
+                       id="no_telp_4" name="no_telp_4" value="{{ old('no_telp_4') }}"
+                       pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
                 @error('no_telp_4')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -211,7 +220,7 @@
         <div class="row">
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control  @error('nama_5') is-invalid @enderror" 
-                       id="nama_5" name="nama_5" value="{{ old('nama_5') }}">
+                       id="nama_5" name="nama_5" value="{{ old('nama_5') }}"pattern="[a-zA-Z\s]+">
                 @error('nama_5')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -220,7 +229,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('nip_5') is-invalid @enderror" 
-                       id="nip_5" name="nip_5" value="{{ old('nip_5') }}">
+                       id="nip_5" name="nip_5" value="{{ old('nip_5') }}"
+                       pattern="\d{18}" title="NIP harus terdiri dari 18 angka">
                 @error('nip_5')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -229,7 +239,8 @@
             </div>
             <div class="col-md-4 mb-3">
                 <input type="text" class="form-control @error('no_telp_5') is-invalid @enderror" 
-                       id="no_telp_5" name="no_telp_5" value="{{ old('no_telp_5') }}">
+                       id="no_telp_5" name="no_telp_5" value="{{ old('no_telp_5') }}"
+                       pattern="\d{10,13}" title="Nomor telepon harus terdiri dari 10-13 angka">
                 @error('no_telp_5')
                 <div class="invalid-feedback">
                     {{ $message }}
