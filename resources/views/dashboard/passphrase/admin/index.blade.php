@@ -21,7 +21,8 @@
         <select name="status" class="form-select" style="min-width: 200px;">
             <option value="" disabled selected hidden>Status</option>
             <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
-            <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+            <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+            <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
@@ -34,11 +35,9 @@
             <th scope="col">No</th>
             <th scope="col">Nama Pemohon</th>
             <th scope="col">No HP Pemohon</th>
-            <th scope="col">Nama User</th>
             <th scope="col">NIK User</th>
             <th scope="col">NIP User</th>
             <th scope="col">Email User</th>
-            <th scope="col">Alasan</th>
             <th scope="col">Status</th>
             <th scope="col">Aksi</th>
         </tr>
@@ -49,30 +48,41 @@
           <td>{{ $loop->iteration }}</td>
           <td>{{ $p->nama }}</td>
           <td>{{ $p->no_telp }}</td>
-          <td>{{ $p->nama_user }}</td>
           <td>{{ $p->nik_user }}</td>
           <td>{{ $p->nip_user}}</td>
           <td>{{ $p->email_domain }}</td>
-          <td>{{ $p->alasan }}</td>
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $p->status }}
             </span>
           </td>
           <td>
-            <form action="/dashboard/passphrase/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
-            @csrf
-            @method('put')
-            <button class="badge bg-success border-0">
-                <i class="bi bi-check-lg fs-6"></i></button>
-            </form>
-          </td>
-        </tr>
-        @endforeach
+            <div class="d-flex align-items-center gap-1">
+              <a href="{{ route('passphrase.admin.tanggapan', $p->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
+                <i class="bi bi-pencil-square fs-6 m-0"></i>
+              </a>
+              <a href="{{ route('passphrase.admin.show', $p->id) }}" class="badge bg-primary"><i class="bi bi-eye fs-6"></i></a>
+              <form action="/dashboard/passphrase/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
+              @csrf
+              @method('put')
+              <button class="badge bg-success border-0">
+                  <i class="bi bi-check-lg fs-6"></i></button>
+              </form>
+              <form action="/dashboard/passphrase/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
+                @csrf
+                @method('put')
+                <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                  <i class="bi bi-x-lg fs-6 m-0"></i>
+                </button>
+              </form>
+              </div>
+            </td>
+          </tr>
+          @endforeach
       </tbody>
     </table>
   </div>

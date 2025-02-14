@@ -46,7 +46,6 @@ class PassphraseController extends Controller
         ]);
 
         $validatedData['user_id'] = Auth::id();
-
         Passphrase::create($validatedData);
 
         return redirect ('/dashboard/passphrase')->with("success", "Passphrase TTE berhasil ditambahkan!");
@@ -115,10 +114,10 @@ class PassphraseController extends Controller
 
     public function selesai(Passphrase $passphrase){
         Passphrase::where('id', $passphrase->id)->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE selesai!");
+        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE disetujui!");
     }
 
     // public function tolak(Passphrase $Passphrase){
@@ -131,10 +130,45 @@ class PassphraseController extends Controller
 
     public function selesaiSemua(){
         Passphrase::where('status', 'diproses')->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE selesai diproses!");
     }
-}
 
+    public function tolak(passphrase $passphrase){
+        passphrase::where('id', $passphrase->id)->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect('/dashboard/passphrase/admin')->with("success", "Pengajuan passphrase ditolak!");
+    }
+
+    public function adminShow(passphrase $passphrase){
+        return view('dashboard.passphrase.admin.show',[
+            'passphrase' => $passphrase
+        ]);
+    }
+
+    public function adminTanggapi(passphrase $passphrase){
+        return view('dashboard.passphrase.admin.tanggapan',[
+            'passphrase' => $passphrase
+        ]);
+    }
+
+    public function adminUpdate(Request $request, passphrase $passphrase)
+    {
+        // Validasi input dari admin
+        $validatedData = $request->validate([
+            'tanggapan' => 'required', // Sesuaikan dengan kebutuhan
+        ]);
+
+        // Update tanggapan bukutamu
+        $passphrase->update([
+            'tanggapan' => $validatedData['tanggapan']
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect('/dashboard/passphrase/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+}

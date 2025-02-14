@@ -27,7 +27,8 @@
           <th scope="col">Nama OPD</th>
           <th scope="col">Nama Pemohon</th>
           <th scope="col">No Telp Pemohon</th>
-          <th scope="col">Aksi</th>
+          <th scope="col">Tanggapan</th>
+          {{-- <th scope="col">Aksi</th> --}}
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -40,7 +41,8 @@
           <td>{{ $p->nama_opd }}</td>
           <td>{{ $p->nama_pemohon}}</td>
           <td>{{ $p->no_telp_pemohon}}</td>
-          <td>
+          <td>{{ $p->tanggapan}}</td>
+          {{-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
             <a href="{{ route('emaildinas.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
             <form action="{{ route('emaildinas.destroy', $p->id) }}" method="post" class="d-inline">
@@ -50,11 +52,11 @@
                   <i class="bi bi-trash fs-6"></i></button>
             </form>
             @endif
-          </td>
+          </td> --}}
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $p->status }}

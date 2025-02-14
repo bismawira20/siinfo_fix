@@ -214,8 +214,13 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     //Route untuk Passphrase TTE
     Route::prefix('dashboard/passphrase/admin')->group(function () {
         Route::get('/',[PassphraseController::class, 'adminIndex'])->name('passphrase.admin.index');
+        Route::get('/{passphrase}/show',[PassphraseController::class, 'adminShow'])->name('passphrase.admin.show');
         Route::put('/{passphrase}/selesai',[PassphraseController::class,'selesai'])->name('passphrase.admin.selesai');
         Route::put('/selesaiSemua',[PassphraseController::class,'selesaiSemua'])->name('passphrase.admin.selesaiSemua');
+        Route::put('/{passphrase}/tolak',[PassphraseController::class,'tolak'])->name('passphrase.admin.tolak');
+        Route::get('/{passphrase}/tanggapi',[PassphraseController::class, 'adminTanggapi'])->name('passphrase.admin.tanggapan');
+        Route::put('/{passphrase}/update', [PassphraseController::class, 'adminUpdate'])->name('passphrase.admin.update');
+
     });
     //Route untuk CPANEL
     Route::prefix('dashboard/cpanel/admin')->group(function () {
@@ -230,8 +235,12 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     //Route untuk EmailDinas
     Route::prefix('dashboard/emaildinas/admin')->group(function () {
         Route::get('/',[EmailDinasController::class, 'adminIndex'])->name('emaildinas.admin.index');
+        Route::get('/{emaildinas}/show',[EmailDinasController::class, 'adminShow'])->name('emaildinas.admin.show');
         Route::put('/{emaildinas}/selesai',[EmailDinasController::class,'selesai'])->name('emaildinas.admin.selesai');
         Route::put('/selesaiSemua',[EmailDinasController::class,'selesaiSemua'])->name('emaildinas.admin.selesaiSemua');
+        Route::put('/{emaildinas}/tolak',[EmailDinasController::class,'tolak'])->name('emaildinas.admin.tolak');
+        Route::get('/{emaildinas}/tanggapi',[EmailDinasController::class, 'adminTanggapi'])->name('emaildinas.admin.tanggapan');
+        Route::put('/{emaildinas}/update', [EmailDinasController::class, 'adminUpdate'])->name('emaildinas.admin.update');
     });
     //Route untuk Aplikasi
     Route::prefix('dashboard/aplikasi/admin')->group(function () {

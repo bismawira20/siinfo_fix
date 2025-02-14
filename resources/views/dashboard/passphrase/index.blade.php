@@ -25,8 +25,8 @@
             <th scope="col">Nama User</th>
             <th scope="col">Email User</th>
             <th scope="col">Alasan</th>
+            <th scope="col">Tanggapan admin</th>
             <th scope="col">Status</th>
-            <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -38,16 +38,17 @@
           <td>{{ $p->nama_user }}</td>
           <td>{{ $p->email_domain }}</td>
           <td>{{ $p->alasan }}</td>
+          <td>{{ $p->tanggapan }}</td>
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $p->status }}
             </span>
           </td>
-          <td>
+          {{-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
               <a href="{{ route('passphrase.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
               <form action="{{ route('passphrase.destroy', $p->id) }}" method="post" class="d-inline">
@@ -63,7 +64,7 @@
                 <button class="badge bg-danger border-0 mt-1">
                     <i class="bi bi-x-lg fs-6"></i></button>
             </form> --}}
-          </td>
+          </td> 
         </tr>
         @endforeach
       </tbody>
