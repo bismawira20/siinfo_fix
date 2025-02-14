@@ -3,12 +3,18 @@
 {{-- CSS dan JS --}}
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
     .is-invalid {
         border-color: red; /* Mengubah warna batas menjadi merah */
+    }
+    .valid-icon {
+    display: none; /* Sembunyikan secara default */
+    color: green; /* Warna hijau untuk centang */
+    margin-left: 5px; /* Jarak antara input dan centang */
     }
 </style>
 
@@ -22,8 +28,11 @@
         @csrf
         <div class="mb-3">
         <label for="nama" class="form-label @error('nama') is-invalid @enderror">Nama</label>
+        <div class="d-flex align-items-center">
         <input type="text" class="form-control @error('nama') is-invalid @enderror" 
         id="nama" name="nama" value="{{ old('nama') }}">
+        <span class="valid-icon" id="valid-nama"><i class="fas fa-check" style="color: green;"></i></span>
+        </div>
         @error('nama')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -37,8 +46,11 @@
                     Harap menggunakan Nomor WhatsApp Anda!
                 </small>
             </label>
+            <div class="d-flex align-items-center">
             <input type="tel" class="form-control @error('no_telp') is-invalid @enderror" 
             id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
+            <span class="valid-icon" id="valid-no_telp"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('no_telp')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -49,8 +61,11 @@
             <label for="instansi" class="form-label @error('instansi') is-invalid @enderror">
                 Instansi 
             </label>
+            <div class="d-flex align-items-center">
             <input type="text" class="form-control @error('instansi') is-invalid @enderror" 
             id="instansi" name="instansi" value="{{ old('instasi') }}">
+            <span class="valid-icon" id="valid-instansi"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('instansi')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -59,7 +74,8 @@
         </div>
         <div class="mb-3">
             <label for="bidang_id" class="form-label">Tujuan Bidang</label>
-            <select class="form-select {{ $errors->has('bidang_id') ? 'is-invalid' : '' }}" name="bidang_id">
+            <div class="d-flex align-items-center">
+            <select class="form-select {{ $errors->has('bidang_id') ? 'is-invalid' : '' }}" name="bidang_id" id="bidang_id">
                 <option selected disabled>Silahkan Pilih Bidang Tujuan</option>
                 @foreach ($bidangs as $bidang)
                 <option value="{{ $bidang->id }}" {{ old('bidang_id') == $bidang->id ? 'selected' : '' }}>
@@ -67,6 +83,8 @@
                 </option>  
                 @endforeach
             </select>
+            <span class="valid-icon" id="valid-bidang_id"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('bidang_id')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -75,7 +93,10 @@
         </div>
         <div class="mb-3">
             <label for="tujuan" class="form-label @error('tujuan') is-invalid @enderror">Tujuan Kunjungan</label>
+            <div class="d-flex align-items-center">
             <textarea class="form-control @error('tujuan') is-invalid @enderror" id="tujuan" rows="3" name="tujuan">{{ old('tujuan') }}</textarea>
+            <span class="valid-icon" id="valid-tujuan"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('tujuan')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -84,6 +105,7 @@
         </div>
         <div class="mb-3">
             <label for="tanggal" class="form-label @error('tanggal') is-invalid @enderror">Tanggal Kunjungan</label>
+            <div class="d-flex align-items-center">
             <input 
                 type="text" 
                 class="form-control @error('tanggal') is-invalid @enderror" 
@@ -91,6 +113,8 @@
                 name="tanggal"
                 value="{{ old('tanggal') }}"
             >
+            <span class="valid-icon" id="valid-tanggal"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('tanggal')
             <div class="invalid-feedback">
                 {{ $message }}
@@ -99,6 +123,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Waktu Kunjungan</label>
+            <span class="valid-icon" id="valid-waktu"><i class="fas fa-check" style="color: green;"></i></span>
             <div id="waktu-options">
                 <div class="form-check">
                     <input 
@@ -208,5 +233,109 @@
         }
     });
 }
+
+$(document).ready(function() {
+    // Validasi untuk Nama
+    $('#nama').on('input', function() {
+        const input = $(this);
+        const validIcon = $('#valid-nama');
+        const regex = /^[a-zA-Z\s]+$/; // Hanya huruf dan spasi
+
+        if (input.val().length > 0 && input.val().length <= 255 && regex.test(input.val())) {
+            validIcon.show(); // Tampilkan centang hijau
+            input.removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            input.addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    // Validasi untuk Nomor Telepon
+    $('#no_telp').on('input', function() {
+        const input = $(this);
+        const validIcon = $('#valid-no_telp');
+        const regex = /^[0-9]+$/; // Hanya angka
+
+        if (input.val().length > 0 && input.val().length <= 15 && regex.test(input.val())) {
+            validIcon.show(); // Tampilkan centang hijau
+            input.removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            input.addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    // Validasi untuk Instansi
+    $('#instansi').on('input', function() {
+        const input = $(this);
+        const validIcon = $('#valid-instansi');
+
+        if (input.val().length > 0 && input.val().length <= 255) {
+            validIcon.show(); // Tampilkan centang hijau
+            input.removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            input.addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    //Validasi untuk Bidang
+    $('#bidang_id').on('change', function() {
+        const validIcon = $('#valid-bidang_id');
+        const selectedValue = $(this).val();
+
+        // Cek apakah nilai yang dipilih bukan opsi default
+        if (selectedValue) {
+            validIcon.show(); // Tampilkan centang hijau
+            $(this).removeClass('is-invalid'); // Hapus kelas invalid jika ada
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    // Validasi untuk Tujuan
+    $('#tujuan').on('input', function() {
+        const input = $(this);
+        const validIcon = $('#valid-tujuan');
+
+        if (input.val().length > 0) {
+            validIcon.show(); // Tampilkan centang hijau
+            input.removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            input.addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    // Validasi untuk Tanggal
+    $('#tanggal').on('input', function() {
+        const input = $(this);
+        const validIcon = $('#valid-tanggal');
+
+        // Cek apakah input adalah tanggal yang valid
+        const date = new Date(input.val());
+        if (input.val() && !isNaN(date.getTime())) {
+            validIcon.show(); // Tampilkan centang hijau
+            input.removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            input.addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+
+    // Validasi untuk Waktu
+    $('input[name="waktu"]').on('change', function() {
+        const validIcon = $('#valid-waktu');
+
+        if ($('input[name="waktu"]:checked').length > 0) {
+            validIcon.show(); // Tampilkan centang hijau
+            $('input[name="waktu"]').removeClass('is-invalid'); // Hapus kelas invalid
+        } else {
+            validIcon.hide(); // Sembunyikan centang hijau
+            $('input[name="waktu"]').addClass('is-invalid'); // Tambahkan kelas invalid
+        }
+    });
+});
 </script>
 @endsection
