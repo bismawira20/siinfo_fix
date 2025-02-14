@@ -18,6 +18,7 @@ class Passphrase extends Model
         'nik_user',
         'nip_user',
         'email_domain',
+        'tanggapan',
         'alasan',
         'status'];
 

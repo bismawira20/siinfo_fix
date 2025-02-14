@@ -22,7 +22,8 @@
         <select name="status" class="form-select" style="min-width: 200px;">
             <option value="" disabled selected hidden>Status</option>
             <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
-            <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
+            <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+            <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
@@ -33,50 +34,22 @@
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Nama PIC</th>
-          <th scope="col">Nama OPD</th>
           <th scope="col">Nama Pemohon</th>
+          <th scope="col">Nama OPD</th>
           <th scope="col">No Telp Pemohon</th>
-          <th scope="col">Surat Rekomendasi</th>
           <th scope="col">Form Pengajuan</th>
-          <th scope="col">Aksi</th>
           <th scope="col">Status</th>
+          <th scope="col">Aksi</th>
+          
         </tr>
       </thead>
       <tbody>
         @foreach ($emaildinas as $p)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $p->nama_pic }}</td>
-          <td>{{ $p->nama_opd }}</td>
           <td>{{ $p->nama_pemohon}}</td>
+          <td>{{ $p->nama_opd }}</td>
           <td>{{ $p->no_telp_pemohon}}</td>
-          <td>
-            @if($p->surat_rekomendasi)
-                                @php
-                                    $fileExtension = pathinfo($p->surat_rekomendasi, PATHINFO_EXTENSION);
-                                    $filePath = asset('storage/' . $p->surat_rekomendasi);
-                                @endphp
-
-                                @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg', 'png', 'gif']))
-                                    <a href="{{ $filePath }}" target="_blank">
-                                        <img src="{{ $filePath }}" 
-                                             alt="Dokumen CPANEL" 
-                                             class="img-fluid" 
-                                             style="max-height: 200px;">
-                                    </a>
-                                @else
-                                    <a href="{{ $filePath }}" 
-                                       target="_blank" 
-                                       class="btn btn-outline-primary">
-                                        <i class="bi bi-file-earmark-{{ $fileExtension }}"></i> 
-                                        Dokumen ({{ strtoupper($fileExtension) }})
-                                    </a>
-                                @endif
-                            @else
-                                Tidak ada dokumen terlampir
-                            @endif
-          </td>
           <td>
             @if($p->form_pengajuan)
                                 @php
@@ -103,22 +76,35 @@
                                 Tidak ada dokumen terlampir
                             @endif
           </td>
-          <td>
-            <form action="/dashboard/emaildinas/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
-                @csrf
-                @method('put')
-                <button class="badge bg-success border-0">
-                    <i class="bi bi-check-lg fs-6"></i></button>
-                </form>
-          </td>
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $p->status }}
             </span>
+          </td>
+          <td>
+            <div class="d-flex align-items-center gap-1">
+            <a href="{{ route('emaildinas.admin.tanggapan', $p->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
+              <i class="bi bi-pencil-square fs-6 m-0"></i>
+            </a>
+            <a href="{{ route('emaildinas.admin.show', $p->id) }}" class="badge bg-primary"><i class="bi bi-eye fs-6"></i></a>
+            <form action="/dashboard/emaildinas/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
+            @csrf
+            @method('put')
+            <button class="badge bg-success border-0">
+                <i class="bi bi-check-lg fs-6"></i></button>
+            </form>
+            <form action="/dashboard/emaildinas/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
+              @csrf
+              @method('put')
+              <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                <i class="bi bi-x-lg fs-6 m-0"></i>
+              </button>
+            </form>
+            </div>
           </td>
         </tr>
         @endforeach

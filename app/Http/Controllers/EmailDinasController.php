@@ -137,7 +137,7 @@ class EmailDinasController extends Controller
 
     public function selesai(EmailDinas $emaildinas){
         EmailDinas::where('id', $emaildinas->id)->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
@@ -145,9 +145,44 @@ class EmailDinasController extends Controller
 
     public function selesaiSemua(){
         EmailDinas::where('status', 'diproses')->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
+    }
+    public function tolak(EmailDinas $emaildinas){
+        EmailDinas::where('id', $emaildinas->id)->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas ditolak!");
+    }
+
+    public function adminShow(EmailDinas $emaildinas){
+        return view('dashboard.emaildinas.admin.show',[
+            'emaildinas' => $emaildinas
+        ]);
+    }
+
+    public function adminTanggapi(EmailDinas $emaildinas){
+        return view('dashboard.emaildinas.admin.tanggapan',[
+            'emaildinas' => $emaildinas
+        ]);
+    }
+
+    public function adminUpdate(Request $request, EmailDinas $emaildinas)
+    {
+        // Validasi input dari admin
+        $validatedData = $request->validate([
+            'tanggapan' => 'required', // Sesuaikan dengan kebutuhan
+        ]);
+
+        // Update tanggapan bukutamu
+        $emaildinas->update([
+            'tanggapan' => $validatedData['tanggapan']
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect('/dashboard/emaildinas/admin')->with('success', 'Tanggapan berhasil disimpan!');
     }
 }
