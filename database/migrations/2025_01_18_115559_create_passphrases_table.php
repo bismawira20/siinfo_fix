@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('nip_user');
             $table->string('email_domain');
             $table->text('alasan')->nullable();
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->text('tanggapan')->nullable();
+            $table->enum('status', ['diproses', 'disetujui','ditolak'])->default('diproses');
             $table->timestamps();
         });
     }

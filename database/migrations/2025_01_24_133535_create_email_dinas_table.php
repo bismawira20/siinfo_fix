@@ -34,7 +34,8 @@ return new class extends Migration
             $table->string('nama_5')->nullable();
             $table->string('nip_5')->nullable();
             $table->string('no_telp_5')->nullable();
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->text('tanggapan')->nullable();
+            $table->enum('status', ['diproses', 'disetujui','ditolak'])->default('diproses');
             $table->timestamps();
         });
     }

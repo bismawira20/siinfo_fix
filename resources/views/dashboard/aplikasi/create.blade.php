@@ -323,6 +323,7 @@
             $(this).addClass('is-invalid'); // Tambahkan kelas invalid
         }
     });
+    
 
     // Validasi untuk OPD
     $('#opd').on('input', function() {
