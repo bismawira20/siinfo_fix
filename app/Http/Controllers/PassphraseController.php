@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Passphrase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PassphraseController extends Controller
 {
@@ -22,28 +23,35 @@ class PassphraseController extends Controller
 
     public function store(Request $request){
         $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'nip_pemohon' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
-            'no_telp' => 'required|max:15',
+            'nama' => 'required|max:255|regex:/^[\p{L} ]+$/u', // Nama tidak boleh mengandung angka dan simbol
+            'nip_pemohon' => 'required|digits:18', // NIP harus terdiri dari 18 digit
+            'no_telp' => 'required|digits_between:10,15', // No telp harus diisi angka dan memiliki panjang antara 10 hingga 15 digit
             'nama_user' => 'required|max:255',
-            'nik_user' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
-            'nip_user' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
+            'nik_user' => 'required|digits:16',
+            'nip_user' => 'required|digits:18',
             'email_domain' => [
                 'required', 
                 'email', 
                 'regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/'
             ],    
             'alasan' => 'required'
+        ], [
+            'nama.required' => 'Nama harus diisi.',
+            'nama.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
+            'nip.required' => 'NIP harus diisi.',
+            'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+            'nik.required' => 'NIP harus diisi.',
+            'nik.digits' => 'NIP harus terdiri dari 16 digit.',
+            'email.required' => 'email harus diisi.',
+            'email.digits' => 'NIP harus @semarangkota.go.id.',
+
         ]);
+
+        if($request->file('file')){
+            $validatedData['file'] = $request->file('file')->store('passphrase-file');
+        }
 
         $validatedData['user_id'] = Auth::id();
         Passphrase::create($validatedData);
@@ -68,28 +76,27 @@ class PassphraseController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|max:255',
-            'nip_pemohon' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
+            'nip' => 'required|digits:18',
             'no_telp' => 'required|max:15',
             'nama_user' => 'required|max:255',
-            'nik_user' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
-            'nip_user' => [
-                'required', 
-                'regex:/^[0-9]+$/', // Hanya angka
-            ],
-            'email_domain' => [
+            'nik_user' => 'required|digits:16',
+            'nip_user' => 'required|digits:18',
+            'email_domain' => 
                 'required', 
                 'email', 
                 'regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/'
-            ],    
+            ,    
             'alasan' => 'required'
         ]);
 
+        if ($request->file('file')) {
+            if ($passphrase->file) {
+                Storage::disk('public')->delete($passphrase->file);
+            }
+    
+            $validatedData['file'] = $request->file('file')->store('cpanel-file', 'public');
+        }
+    
         $validatedData['user_id'] = Auth::id();
         
         Passphrase::where('id', $passphrase->id)->update($validatedData);

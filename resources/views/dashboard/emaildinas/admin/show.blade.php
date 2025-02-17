@@ -83,6 +83,71 @@
                     </tr>
 
                     <tr>
+                        <th width="30%">Nama Pemohon </th>
+                        <td>{{ $emaildinas->nama_pemohon }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">NIP Pemohon </th>
+                        <td>{{ $emaildinas->nip_pemohon }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Nama Telp Pemohon </th>
+                        <td>{{ $emaildinas->no_telp_pemohon }}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="30%">Nama 2 </th>
+                        <td>{{ $emaildinas->nama_2 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">NIP 2 </th>
+                        <td>{{ $emaildinas->nip_2 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Nama Telp 2 </th>
+                        <td>{{ $emaildinas->no_telp_2 }}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="30%">Nama 3 </th>
+                        <td>{{ $emaildinas->nama_3}}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">NIP 3 </th>
+                        <td>{{ $emaildinas->nip_3 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Nama Telp 3</th>
+                        <td>{{ $emaildinas->no_telp_3 }}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="30%">Nama 4 </th>
+                        <td>{{ $emaildinas->nama_4 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">NIP 4 </th>
+                        <td>{{ $emaildinas->nip_4 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Nama Telp 4 </th>
+                        <td>{{ $emaildinas->no_telp_4 }}</td>
+                    </tr>
+
+                    <tr>
+                        <th width="30%">Nama 5 </th>
+                        <td>{{ $emaildinas->nama_5 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">NIP 5 </th>
+                        <td>{{ $emaildinas->nip_5 }}</td>
+                    </tr>
+                    <tr>
+                        <th width="30%">Nama Telp 5 </th>
+                        <td>{{ $emaildinas->no_telp_5 }}</td>
+                    </tr>
+                    
+                    <tr>
                         <th width="30%">Tanggapan Admin</th>
                         <td>{{ $emaildinas->tanggapan }}</td>
                     </tr>
