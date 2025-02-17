@@ -25,25 +25,33 @@
   }
   
   .sidebar .nav-link.active {
-    color: #2470dc;
+    color: #b90000;
+  }
+
+  .sidebar .nav-link:hover {
+    color: #b90000; /* Warna merah muda saat hover */
   }
   
   .sidebar-heading {
     font-size: .75rem;
   }
   
-  /*
-   * Navbar
-   */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
 
   .navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
-    background-color: rgba(0, 0, 0, .25);
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+    background-color: #ad1717e6;
+    box-shadow: inset -1px 0 0 #ad1717e6;
   }
   
   .navbar .form-control {
     padding: .75rem 1rem;
   }
-  
+
+

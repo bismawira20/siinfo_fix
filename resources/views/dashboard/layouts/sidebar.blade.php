@@ -142,11 +142,13 @@
 
   <style>
     .nav-link {
-    color: inherit; /* Gunakan warna default */
+    color: black; /* Warna default (tidak aktif) */
+    text-decoration: none;
 }
 
+
     .nav-link.active {
-    color: blue; /* Atau warna biru sesuai kebutuhan */
+    color: rgb(255, 0, 0); /* Atau warna biru sesuai kebutuhan */
 }
 
     .dropdown-submenu {
