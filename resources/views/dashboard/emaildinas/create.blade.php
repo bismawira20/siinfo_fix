@@ -81,7 +81,7 @@
                 </small> 
             </label>
             <div class="d-flex align-items-center">
-            <input class="form-control" type="file" id="surat_rekomendasi" name="surat_rekomendasi">
+            <input class="form-control" type="file" id="surat_rekomendasi" name="surat_rekomendasi"accept=".pdf">
             <span class="valid-icon" id="valid-surat_rekomendasi" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @if(old('file') || isset($existingFileName))
@@ -109,7 +109,7 @@
             
             </label>
             <div class="d-flex align-items-center">
-            <input class="form-control" type="file" id="form_pengajuan" name="form_pengajuan">
+            <input class="form-control" type="file" id="form_pengajuan" name="form_pengajuan"accept=".pdf">
             <span class="valid-icon" id="valid-form_pengajuan" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @if(old('file') || isset($existingFileName))
@@ -140,7 +140,7 @@
                 <label for="nama_pemohon" class="form-label  @error('nama_pemohon') is-invalid @enderror">Nama Pemohon
                 </label>
                 <div class="d-flex align-items-center">
-                <input type="text" class="form-control" 
+                <input type="text" class="form-control @error('nip_pemohon') is-invalid @enderror" 
                        id="nama_pemohon" name="nama_pemohon" value="{{ old('nama_pemohon') }}" >
                        <span class="valid-icon" id="valid-nama_pemohon" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
                 </div>

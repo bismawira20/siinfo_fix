@@ -25,7 +25,7 @@
           <th scope="col">Nama PIC</th>
           <th scope="col">No Telp PIC</th>
           <th scope="col">Nama OPD</th>
-          <th scope="col">Nama Pemohon</th>
+          {{-- <th scope="col">Nama Pemohon</th> --}}
           <th scope="col">No Telp Pemohon</th>
           <th scope="col">Tanggapan</th>
           {{-- <th scope="col">Aksi</th> --}}
@@ -39,7 +39,7 @@
           <td>{{ $p->nama_pic }}</td>
           <td>{{ $p->no_telp_pic}}</td>
           <td>{{ $p->nama_opd }}</td>
-          <td>{{ $p->nama_pemohon}}</td>
+          {{-- <td>{{ $p->nama_pemohon}}</td> --}}
           <td>{{ $p->no_telp_pemohon}}</td>
           <td>{{ $p->tanggapan}}</td>
           {{-- <td>
