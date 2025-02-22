@@ -45,8 +45,32 @@ class PengajuanController extends Controller
                 'email', 
                 'regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/'
             ],    
-            'jabatan' => 'required'
-        ]);
+            'jabatan' => 'required'],[
+                'nama.required' => 'Nama harus diisi.',
+                'nama.max' => 'Nama tidak boleh lebih dari 20 karakter.',
+                'nama.regex' => 'Nama hanya boleh mengandung huruf dan spasi.',
+                
+                'nip.required' => 'NIP harus diisi.',
+                'nip.regex' => 'NIP hanya boleh mengandung angka.',
+                'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+                
+                'nik.required' => 'NIK harus diisi.',
+                'nik.regex' => 'NIK hanya boleh mengandung angka.',
+                'nik.digits' => 'NIK harus terdiri dari 16 digit.',
+                
+                'nama_opd.required' => 'Nama OPD harus diisi.',
+                'nama_opd.max' => 'Nama OPD tidak boleh lebih dari 255 karakter.',
+                
+                'no_telp.required' => 'Nomor telepon harus diisi.',
+                'no_telp.max' => 'Nomor telepon tidak boleh lebih dari 15 karakter.',
+                'no_telp.digits_between' => 'Nomor telepon harus terdiri dari 10 hingga 15 digit.',
+                
+                'email_domain.required' => 'Email harus diisi.',
+                'email_domain.email' => 'Format email tidak valid.',
+                'email_domain.regex' => 'Email harus menggunakan domain semarangkota.go.id.',
+                
+                'jabatan.required' => 'Jabatan harus diisi.'
+            ]);
 
         $validatedData['user_id'] = Auth::id();
 
@@ -147,7 +171,7 @@ class PengajuanController extends Controller
 
     public function selesai(Pengajuan $pengajuan){
         Pengajuan::where('id', $pengajuan->id)->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE selesai!");
@@ -158,7 +182,7 @@ class PengajuanController extends Controller
             'status' => 'ditolak'
         ]);
 
-        return redirect('/dashboard/Pengajuan/admin')->with("success", "Agenda kunjungan ditolak!");
+        return redirect('/dashboard/pengajuan/admin')->with("success", "Agenda kunjungan ditolak!");
     }
 
     public function selesaiSemua(){

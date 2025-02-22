@@ -27,8 +27,25 @@ class PengaduanController extends Controller
             'nama' => 'required|max:255|regex:/^[\p{L} ]+$/u',
             'jenis_id' =>'required|exists:jenis_pengaduans,id', //|exists:jenis_pengaduans,id
             'deskripsi' => 'required|max:255',
-            'file' => 'required|file|mimes:pdf|max:1024',
+            'file' => 'file|mimes:pdf|max:1024',
             'no_telp' => 'required|digits_between:10,15',
+        ],[
+            'nama.required' => 'Nama harus diisi.',
+            'nama.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'nama.regex' => 'Nama hanya boleh mengandung huruf dan spasi.',
+            
+            'jenis_id.required' => 'Jenis pengaduan harus dipilih.',
+            'jenis_id.exists' => 'Jenis pengaduan yang dipilih tidak valid.',
+            
+            'deskripsi.required' => 'Deskripsi harus diisi.',
+            'deskripsi.max' => 'Deskripsi tidak boleh lebih dari 255 karakter.',
+            
+            'file.file' => 'File harus berupa file.',
+            'file.mimes' => 'File harus berupa dokumen PDF.',
+            'file.max' => 'File tidak boleh lebih dari 1 MB.',
+            
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.digits_between' => 'Nomor telepon harus terdiri dari 10 hingga 15 digit.',
         ]);
         
         if($request->file('file')){

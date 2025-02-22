@@ -34,6 +34,41 @@ class DomainController extends Controller
             'fungsi_app' => 'required',
             'bahasa_pemograman' => 'required',
             'dokumen' => 'required|file|mimes:pdf|max:1024',
+        ], [
+            'nip.required' => 'NIP harus diisi.',
+            'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+            
+            'nama_pic.required' => 'Nama PIC harus diisi.',
+            'nama_pic.max' => 'Nama PIC tidak boleh lebih dari 255 karakter.',
+            'nama_pic.regex' => 'Nama PIC hanya boleh mengandung huruf dan spasi.',
+            
+            'jabatan.required' => 'Jabatan harus diisi.',
+            'jabatan.max' => 'Jabatan tidak boleh lebih dari 255 karakter.',
+            
+            'opd.required' => 'OPD harus diisi.',
+            'opd.max' => 'OPD tidak boleh lebih dari 255 karakter.',
+            
+            'email.required' => 'Email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.regex' => 'Email harus menggunakan domain semarangkota.go.id.',
+            
+            'no_telp.required' => 'Nomor telepon harus diisi.',
+            'no_telp.digits_between' => 'Nomor telepon harus terdiri dari 10 hingga 15 digit.',
+            'no_telp.regex' => 'Nomor telepon hanya boleh mengandung angka.',
+            
+            'paket.required' => 'Paket harus dipilih.',
+            
+            'nama_domain.required' => 'Nama domain harus diisi.',
+            'nama_domain.regex' => 'Nama domain harus dalam format nama.semarangkota.go.id.',
+            
+            'fungsi_app.required' => 'Fungsi aplikasi harus diisi.',
+            
+            'bahasa_pemograman.required' => 'Bahasa pemrograman harus diisi.',
+            
+            'dokumen.required' => 'Dokumen harus diunggah.',
+            'dokumen.file' => 'File harus berupa file.',
+            'dokumen.mimes' => 'Dokumen harus berupa file PDF.',
+            'dokumen.max' => 'Dokumen tidak boleh lebih dari 1 MB.',
         ]);
 
         if($request->file('dokumen')){
@@ -104,7 +139,7 @@ class DomainController extends Controller
 
     public function selesai(Domain $domain){
         Domain::where('id', $domain->id)->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
@@ -112,7 +147,7 @@ class DomainController extends Controller
 
     public function selesaiSemua(){
         Domain::where('status', 'diproses')->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");

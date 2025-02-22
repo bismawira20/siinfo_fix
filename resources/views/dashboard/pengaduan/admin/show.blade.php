@@ -20,6 +20,10 @@
                                 <td>{{ $pengaduan->no_telp }}</td>
                             </tr>
                             <tr>
+                                <th>Dibuat Pada</th>
+                                <td>{{ $pengaduan->created_at->format('d M Y') }}</td>
+                            </tr>
+                            <tr>
                                 <th width="30%">Deskripsi</th>
                                 <td>{{ $pengaduan->deskripsi }}</td>
                             </tr>
@@ -53,20 +57,20 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th width="30%">Tanggapan</th>
+                                <td>{{ $pengaduan->tanggapan }}</td>
+                            </tr>
+                            <tr>
                                 <th>Status</th>
                                 <td>
                                     <span class="badge 
-                                        @if($pengaduan->status == 'diproses') bg-warning
-                                        @elseif($pengaduan->status == 'selesai') bg-success 
+                                        @if($pengaduan->status == 'pending') bg-warning
+                                        @elseif($pengaduan->status == 'disetujui') bg-success 
                                         @else bg-danger 
                                         @endif">
                                         {{ ucfirst($pengaduan->status) }}
                                     </span>
                                 </td>
-                            </tr>
-                            <tr>
-                                <th width="30%">Tanggapan</th>
-                                <td>{{ $pengaduan->tanggapan }}</td>
                             </tr>
                         </tbody>
                     </table>    

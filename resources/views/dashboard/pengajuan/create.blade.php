@@ -46,11 +46,12 @@
 
         <div class="mb-3">
             <label for="nip" class="form-label @error('nip') is-invalid @enderror">NIP
-            <!-- <small class="form-text text-muted d-block">
-                (Tanpa spasi, tanpa tanda baca, misal 198709032018021002)
-            </small> -->
+                <small class="form-text text-muted d-block">
+                    (Tanpa spasi, tanpa tanda baca, misal 198709032018021002)
+                </small>
+            </label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="nip" name="nip">
+                <input type="text" class="form-control" id="nip" name="nip" value="{{ old('nip') }}">
                 <span class="valid-icon" id="valid-nip" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('nip')
@@ -62,9 +63,9 @@
 
         <div class="mb-3">
             <label for="nik" class="form-label @error('nik') is-invalid @enderror">NIK KTP
-                <!-- <small class="form-text text-muted d-block">
+            <small class="form-text text-muted d-block">
                     Contoh: 3374110309872001
-                </small> -->
+                </small>
             </label>
             <div class="d-flex align-items-center">
                 <input type="text" class="form-control" 
@@ -121,7 +122,7 @@
             <div class="d-flex align-items-center">
                 <input type="email" class="form-control" 
                 id="email_domain" name="email_domain" value="{{ old('email_domain') }}">
-                <span class="valid-icon" id="valid-email_domain" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
+                <span class="valid-icon" id="valid-email" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('email_domain')
             <div class="invalid-feedback">
@@ -152,19 +153,21 @@
 
 <script>
 $(document).ready(function() {
-    // validasi nama -> masih perlu dibenerin sih regexnya
+    // Validasi nama -> hanya huruf kapital dan maksimal 20 karakter
     $('#nama').on('input', function() {
         const input = $(this);
         const validIcon = $('#valid-nama');
-        const regex = /^[a-zA-Z\s]+$/;
+        const regex = /^[A-Z\s]+$/; // Hanya huruf kapital dan spasi
 
-        if (input.val().length > 20 && regex.test(input.val())) {
+        // Memeriksa panjang input dan regex
+        if (input.val().length <= 20 && regex.test(input.val())) {
             validIcon.show();
             input.removeClass('is-invalid');
         } else {
             validIcon.hide();
             input.addClass('is-invalid');
         }
+        });
     });
 
     // validasi nip
@@ -185,8 +188,8 @@ $(document).ready(function() {
     // validasi nik
     $('#nik').on('input', function() {
         const input = $(this);
-        const validIcon = $('#valid-nip');
-        const regex = /^\d{16}$/; // Format NIP 18 digit
+        const validIcon = $('#valid-nik');
+        const regex = /^\d{16}$/;
 
         if (input.val().length > 0 && regex.test(input.val())) {
             validIcon.show();
@@ -231,7 +234,7 @@ $(document).ready(function() {
     $('#email_domain').on('input', function() {
         const input = $(this);
         const validIcon = $('#valid-email');
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regex = /^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/;
         //format nama email tidak boleh selain nama@semarangkota.go.id
         
         if (input.val().length > 0 && regex.test(input.val())) {
@@ -257,7 +260,7 @@ $(document).ready(function() {
             input.addClass('is-invalid');
         }
     });
-});
+
 </script>
 
 @endsection

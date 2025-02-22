@@ -23,16 +23,8 @@
                         <td>{{ $pengaduan->jenispengaduan->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Status</th>
-                        <td>
-                            <span class="badge 
-                                @if($pengaduan->status == 'pending') bg-warning 
-                                @elseif($pengaduan->status == 'disetujui') bg-success 
-                                @else bg-danger 
-                                @endif">
-                                {{ ucfirst($pengaduan->status) }}
-                            </span>
-                        </td>
+                        <th>Dibuat Pada</th>
+                        <td>{{ $pengaduan->created_at->format('d M Y') }}</td>
                     </tr>
                     <tr>
                         <th width="30%">Deskripsi</th>
@@ -67,10 +59,22 @@
                             @endif
                         </td>
                     </tr>
-                    <!-- <tr>
-                        <th>Dibuat Pada</th>
-                        <td>{{ $pengaduan->created_at->format('d M Y H:i') }}</td>
-                    </tr> -->
+                    <tr>
+                        <th width="30%">Tanggapan</th>
+                        <td>{{ $pengaduan->tanggapan }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>
+                            <span class="badge 
+                                @if($pengaduan->status == 'pending') bg-warning 
+                                @elseif($pengaduan->status == 'disetujui') bg-success 
+                                @else bg-danger 
+                                @endif">
+                                {{ ucfirst($pengaduan->status) }}
+                            </span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>    
         </div>
@@ -88,7 +92,7 @@
                         name="tanggapan" 
                         rows="5" 
                         placeholder="Masukkan tanggapan Anda..."
-                    >{{ old('tanggapan', $pengaduan->tanggapan) }}</textarea>
+                    >{{ old('tanggapan') }}</textarea>
                     
                     @error('tanggapan')
                         <div class="invalid-feedback">
