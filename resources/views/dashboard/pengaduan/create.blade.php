@@ -60,16 +60,21 @@
         </div>
 
         <div class="mb-3">
-            <label for="pengaduan_id" class="form-label">Jenis Pengaduan</label>
+            <label for="jenis_id" class="form-label">Jenis Pengaduan</label>
             <div class="d-flex align-items-center">
-                <select class="form-select" name="jenis_id" id="jenis_id" value="{{ old('jenis_id') }}"> <!-- Change from pengaduan_id to jenis_id -->
+                <select class="form-select @error('jenis_id') is-invalid @enderror" name="jenis_id" id="jenis_id">
                     <option selected disabled>Silahkan Pilih Jenis Pengaduan</option>
                     @foreach ($jenispengaduan as $jp)
-                    <option value="{{ $jp->id }}">{{ $jp->nama }}</option>  
+                        <option value="{{ $jp->id }}" {{ old('jenis_id') == $jp->id ? 'selected' : '' }}>{{ $jp->nama }}</option>  
                     @endforeach
                 </select>
                 <span class="valid-icon" id="valid-jenis_id" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
+            @error('jenis_id')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -183,7 +188,7 @@ $(document).ready(function() {
         const input = $(this);
         const validIcon = $('#valid-deskripsi');
         
-        if (input.val().length > 10) { // Minimal 10 karakter
+        if (input.val().length > 0) { // Minimal 10 karakter
             validIcon.show();
             input.removeClass('is-invalid');
         } else {

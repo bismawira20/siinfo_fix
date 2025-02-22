@@ -38,6 +38,22 @@
                                 <th width="30%">Jabatan</th>
                                 <td>{{ $pengajuan->jabatan }}</td>
                             </tr>
+                            <tr>
+                                <th width="30%">Tanggapan</th>
+                                <td>{{ $pengajuan->tanggapan }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>
+                                    <span class="badge 
+                                        @if($pengajuan->status == 'diproses') bg-warning
+                                        @elseif($pengajuan->status == 'disetujui') bg-success 
+                                        @else bg-danger 
+                                        @endif">
+                                        {{ ucfirst($pengajuan->status) }}
+                                    </span>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>    
                 </div>

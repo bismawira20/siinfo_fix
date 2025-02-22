@@ -80,10 +80,15 @@
                         </td>
                     </tr>
                     <tr>
+                        <th width="30%">Tanggapan</th>
+                        <td>{{ $domain->tanggapan }}</td>
+                    </tr>
+                    <tr>
                         <th>Status</th>
                         <td>
                             <span class="badge 
                                 @if($domain->status == 'diproses') bg-warning 
+                                @elseif($domain->status == 'ditolak') bg-danger 
                                 @else bg-success 
                                 @endif">
                                 {{ ucfirst($domain->status) }}

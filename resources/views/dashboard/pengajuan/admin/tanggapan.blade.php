@@ -40,6 +40,10 @@
                         <td>{{ $pengajuan->jabatan }}</td>
                     </tr>
                     <tr>
+                        <th width="30%">Tanggapan</th>
+                        <td>{{ $pengajuan->tanggapan }}</td>
+                    </tr>
+                    <tr>
                         <th>Status</th>
                         <td>
                             <span class="badge 
@@ -68,7 +72,7 @@
                         name="tanggapan" 
                         rows="5" 
                         placeholder="Masukkan tanggapan Anda..."
-                    >{{ old('tanggapan', $pengajuan->tanggapan) }}</textarea>
+                    >{{ old('tanggapan') }}</textarea>
                     @error('tanggapan')
                         <div class="invalid-feedback">
                             {{ $message }}

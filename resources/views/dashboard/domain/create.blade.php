@@ -198,7 +198,7 @@
                 <small class="form-text text-muted d-block">Surat permohonan yang ditandatangani oleh kepala bidang terkait</small> 
             </label>
             <div class="d-flex align-items-center">
-                <input class="form-control" type="file" id="dokumen" name="dokumen">
+                <input class="form-control" type="file" id="dokumen" name="dokumen" accept=".pdf">
                 <span class="valid-icon" id="valid-dokumen" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('dokumen')
@@ -274,7 +274,7 @@ $(document).ready(function() {
     // Validasi Email
     $('#email').on('input', function() {
         const validIcon = $('#valid-email');
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regex = /^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/;
         const value = $(this).val();
         
         if (regex.test(value)) {
@@ -317,7 +317,7 @@ $(document).ready(function() {
     // Validasi Nama Domain
     $('#nama_domain').on('input', function() {
         const validIcon = $('#valid-nama_domain');
-        // const regex = /^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/;
+        const regex = /^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/;
         const value = $(this).val();
         
         if (value.length > 0 && value.length <= 255 && regex.test(value)) {

@@ -37,8 +37,8 @@
           <th scope="col">No Telp PIC</th>
           <th scope="col">Nama OPD</th>
           <th scope="col">Nama Domain</th>
-          <th scope="col">Aksi</th>
           <th scope="col">Status</th>
+          <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +49,15 @@
           <td>{{ $p->no_telp}}</td>
           <td>{{ $p->opd }}</td>
           <td>{{ $p->nama_domain}}</td>
+          <td>              
+            <span class="badge {{ 
+            $p->status == 'diproses' ? 'bg-warning' : 
+            ($p->status == 'disetujui' ? 'bg-success' : 
+            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
+            }}" style="font-size: 0.9em;">
+            {{ $p->status }}
+            </span>
+          </td>
           <td>
               <div class="d-flex align-items-center gap-1">
                   <a href="{{ route('domain.admin.tanggapan', $p->id) }}" 
@@ -77,15 +86,6 @@
                       </button>
                   </form>
               </div>
-          </td>
-          <td>              
-            <span class="badge {{ 
-            $p->status == 'diproses' ? 'bg-warning' : 
-            ($p->status == 'selesai' ? 'bg-success' : 
-            ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
-            }}" style="font-size: 0.9em;">
-            {{ $p->status }}
-            </span>
           </td>
         </tr>
         @endforeach

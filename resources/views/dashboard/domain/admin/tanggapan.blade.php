@@ -48,8 +48,8 @@
                         <td>{{ $domain->fungsi_app }}</td>
                     </tr>
                     <tr>
-                        <th width="30%">Bahasa Pemrograman</th>
-                        <td>{{ $domain->bahasa_pemrograman }}</td>
+                        <th width="30%">Bahasa Pemograman</th>
+                        <td>{{ $domain->bahasa_pemograman }}</td>
                     </tr>
                     <tr>
                         <th>Dokumen Terlampir</th>
@@ -80,10 +80,10 @@
                             @endif
                         </td>
                     </tr>
-                    <!-- <tr>
-                        <th width="30%">Tanggapan Admin</th>
+                    <tr>
+                        <th width="30%">Tanggapan</th>
                         <td>{{ $domain->tanggapan }}</td>
-                    </tr> -->
+                    </tr>
                     <tr>
                         <th>Status</th>
                         <td>
@@ -113,7 +113,7 @@
                         name="tanggapan" 
                         rows="5" 
                         placeholder="Masukkan tanggapan Anda..."
-                    >{{ old('tanggapan', $domain->tanggapan) }}</textarea>
+                    >{{ old('tanggapan') }}</textarea>
                     
                     @error('tanggapan')
                         <div class="invalid-feedback">
