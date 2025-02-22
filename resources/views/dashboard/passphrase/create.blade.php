@@ -91,6 +91,7 @@
                     {{ $message }}
                 </div>
                 @enderror
+        </div>
         
                 <div class="mb-3">
                     <label for="nik_user" class="form-label @error('nik_user') is-invalid @enderror">NIK User
@@ -112,7 +113,7 @@
 
 
                 <div class="mb-3">
-                    <label for="nip_user" class="form-label @error('nip_user') is-invalid @enderror">NIP USER
+                    <label for="nip_user" class="form-label @error('nip_user') is-invalid @enderror">NIP User
                     <small class="form-text text-muted d-block">
                         (Tanpa spasi, tanpa tanda baca, misal 198709032018021002)
                     </small>
@@ -133,16 +134,17 @@
             <label for="email_domain" class="form-label @error('email_domain') is-invalid @enderror">Alamat Email User
             <small class="form-text text-muted d-block">(Alamat email dengan domain @semarangkota.go.id, jika lupa/ belum memiliki 
             silakan berkoordinasi dengan petugas terkait)
-        </small>
-        </label>
-        <div class="d-flex align-items-center">
-            <input type="text" class="form-control" 
+            </small>
+            </label>
+            <div class="d-flex align-items-center">
+            <input type="email" class="form-control" 
             id="email_domain" name="email_domain" value="{{ old('email_domain') }}">
-                <span class="valid-icon" id="valid-email_domain" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
+            <span class="valid-icon" id="valid-email_domain" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
+            </div>
             @error('email_domain')
             <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                {{ $message }}
+            </div>
             @enderror
         </div>
 
