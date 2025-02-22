@@ -18,6 +18,7 @@ class Pengajuan extends Model
         'no_telp',
         'email_domain',
         'jabatan',
+        'tanggapan',
         'status'];
 
     protected $with = ['user'];

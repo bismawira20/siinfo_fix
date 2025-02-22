@@ -37,7 +37,6 @@
           <th scope="col">No Telepon</th>
           <th scope="col">Jenis Pengaduan</th>
           <th scope="col">Status</th>
-          <th scope="col">Tanggapi</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
@@ -58,22 +57,34 @@
             </span>
           </td>
           <td>
-            <a href="{{ route('pengaduan.admin.tanggapi', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
-          </td>
-          <td>
-            <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline">
-            @csrf
-            @method('put')
-            <button class="badge bg-success border-0">
-                <i class="bi bi-check-lg fs-6"></i></button>
-            </form>
-            <form action="/dashboard/pengaduan/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
-              @csrf
-              @method('put')
-                <button class="badge bg-danger border-0 mt-1">
-                    <i class="bi bi-x-lg fs-6"></i></button>
-            </form>
-          </td>
+            <div class="d-flex align-items-center gap-1">
+                <a href="{{ route('pengaduan.admin.tanggapan', $p->id) }}" 
+                    class="badge bg-warning d-flex align-items-center justify-content-center text-decoration-none">
+                    <i class="bi bi-pencil-square fs-6 m-0"></i>
+                </a>
+                
+                <a href="{{ route('pengaduan.admin.show', $p->id) }}" 
+                    class="badge bg-primary d-flex align-items-center justify-content-center text-decoration-none">
+                    <i class="bi bi-eye fs-6"></i>
+                </a>
+                
+                <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline">
+                    @csrf
+                    @method('put')
+                    <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-check-lg fs-6"></i>
+                    </button>
+                </form>
+                
+                <form action="/dashboard/pengaduan/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
+                    @csrf
+                    @method('put')
+                    <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-x-lg fs-6 m-0"></i>
+                    </button>
+                </form>
+            </div>
+        </td>
         </tr>
         @endforeach
       </tbody>

@@ -2,10 +2,8 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Permintaan Sub Domain dan VPS</h1>
+  <h1 class="h2">Layanan Sub Domain dan VPS</h1>
 </div>
-
-
 
 <div class="">
   @if(session()->has('success'))
@@ -17,7 +15,7 @@
 </div>
 
 <div class="table-responsive small">
-    <a href="/dashboard/domain/create" class="btn btn-primary mb-3">Tambah Permintaan</a>
+    <a href="/dashboard/domain/create" class="btn btn-primary mb-3">Ajukan Permohonan</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
@@ -26,7 +24,8 @@
           <th scope="col">No Telp PIC</th>
           <th scope="col">Nama OPD</th>
           <th scope="col">Nama Domain</th>
-          <th scope="col">Aksi</th>
+          <!-- <th scope="col">Aksi</th> -->
+          <th scope="col">Tanggapan</th> 
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -38,7 +37,8 @@
           <td>{{ $p->no_telp}}</td>
           <td>{{ $p->opd }}</td>
           <td>{{ $p->nama_domain}}</td>
-          <td>
+          <td>{{ $p->tanggapan}}</td>
+          <!-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
               <a href="{{ route('domain.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
               <form action="{{ route('domain.destroy', $p->id) }}" method="post" class="d-inline">
@@ -48,7 +48,10 @@
                     <i class="bi bi-trash fs-6"></i></button>
               </form>
             @endif
-          </td>
+          </td> -->
+          <!-- <td>
+            {{ $p->tanggapan }}
+          </td> -->
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
@@ -57,6 +60,7 @@
             }}" style="font-size: 0.9em;">
             {{ $p->status }}
             </span>
+            <!-- nambahin di db, enum Ditolak -->
           </td>
         </tr>
         @endforeach

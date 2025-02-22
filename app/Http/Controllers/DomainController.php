@@ -23,14 +23,14 @@ class DomainController extends Controller
 
     public function store(Request $request){
         $validatedData = $request->validate([
-            'nip' => 'required',
-            'nama_pic' => 'required|max:255',
+            'nip' => 'required|digits:18',
+            'nama_pic' => 'required|max:255|regex:/^[\p{L} ]+$/u',
             'jabatan' => 'required|max:255',
             'opd' => 'required|max:255',
-            'email' => 'required|email',
-            'no_telp' => 'required|max:15|regex:/^[0-9]+$/',
+            'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/',
+            'no_telp' => 'required|digits_between:10,15|regex:/^[0-9]+$/',
             'paket' => 'required',
-            'nama_domain' => 'required',
+            'nama_domain' => 'required|regex:/^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/',
             'fungsi_app' => 'required',
             'bahasa_pemograman' => 'required',
             'dokumen' => 'required|file|mimes:pdf|max:1024',
@@ -54,19 +54,20 @@ class DomainController extends Controller
 
     public function update(Request $request, Domain $domain){
         $validatedData = $request->validate([
-            'nip' => 'required',
-            'nama_pic' => 'required|max:255',
+            'nip' => 'required|digits:18',
+            'nama_pic' => 'required|max:255|regex:/^[\p{L} ]+$/u',
             'jabatan' => 'required|max:255',
             'opd' => 'required|max:255',
-            'email' => 'required|email',
-            'no_telp' => 'required|max:15|regex:/^[0-9]+$/',
+            'email' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/',
+            'no_telp' => 'required|digits_between:10,15|regex:/^[0-9]+$/',
             'paket' => 'required',
-            'nama_domain' => 'required',
+            'nama_domain' => 'required|regex:/^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/',
             'fungsi_app' => 'required',
             'bahasa_pemograman' => 'required',
-            'dokumen' => 'nullable|file|mimes:pdf|max:1024',
+            'dokumen' => 'required|file|mimes:pdf|max:1024',
         ]);
 
+        // $dokumen = $request->file('dokumen')->store('domain-dokumen');
         if ($request->file('dokumen')) {
             if ($domain->dokumen) {
                 Storage::disk('public')->delete($domain->dokumen);
@@ -81,13 +82,13 @@ class DomainController extends Controller
         return redirect('/dashboard/domain/')->with("success", "Pengajuan Domain berhasil diperbarui!");
     }
 
-    public function destroy(Domain $domain){
-        if($domain->dokumen){
-            Storage::delete($domain->dokumen);
-        }
-        Domain::destroy($domain->id);
-        return redirect('/dashboard/domain/')->with("success", "Pengajuan Domain berhasil dihapus!");
-    }
+    // public function destroy(Domain $domain){
+    //     if($domain->dokumen){
+    //         Storage::delete($domain->dokumen);
+    //     }
+    //     Domain::destroy($domain->id);
+    //     return redirect('/dashboard/domain/')->with("success", "Pengajuan Domain berhasil dihapus!");
+    // }
 
     public function adminIndex(Request $request) {
         $domain = Domain::query();
@@ -117,9 +118,39 @@ class DomainController extends Controller
         return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
     }
 
+    public function tolak(Domain $domain){
+        Domain::where('id', $domain->id)->update([
+            'status' => 'ditolak'
+        ]);
+
+        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain ditolak!");
+    }
+
     public function adminShow(Domain $domain){
         return view('dashboard.domain.admin.show',[
             'domain' => $domain
         ]);
+    }
+
+    public function adminTanggapi(Domain $domain){
+        return view('dashboard.domain.admin.tanggapan',[
+            'domain' => $domain
+        ]);
+    }
+
+    public function adminUpdate(Request $request, Domain $domain)
+    {
+        // Validasi input dari admin
+        $validatedData = $request->validate([
+            'tanggapan' => 'required', // Sesuaikan dengan kebutuhan
+        ]);
+    
+        // Update tanggapan
+        $domain->update([
+            'tanggapan' => $validatedData['tanggapan']
+        ]);
+    
+        // Redirect dengan pesan sukses
+        return redirect('/dashboard/domain/admin')->with('success', 'Tanggapan berhasil disimpan!');
     }
 }
