@@ -29,11 +29,7 @@ class PassphraseController extends Controller
             'nama_user' => 'required|max:255',
             'nik_user' => 'required|digits:16',
             'nip_user' => 'required|digits:18',
-            'email_domain' => [
-                'required', 
-                'email', 
-                'regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/'
-            ],    
+            'email_domain' => 'required|email |regex:/^[a-zA-Z0-9._%+-]+@semarangkota\.go\.id$/',
             'alasan' => 'required'
         ], [
             'nama.required' => 'Nama harus diisi.',
@@ -42,11 +38,20 @@ class PassphraseController extends Controller
             'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
             'nip.required' => 'NIP harus diisi.',
             'nip.digits' => 'NIP harus terdiri dari 18 digit.',
-            'nik.required' => 'NIP harus diisi.',
-            'nik.digits' => 'NIP harus terdiri dari 16 digit.',
-            'email.required' => 'email harus diisi.',
-            'email.digits' => 'NIP harus @semarangkota.go.id.',
-
+            'nik.required' => 'NIK harus diisi.',
+            'nik.digits' => 'NIK harus terdiri dari 16 digit.',
+            'email_domain.required' => 'Email harus diisi.',
+            'email_domain.digits' => 'Email harus @semarangkota.go.id.',
+            'alasan.required' => 'Alasan harus diisi',
+            'alasan.digits' =>'Alasan harus diisi huruf',
+            'nama_user.required' => 'Nama harus diisi.',
+            'nama_user.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
+            'nip_user.required' => 'NIP harus diisi.',
+            'nip_user.digits' => 'NIP harus terdiri dari 18 digit.',
+            'nik_user.required' => 'NIK harus diisi.',
+            'nik_user.digits' => 'NIK harus terdiri dari 16 digit.',
+            'nip_pemohon.required' => 'NIP harus diisi.',
+            'nip_pemohon.digits' => 'NIP harus terdiri dari 18 digit.',
         ]);
 
         if($request->file('file')){
@@ -94,7 +99,7 @@ class PassphraseController extends Controller
                 Storage::disk('public')->delete($passphrase->file);
             }
     
-            $validatedData['file'] = $request->file('file')->store('cpanel-file', 'public');
+            $validatedData['file'] = $request->file('file')->store('passphrase-file', 'public');
         }
     
         $validatedData['user_id'] = Auth::id();
