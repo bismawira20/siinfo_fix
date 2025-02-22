@@ -50,13 +50,33 @@
           <td>{{ $p->opd }}</td>
           <td>{{ $p->nama_domain}}</td>
           <td>
-            <a href="{{ route('domain.admin.show', $p->id) }}" class="badge bg-primary mx-1"><i class="bi bi-eye fs-6"></i></a>
-                <form action="/dashboard/domain/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
-                    @csrf
-                    @method('put')
-                    <button class="badge bg-success border-0">
-                        <i class="bi bi-check-lg fs-6"></i></button>
-                    </form>
+              <div class="d-flex align-items-center gap-1">
+                  <a href="{{ route('domain.admin.tanggapan', $p->id) }}" 
+                      class="badge bg-warning d-flex align-items-center justify-content-center text-decoration-none">
+                      <i class="bi bi-pencil-square fs-6 m-0"></i>
+                  </a>
+                  
+                  <a href="{{ route('domain.admin.show', $p->id) }}" 
+                      class="badge bg-primary d-flex align-items-center justify-content-center text-decoration-none">
+                      <i class="bi bi-eye fs-6"></i>
+                  </a>
+                  
+                  <form action="/dashboard/domain/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-check-lg fs-6"></i>
+                      </button>
+                  </form>
+                  
+                  <form action="/dashboard/domain/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-x-lg fs-6 m-0"></i>
+                      </button>
+                  </form>
+              </div>
           </td>
           <td>              
             <span class="badge {{ 

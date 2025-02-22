@@ -25,7 +25,8 @@ return new class extends Migration
             $table->text('fungsi_app');
             $table->string('bahasa_pemograman');
             $table->string('dokumen');
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->enum('status', ['diproses', 'selesai', 'ditolak'])->default('diproses');
+            $table->string('tanggapan')->nullable();
             $table->timestamps();
         });
     }

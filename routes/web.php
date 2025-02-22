@@ -203,8 +203,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     //Route untuk Pengaduan
     Route::prefix('dashboard/pengaduan/admin')->group(function(){
         Route::get('/',[PengaduanController::class, 'adminIndex'])->name('pengaduan.admin.index');
-        Route::get('/{pengaduan}/tanggapi',[PengaduanController::class, 'adminTanggapi'])->name('pengaduan.admin.tanggapi');
+        Route::get('/{pengaduan}/tanggapan',[PengaduanController::class, 'adminTanggapan'])->name('pengaduan.admin.tanggapan');
         Route::put('/{pengaduan}/update', [PengaduanController::class, 'adminUpdate'])->name('pengaduan.admin.update');
+        Route::get('/{pengaduan}/show',[PengaduanController::class, 'adminShow'])->name('pengaduan.admin.show');
         Route::put('/{pengaduan}/setuju',[PengaduanController::class,'setuju'])->name('pengaduan.admin.setuju');
         Route::put('/{pengaduan}/tolak',[PengaduanController::class,'tolak'])->name('pengaduan.admin.tolak');
         Route::put('/setujuSemua',[PengaduanController::class,'setujuSemua'])->name('pengaduan.admin.setujuSemua');
@@ -212,6 +213,10 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     //Route Pengajuan TTE
     Route::prefix('dashboard/pengajuan/admin')->group(function () {
         Route::get('/',[PengajuanController::class, 'adminIndex'])->name('pengajuan.admin.index');
+        Route::get('/{pengajuan}/show',[PengajuanController::class, 'adminShow'])->name('pengajuan.admin.show');
+        Route::get('/{pengajuan}/tanggapi',[PengajuanController::class, 'adminTanggapan'])->name('pengajuan.admin.tanggapan');
+        Route::put('/{pengajuan}/update', [PengajuanController::class, 'adminUpdate'])->name('pengajuan.admin.update');
+        Route::put('/{pengajuan}/tolak',[PengajuanController::class,'tolak'])->name('pengajuan.admin.tolak');
         Route::put('/{pengajuan}/selesai',[PengajuanController::class,'selesai'])->name('pengajuan.admin.selesai');
         Route::put('/selesaiSemua',[PengajuanController::class,'selesaiSemua'])->name('pengajuan.admin.selesaiSemua');
     });
@@ -260,6 +265,9 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
     Route::prefix('dashboard/domain/admin')->group(function () {
         Route::get('/',[DomainController::class, 'adminIndex'])->name('domain.admin.index');
         Route::get('/{domain}/show',[DomainController::class, 'adminShow'])->name('domain.admin.show');
+        Route::get('/{domain}/tanggapi',[DomainController::class, 'adminTanggapi'])->name('domain.admin.tanggapan');
+        Route::put('/{domain}/update', [DomainController::class, 'adminUpdate'])->name('domain.admin.update');
+        Route::put('/{domain}/tolak',[DomainController::class,'tolak'])->name('domain.admin.tolak');
         Route::put('/{domain}/selesai',[DomainController::class,'selesai'])->name('domain.admin.selesai');
         Route::put('/selesaiSemua',[DomainController::class,'selesaiSemua'])->name('domain.admin.selesaiSemua');
     });

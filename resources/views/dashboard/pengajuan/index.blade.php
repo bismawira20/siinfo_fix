@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Pengajuan Tanda Tangan Elektronik</h1>
+  <h1 class="h2">Layanan Pengajuan Tanda Tangan Elektronik</h1>
 </div>
 
 
@@ -16,19 +16,20 @@
 </div>
 
 <div class="table-responsive small">
-    <a href="/dashboard/pengajuan/create" class="btn btn-primary mb-3">Tambah Pengajuan</a>
+    <a href="/dashboard/pengajuan/create" class="btn btn-primary mb-3">Ajukan TTE</a>
     <table class="table table-striped table-sm">
       <thead>
         <tr>
           <th scope="col">No</th>
           <th scope="col">Nama</th>
-          {{-- <th scope="col">NIP</th>
-          <th scope="col">NIK</th> --}}
-          <th scope="col">Nama OPD</th>
+          <!-- {{-- <th scope="col">NIP</th>
+          <th scope="col">NIK</th> --}} -->
+          <th scope="col">OPD</th>
           <th scope="col">Email Domain</th>
-          {{-- <th scope="col">No Telp</th>--}}
+          <th scope="col">No Telp</th>
           <th scope="col">Jabatan</th>
-          <th scope="col">Aksi</th>
+          <!-- <th scope="col">Aksi</th> -->
+          <th scope="col">Tanggapan</th>
           <th scope="col">Status</th>
         </tr>
       </thead>
@@ -42,8 +43,9 @@
           <td>{{ $p->nama }}</td>
           <td>{{ $p->nama_opd }}</td>
           <td>{{ $p->email_domain}}</td>
+          <td>{{ $p->no_telp}}</td>
           <td>{{ $p->jabatan}}</td>
-          <td>
+          <!-- <td>
             @if($p->created_at->diffInHours() < 1 && $p->status == 'diproses')
               <a href="{{ route('pengajuan.edit', $p->id) }}" class="badge bg-warning"><i class="bi bi-pencil-square fs-6"></i></a>
               <form action="{{ route('pengajuan.destroy', $p->id) }}" method="post" class="d-inline">
@@ -53,7 +55,8 @@
                     <i class="bi bi-trash fs-6"></i></button>
               </form>
             @endif
-          </td>
+          </td> -->
+          <td> {{ $p->tanggapan }} </td>
           <td>              
             <span class="badge {{ 
             $p->status == 'diproses' ? 'bg-warning' : 
@@ -63,6 +66,7 @@
             {{ $p->status }}
             </span>
           </td>
+          <!-- nambahin di db, enum Ditolak -->
         </tr>
         @endforeach
       </tbody>

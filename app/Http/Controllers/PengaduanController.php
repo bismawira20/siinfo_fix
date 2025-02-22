@@ -24,11 +24,11 @@ class PengaduanController extends Controller
 
     public function store(Request $request){
         $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'jenis_id' =>'required',
-            'deskripsi' => 'required',
-            'file' => 'nullable|file|max:1024',
-            'no_telp' => 'required|max:15',
+            'nama' => 'required|max:255|regex:/^[\p{L} ]+$/u',
+            'jenis_id' =>'required|exists:jenis_pengaduans,id', //|exists:jenis_pengaduans,id
+            'deskripsi' => 'required|max:255',
+            'file' => 'required|file|mimes:pdf|max:1024',
+            'no_telp' => 'required|digits_between:10,15',
         ]);
         
         if($request->file('file')){
@@ -51,11 +51,11 @@ class PengaduanController extends Controller
     public function update(Request $request, Pengaduan $pengaduan){
     // Validasi data yang diterima dari request
     $validatedData = $request->validate([
-        'nama' => 'required|max:255',
-        'jenis_id' => 'required|exists:jenis_pengaduans,id', // Pastikan jenis_id valid
-        'deskripsi' => 'required',
-        'file' => 'nullable|file|max:1024', // File opsional
-        'no_telp' => 'required|max:15',
+        'nama' => 'required|max:255|regex:/^[\p{L} ]+$/u',
+        'jenis_id' =>'required', //|exists:jenis_pengaduans,id
+        'deskripsi' => 'required|max:255',
+        'file' => 'required|file|mimes:pdf|max:1024',
+        'no_telp' => 'required|digits_between:10,15',
     ]);
 
     // Jika ada file baru yang diunggah
@@ -77,13 +77,13 @@ class PengaduanController extends Controller
     return redirect('/dashboard/pengaduan/')->with("success", "Pengaduan berhasil diperbarui!");
     }
 
-    public function destroy(Pengaduan $pengaduan){
-        if($pengaduan->file){
-            Storage::delete($pengaduan->file);
-        }
-        Pengaduan::destroy($pengaduan->id);
-        return redirect('/dashboard/pengaduan/')->with("success", "Pengaduan berhasil dihapus!");
-    }
+    // public function destroy(Pengaduan $pengaduan){
+    //     if($pengaduan->file){
+    //         Storage::delete($pengaduan->file);
+    //     }
+    //     Pengaduan::destroy($pengaduan->id);
+    //     return redirect('/dashboard/pengaduan/')->with("success", "Pengaduan berhasil dihapus!");
+    // }
 
     public function adminIndex(Request $request){
         $pengaduan = Pengaduan::query();
@@ -97,8 +97,14 @@ class PengaduanController extends Controller
         return view('dashboard.pengaduan.admin.index', compact('pengaduan'));
     }
 
-    public function adminTanggapi(Pengaduan $pengaduan){
-        return view('dashboard.pengaduan.admin.tanggapi',[
+    public function adminTanggapan(Pengaduan $pengaduan){
+        return view('dashboard.pengaduan.admin.tanggapan',[
+            'pengaduan' => $pengaduan
+        ]);
+    }
+
+    public function adminShow(Pengaduan $pengaduan){
+        return view('dashboard.pengaduan.admin.show',[
             'pengaduan' => $pengaduan
         ]);
     }

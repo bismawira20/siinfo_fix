@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string('no_telp')->nullable();
             $table->string('email_domain');
             $table->string('jabatan');
-            $table->enum('status', ['diproses', 'selesai'])->default('diproses');
+            $table->enum('status', ['diproses', 'selesai', 'ditolak'])->default('diproses');
+            $table->string('tanggapan')->nullable();
             $table->timestamps();
         });
     }
