@@ -47,17 +47,23 @@
         $services = [
             [
                 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>',
-                'title' => 'Sub Domain dan VPS Kota Semarang', 
+                'title' => 'Sub Domain dan VPS Kota Semarang',
+                'route_user' => 'domain.create', // Route untuk user
+                'route_admin' => 'domain.admin.index', // Route untuk admin
                 'body' => 'Butuh sub domain, hosting, atau VPS yang handal? Kami menyediakan layanan lengkap untuk kebutuhan web Anda. Dapatkan performa terbaik dan dukungan penuh dari tim ahli kami. Hubungi kami sekarang untuk solusi web yang profesional dan terpercaya.'
             ],
             [
                 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>',
                 'title' => 'Pembuatan Email Dinas',
+                'route_user' => 'emaildinas.create', // Route untuk user
+                'route_admin' => 'emaildinas.admin.index', // Route untuk admin
                 'body' => 'Butuh email dinas resmi @semarangkota.go.id? Hubungi kami untuk proses cepat dan mudah, serta komunikasi profesional.'
             ],
             [
                 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>',
                 'title' => 'Pengajuan TTE (Tanda Tangan Elektronik)',
+                'route_user' => 'pengajuan.create', // Route untuk user
+                'route_admin' => 'pengajuan.admin.index', // Route untuk admin
                 'body' => 'Perlu mengajukan Tanda Tangan Elektronik? Kami siap membantu Anda mendapatkan TTE dengan proses yang cepat dan mudah. Hubungi kami untuk informasi lebih lanjut dan mulailah menikmati kemudahan tanda tangan digital yang aman dan terpercaya.'
             ],
             [
@@ -67,24 +73,38 @@
                     <line x1="12" y1="17" x2="12" y2="21"></line>
                 </svg>',
                 'title' => 'Pembuatan dan Pengembangan Aplikasi',
+                'route_user' => 'aplikasi.create', // Route untuk user
+                'route_admin' => 'aplikasi.admin.index', // Route untuk admin
                 'body' => 'Ingin mengubah ide Anda menjadi aplikasi yang inovatif? Kami menyediakan layanan pembuatan dan pengembangan aplikasi yang profesional. Dari konsep hingga peluncuran, tim kami siap membantu Anda menciptakan aplikasi yang sesuai dengan kebutuhan dan visi Anda.'
             ],
             [
                 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-unlock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>',
                 'title' => 'Reset Password Email/Passphrase TTE',
+                'route_user' => 'passphrase.create', // Route untuk user
+                'route_admin' => 'passphrase.admin.index', // Route untuk admin
                 'body' => 'Lupa password email atau passphrase TTE Anda? Jangan khawatir! Kami menyediakan layanan reset yang cepat dan aman. Hubungi tim kami untuk bantuan lebih lanjut dan dapatkan kembali akses Anda dengan mudah.'
             ],
             [
                 'svg' => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
                 'title' => 'Pembuatan dan Reset Akun CPANEL',
+                'route_user' => 'cpanel.create', // Route untuk user
+                'route_admin' => 'cpanel.admin.index', // Route untuk admin
                 'body' => 'Butuh bantuan mereset akun website atau cPanel? Hubungi kami sekarang untuk pemulihan cepat dan aman.'
             ]
         ];
         @endphp
 
 @foreach($services as $service)
-<div class="col">
-    <a href="" class="text-decoration-none">
+    <div class="col">
+    @guest
+        <a href="{{ route('login') }}" class="text-decoration-none">
+    @else
+        @if(Auth::user()->isAdmin())
+            <a href="{{ route($service['route_admin']) }}" class="text-decoration-none">
+        @else
+            <a href="{{ route($service['route_user']) }}" class="text-decoration-none">
+        @endif
+    @endguest
         <div class="card h-100 shadow border-0 ">
             <div class="card-body text-center">
                 <div class="mb-3">
