@@ -190,6 +190,6 @@ class PengajuanController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE selesai diproses!");
+        return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE disetujui!");
     }
 }

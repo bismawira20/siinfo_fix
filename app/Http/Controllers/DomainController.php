@@ -142,7 +142,7 @@ class DomainController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
+        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain disetujui!");
     }
 
     public function selesaiSemua(){
@@ -150,7 +150,7 @@ class DomainController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
+        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain disetujui!");
     }
 
     public function tolak(Domain $domain){

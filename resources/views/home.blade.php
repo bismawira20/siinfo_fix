@@ -84,7 +84,7 @@
 
 @foreach($services as $service)
 <div class="col">
-    <a href="/layanan" class="text-decoration-none">
+    <a href="" class="text-decoration-none">
         <div class="card h-100 shadow border-0 ">
             <div class="card-body text-center">
                 <div class="mb-3">

@@ -163,7 +163,7 @@ class PengaduanController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan selesai diproses!");
+        return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan disetujui!");
     }
 
 }

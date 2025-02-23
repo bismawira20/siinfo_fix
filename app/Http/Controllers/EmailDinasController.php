@@ -188,7 +188,7 @@ class EmailDinasController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
+        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas disetujui!");
     }
 
     public function selesaiSemua(){
@@ -196,7 +196,7 @@ class EmailDinasController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
+        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas disetujui!");
     }
     public function tolak(EmailDinas $emaildinas){
         EmailDinas::where('id', $emaildinas->id)->update([

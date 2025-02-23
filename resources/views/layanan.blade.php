@@ -100,21 +100,14 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Edit Form</div>
-                               Jika dirasa perlu untuk mengedit isian form, 
-                               edit dapat dilakukan 1x1 jam setelah pengisian, begitu pula dengan penghapusan.
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
                                 <div class="fw-bold">Tunggu Proses Verifikasi</div>
                                 Tunggu status layanan hingga diproses oleh admin.
                             </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Notifikasi</div>
-                                Cek WhatsApp atau email Anda untuk informasi lebih lanjut.
+                                <div class="fw-bold">Disetujui atau Ditolak</div>
+                                Jika pengajuan layanan ditolak, anda dapat mengajukannya kembali
                             </div>
                         </li>
                     </ol>

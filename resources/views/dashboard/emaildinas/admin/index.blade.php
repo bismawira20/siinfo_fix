@@ -115,7 +115,7 @@
     <form action="/dashboard/emaildinas/admin/selesaiSemua" method="POST" class="d-inline">
       @csrf
       @method('put')
-      <button class="btn btn-success rounded">Selesaikan Semua</button>
+      <button class="btn btn-success rounded">Setujui Semua</button>
     </form>
     
     <div class="d-inline">{{ $emaildinas->links() }}</div>

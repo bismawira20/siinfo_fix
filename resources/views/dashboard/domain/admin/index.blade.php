@@ -97,7 +97,7 @@
     <form action="/dashboard/domain/admin/selesaiSemua" method="POST" class="d-inline">
         @csrf
         @method('put')
-        <button class="btn btn-success rounded">Selesaikan Semua</button>
+        <button class="btn btn-success rounded">Setujui Semua</button>
     </form>
 
     <div>{{ $domain->links() }}</div>

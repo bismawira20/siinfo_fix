@@ -145,7 +145,7 @@ class PassphraseController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE selesai diproses!");
+        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE disetujui!");
     }
 
     public function tolak(passphrase $passphrase){
