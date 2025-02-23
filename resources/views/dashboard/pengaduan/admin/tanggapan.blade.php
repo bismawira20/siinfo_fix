@@ -67,7 +67,7 @@
                         <th>Status</th>
                         <td>
                             <span class="badge 
-                                @if($pengaduan->status == 'pending') bg-warning 
+                                @if($pengaduan->status == 'diproses') bg-warning 
                                 @elseif($pengaduan->status == 'disetujui') bg-success 
                                 @else bg-danger 
                                 @endif">

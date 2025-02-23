@@ -50,7 +50,7 @@
           </td> -->
           <td>
             <span class="badge {{ 
-            $p->status == 'pending' ? 'bg-warning' : 
+            $p->status == 'diproses' ? 'bg-warning' : 
             ($p->status == 'disetujui' ? 'bg-success' : 
             ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">

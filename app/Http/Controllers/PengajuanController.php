@@ -174,7 +174,7 @@ class PengajuanController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE selesai!");
+        return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE disetujui!");
     }
 
     public function tolak(Pengajuan $Pengajuan){
@@ -182,12 +182,12 @@ class PengajuanController extends Controller
             'status' => 'ditolak'
         ]);
 
-        return redirect('/dashboard/pengajuan/admin')->with("success", "Agenda kunjungan ditolak!");
+        return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE ditolak!");
     }
 
     public function selesaiSemua(){
         Pengajuan::where('status', 'diproses')->update([
-            'status' => 'selesai'
+            'status' => 'disetujui'
         ]);
 
         return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE selesai diproses!");

@@ -147,7 +147,7 @@ class PengaduanController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/pengaduan/admin')->with("success", "Aduan disetujui!");
+        return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan disetujui!");
     }
 
     public function tolak(Pengaduan $pengaduan){
@@ -155,15 +155,15 @@ class PengaduanController extends Controller
             'status' => 'ditolak'
         ]);
 
-        return redirect('/dashboard/pengaduan/admin')->with("success", "Agenda kunjungan ditolak!");
+        return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan ditolak!");
     }
 
     public function setujuSemua(){
-        Pengaduan::where('status', 'pending')->update([
+        Pengaduan::where('status', 'diproses')->update([
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/pengaduan/admin')->with("success", "Agenda kunjungan disetujui!");
+        return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan selesai diproses!");
     }
 
 }

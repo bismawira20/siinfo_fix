@@ -31,7 +31,7 @@
         <div class="mb-3">
             <label for="nama" class="form-label @error('nama') is-invalid @enderror">Nama</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="nama" name="nama">
+                <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
                 <span class="valid-icon" id="valid-nama" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('nama')
@@ -49,7 +49,7 @@
                 </small> 
             </label>
             <div class="d-flex align-items-center">
-                <input type="tel" class="form-control" id="no_telp" name="no_telp">
+                <input type="tel" class="form-control" id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
                 <span class="valid-icon" id="valid-no_telp" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('no_telp')
