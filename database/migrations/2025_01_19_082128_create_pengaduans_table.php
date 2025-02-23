@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('file')->nullable();
             $table->text('tanggapan')->nullable();
-            $table->enum('status', ['pending', 'disetujui', 'ditolak'])->default('pending');
+            $table->enum('status', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
             $table->timestamps();
         });
     }

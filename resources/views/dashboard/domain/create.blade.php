@@ -34,7 +34,7 @@
         <div class="mb-3">
             <label for="nip" class="form-label @error('nip') is-invalid @enderror">NIP</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="nip" name="nip">
+                <input type="text" class="form-control" id="nip" name="nip" value="{{ old('nip') }}">
                 <span class="valid-icon" id="valid-nip" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('nip')
@@ -47,7 +47,7 @@
         <div class="mb-3">
             <label for="nama_pic" class="form-label @error('nama_pic') is-invalid @enderror">Nama PIC</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="nama_pic" name="nama_pic">
+                <input type="text" class="form-control" id="nama_pic" name="nama_pic" value="{{ old('nama_pic') }}">
                 <span class="valid-icon" id="valid-nama_pic" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('nama_pic')
@@ -60,7 +60,7 @@
         <div class="mb-3">
             <label for="jabatan" class="form-label @error('jabatan') is-invalid @enderror">Jabatan</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="jabatan" name="jabatan">
+                <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
                 <span class="valid-icon" id="valid-jabatan" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('jabatan')
@@ -73,7 +73,7 @@
         <div class="mb-3">
             <label for="opd" class="form-label @error('opd') is-invalid @enderror">OPD</label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="opd" name="opd">
+                <input type="text" class="form-control" id="opd" name="opd" value="{{ old('opd') }}">
                 <span class="valid-icon" id="valid-opd" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('opd')
@@ -88,7 +88,7 @@
                 <small class="form-text text-muted d-block"> Masukkan Email Aktif! Contoh: nama@semarangkota.go.id</small>
             </label>
             <div class="d-flex align-items-center">
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                 <span class="valid-icon" id="valid-email" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('email')
@@ -106,7 +106,7 @@
                 </small> 
             </label>
             <div class="d-flex align-items-center">
-                <input type="tel" class="form-control" id="no_telp" name="no_telp">
+                <input type="tel" class="form-control" id="no_telp" name="no_telp" value="{{ old('no_telp') }}">
                 <span class="valid-icon" id="valid-no_telp" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('no_telp')
@@ -124,9 +124,9 @@
             <div class="d-flex align-items-center">
                 <select class="form-select @error('paket') is-invalid @enderror" id="paket" name="paket">
                     <option selected disabled>Silahkan Pilih Paket Layanan</option>
-                    <option value="Hanya Domain">Hanya Domain</option>
-                    <option value="Domain & Hosting">Domain & Hosting</option>
-                    <option value="VPS (Virtual Private Server)">VPS (Virtual Private Server)</option>
+                    <option value="Hanya Domain" {{ old('paket') == 'Hanya Domain' ? 'selected' : '' }}>Hanya Domain</option>
+                    <option value="Domain & Hosting" {{ old('paket') == 'Domain & Hosting' ? 'selected' : '' }}>Domain & Hosting</option>
+                    <option value="VPS (Virtual Private Server)" {{ old('paket') == 'VPS (Virtual Private Server)' ? 'selected' : '' }}>VPS (Virtual Private Server)</option>
                 </select>
                 <span class="valid-icon" id="valid-paket" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
@@ -145,7 +145,7 @@
                 </small> 
             </label>
             <div class="d-flex align-items-center">
-                <input type="text" class="form-control" id="nama_domain" name="nama_domain">
+                <input type="text" class="form-control" id="nama_domain" name="nama_domain" value="{{ old('nama_domain') }}">
                 <span class="valid-icon" id="valid-nama_domain" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('nama_domain')
@@ -177,7 +177,8 @@
             <div class="d-flex align-items-center">
                 <input type="text" class="form-control @error('bahasa_pemograman') is-invalid @enderror" 
                        id="bahasa_pemograman"
-                       name="bahasa_pemograman" 
+                       name="bahasa_pemograman"
+                       value="{{ old('bahasa_pemograman') }}" 
                        placeholder="Contoh: PHP, Java, Python">
                 <span class="valid-icon" id="valid-bahasa_pemograman" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
@@ -198,7 +199,7 @@
                 <small class="form-text text-muted d-block">Surat permohonan yang ditandatangani oleh kepala bidang terkait</small> 
             </label>
             <div class="d-flex align-items-center">
-                <input class="form-control" type="file" id="dokumen" name="dokumen" accept=".pdf">
+                <input class="form-control" type="file" id="dokumen" name="dokumen" value="{{ old('dokumen') }}" accept=".pdf">
                 <span class="valid-icon" id="valid-dokumen" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('dokumen')
