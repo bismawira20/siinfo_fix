@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Aplikasi;
 use Illuminate\Http\Request;
+use App\Exports\ExportAplikasi;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class AplikasiController extends Controller
@@ -222,6 +224,10 @@ class AplikasiController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/aplikasi/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportAplikasi, 'pembuatan-aplikasi.xlsx');
     }
 }
 

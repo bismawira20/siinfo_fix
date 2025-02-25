@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use Illuminate\Http\Request;
+use App\Exports\ExportDomain;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class DomainController extends Controller
@@ -187,5 +189,9 @@ class DomainController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/domain/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportDomain, 'pembuatan-domain.xlsx');
     }
 }

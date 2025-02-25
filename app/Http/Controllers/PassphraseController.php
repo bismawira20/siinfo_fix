@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Passphrase;
 use Illuminate\Http\Request;
+use App\Exports\ExportPassphrase;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class PassphraseController extends Controller
@@ -182,5 +184,8 @@ class PassphraseController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect('/dashboard/passphrase/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+    public function export_excel(){
+        return Excel::download(new ExportPassphrase, 'pembuatan-passphrase.xlsx');
     }
 }

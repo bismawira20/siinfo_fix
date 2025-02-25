@@ -114,11 +114,18 @@
     </table>
   </div>
   <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
     <form action="/dashboard/cpanel/admin/selesaiSemua" method="POST" class="d-inline">
       @csrf
       @method('put')
-      <button class="btn btn-success rounded">Setujui Semua</button>
+      <button class="btn btn-success rounded mt-1 me-2">Setujui Semua</button>
     </form>
+
+    <form action="/dashboard/cpanel/admin/export-excel" method="GET" class="d-inline">
+      <button class="btn btn-success rounded mt-1">Export Excel</button>
+    </form>
+    </div>
+
     
     <div class="d-inline">{{ $cpanel->links() }}</div>
 </div>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Models\JenisPengaduan;
+use App\Exports\ExportPengaduan;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
@@ -164,6 +166,10 @@ class PengaduanController extends Controller
         ]);
 
         return redirect('/dashboard/pengaduan/admin')->with("success", "Pengaduan disetujui!");
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportPengaduan, 'pengaduan.xlsx');
     }
 
 }

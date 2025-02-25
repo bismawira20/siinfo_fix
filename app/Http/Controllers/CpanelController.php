@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cpanel;
 use Illuminate\Http\Request;
+use App\Exports\ExportCpanel;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class CpanelController extends Controller
@@ -159,5 +161,9 @@ class CpanelController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/cpanel/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportCpanel, 'pembuatan-cpanel.xlsx');
     }
 }

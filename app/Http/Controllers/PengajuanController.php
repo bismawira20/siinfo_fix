@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengajuan;
 use Illuminate\Http\Request;
+use App\Exports\ExportPengajuan;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengajuanController extends Controller
 {
@@ -191,5 +193,9 @@ class PengajuanController extends Controller
         ]);
 
         return redirect('/dashboard/pengajuan/admin')->with("success", "Pengajuan TTE disetujui!");
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportPengajuan, 'pembuatan-pengajuan-tte.xlsx');
     }
 }

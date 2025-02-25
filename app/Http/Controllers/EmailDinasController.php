@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailDinas;
 use Illuminate\Http\Request;
+use App\Exports\ExportEmailDinas;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class EmailDinasController extends Controller
@@ -232,5 +234,8 @@ class EmailDinasController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect('/dashboard/emaildinas/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+    public function export_excel(){
+        return Excel::download(new ExportEmailDinas, 'pembuatan-email-dinas.xlsx');
     }
 }
