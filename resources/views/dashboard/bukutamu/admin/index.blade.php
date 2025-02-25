@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -97,28 +99,31 @@
           <td>
             <div class="d-flex align-items-center gap-2">
               <a href="{{ route('bukutamu.admin.tanggapan', $b->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
-                <i class="bi bi-pencil-square fs-6 m-0"></i>
+                  <i class="bi bi-pencil-square fs-6 m-0"></i>
               </a>
               <a href="{{ route('bukutamu.admin.show', $b->id) }}" class="badge bg-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-eye fs-6 m-0"></i>
+                  <i class="bi bi-eye fs-6 m-0"></i>
               </a>
-            </div>
-            <div class="d-flex align-items-center gap-2 mt-1">
-              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
-                @csrf
-                @method('put')
-                <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
-                  <i class="bi bi-check-lg fs-6 m-0"></i>
-                </button>
-              </form>
-              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
-                @csrf
-                @method('put')
-                <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
-                  <i class="bi bi-x-lg fs-6 m-0"></i>
-                </button>
-              </form>
-            </div>
+          </div>
+          
+          @if ($b->status !== 'disetujui' && $b->status !== 'ditolak')
+    <div class="d-flex align-items-center gap-2 mt-1">
+        <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline" onsubmit="event.preventDefault(); confirmAction('setuju').then((result) => { if (result) this.submit(); })">
+            @csrf
+            @method('put')
+            <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                <i class="bi bi-check-lg fs-6 m-0"></i>
+            </button>
+        </form>
+        <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline" onsubmit="event.preventDefault(); confirmAction('tolak').then((result) => { if (result) this.submit(); })">
+            @csrf
+            @method('put')
+            <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                <i class="bi bi-x-lg fs-6 m-0"></i>
+            </button>
+        </form>
+    </div>
+@endif
           </td>
           
         </tr>
@@ -142,4 +147,37 @@
 
     <div class="d-inline">{{ $bukutamu->links() }}</div>
 </div>
+
+<script>
+  function confirmAction(action) {
+      let title, text, icon;
+
+      if (action === 'setuju') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menyetujui entri ini.';
+          icon = 'warning';
+      } else if (action === 'tolak') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menolak entri ini.';
+          icon = 'warning';
+      }
+
+      return Swal.fire({
+          title: title,
+          text: text,
+          icon: icon,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              return true; // Form akan dikirim
+          } else {
+              return false; // Form tidak akan dikirim
+          }
+      });
+  }
+</script>
 @endsection

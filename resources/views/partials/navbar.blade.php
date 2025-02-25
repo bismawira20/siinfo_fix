@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ad1717;">
     <div class="container">
       <a class="navbar-brand" href="/">
         <img src="https://diskominfo.semarangkota.go.id/img/logodiskominfo.png" alt="Logo" 
