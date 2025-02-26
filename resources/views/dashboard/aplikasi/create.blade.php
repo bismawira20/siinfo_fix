@@ -173,9 +173,9 @@
             <span class="valid-icon" id="valid-tahun_pembuatan" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('tahun_pembuatan')
-                <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
            @enderror
         </div>
         <div class="mb-3">

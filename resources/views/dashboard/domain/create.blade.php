@@ -131,7 +131,7 @@
                 <span class="valid-icon" id="valid-paket" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('paket')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -179,7 +179,7 @@
                 <span class="valid-icon" id="valid-bahasa_pemograman" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('bahasa_pemograman')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
