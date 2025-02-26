@@ -119,6 +119,7 @@
         <div class="mt-5 mb-3">
             <h6>Deskripsi Layanan</h6>
         </div>
+        
         <div class="mb-3">
             <label for="paket" class="form-label">Paket Layanan</label>
             <div class="d-flex align-items-center">
@@ -329,9 +330,10 @@ $(document).ready(function() {
     // Validasi Fungsi Aplikasi
     $('#fungsi_app').on('input', function() {
         const validIcon = $('#valid-fungsi_app');
+        const regex = /^[\p{L} ]+$/u;
         const value = $(this).val();
         
-        if (value.length > 0 && value.length <= 1000) {
+        if (value.length > 0 && value.length <= 1000 && regex.test(value)) {
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {

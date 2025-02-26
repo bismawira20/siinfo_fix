@@ -215,10 +215,9 @@
                 // Validasi untuk Nama user
                 $('#nama_user').on('input', function() {
                     const validIcon = $('#valid-nama_user');
-                    const regex = /^[\p{L} ]+$/u; // Hanya huruf dan spasi
                     const value = $(this).val();
             
-                    if (value.length > 0 && value.length <= 255 && regex.test(value)) {
+                    if (value.length > 0 && value.length <= 255) {
                         validIcon.show(); // Tampilkan centang hijau
                         $(this).removeClass('is-invalid'); // Hapus kelas invalid
                     } else {

@@ -33,7 +33,7 @@ class DomainController extends Controller
             'no_telp' => 'required|digits_between:10,15|regex:/^[0-9]+$/',
             'paket' => 'required',
             'nama_domain' => 'required|regex:/^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/',
-            'fungsi_app' => 'required',
+            'fungsi_app' => 'required|regex:/^[\p{L} ]+$/u',
             'bahasa_pemograman' => 'required',
             'dokumen' => 'required|file|mimes:pdf|max:1024',
         ], [
@@ -64,6 +64,7 @@ class DomainController extends Controller
             'nama_domain.regex' => 'Nama domain harus dalam format nama.semarangkota.go.id.',
             
             'fungsi_app.required' => 'Fungsi aplikasi harus diisi.',
+            'fungsi_app.regex' => 'Fungsi harus berupa huruf dan spasi',
             
             'bahasa_pemograman.required' => 'Bahasa pemrograman harus diisi.',
             

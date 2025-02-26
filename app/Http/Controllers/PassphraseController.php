@@ -36,22 +36,31 @@ class PassphraseController extends Controller
         ], [
             'nama.required' => 'Nama harus diisi.',
             'nama.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
+
             'no_telp.required' => 'Nomor telepon harus diisi.',
             'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
+            
             'nip.required' => 'NIP harus diisi.',
             'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+            
             'nik.required' => 'NIK harus diisi.',
             'nik.digits' => 'NIK harus terdiri dari 16 digit.',
+            
             'email_domain.required' => 'Email harus diisi.',
-            'email_domain.digits' => 'Email harus @semarangkota.go.id.',
+            'email_domain.regex' => 'Format email tidak valid.',
+            
             'alasan.required' => 'Alasan harus diisi',
             'alasan.digits' =>'Alasan harus diisi huruf',
+            
             'nama_user.required' => 'Nama harus diisi.',
-            'nama_user.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
-            'nip_user.required' => 'NIP harus diisi.',
+            'nama_user.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            '
+            nip_user.required' => 'NIP harus diisi.',
             'nip_user.digits' => 'NIP harus terdiri dari 18 digit.',
+            
             'nik_user.required' => 'NIK harus diisi.',
             'nik_user.digits' => 'NIK harus terdiri dari 16 digit.',
+            
             'nip_pemohon.required' => 'NIP harus diisi.',
             'nip_pemohon.digits' => 'NIP harus terdiri dari 18 digit.',
         ]);
