@@ -23,8 +23,8 @@
         <select name="status" class="form-select" style="min-width: 200px;">
             <option value="" disabled selected hidden>Status</option>
             <option value="diproses" {{ request('status') == 'diproses' ? 'selected' : '' }}>Diproses</option>
-            <option value="selesai" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
-            <option value="disetujui" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+            <option value="disetujui" {{ request('status') == 'disetujui' ? 'selected' : '' }}>Disetujui</option>
+            <option value="ditolak" {{ request('status') == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
         </select>
     </div>
     <button type="submit" class="btn btn-primary">Filter</button>
@@ -105,6 +105,7 @@
   </div>
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
+    <form action="/dashboard/pengajuan/admin/selesaiSemua" method="POST" class="d-inline">
     <form action="/dashboard/pengajuan/admin/selesaiSemua" method="POST" class="d-inline"
     onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
       @csrf

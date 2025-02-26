@@ -31,7 +31,7 @@ class CpanelController extends Controller
             'nip' => 'required|digits:18', // NIP harus terdiri dari 18 digit
             'jabatan' => 'required|max:255',
             'asal_opd' => 'required|max:255',
-            'url' => 'required|max:255|regex:/^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)$/i', // Pastikan URL valid
+            'url' => 'required|max:255|regex:/^(https?:\/\/)?[a-z0-9-]+\.semarangkota\.go\.id$/i', // Pastikan URL valid
             'file' => 'required|file|mimes:pdf|max:1024',
         ], [
             'nama.required' => 'Nama harus diisi.',

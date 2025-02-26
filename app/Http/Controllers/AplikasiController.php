@@ -31,11 +31,11 @@ class AplikasiController extends Controller
                 'digits:18', // Memastikan NIP terdiri dari 18 digit
                 'regex:/^[0-9]+$/', // Memastikan NIP hanya terdiri dari angka
             ],
-            'nama_pic' => 'required|max:255',
+            'nama_pic' => 'required|max:255|regex:/^[\p{L} ]+$/u',
             'jabatan' => 'required|max:255',
             'opd' => 'required|max:255',
             'email' => 'required|email',
-            'no_telp' => 'required|max:15|regex:/^[0-9]+$/',
+            'no_telp' => 'required|digits_between:10,15',
             'nama_app' => 'required',
             'deskripsi' => 'required',
             'tipe' => 'required',
@@ -50,25 +50,41 @@ class AplikasiController extends Controller
             'nip.required' => 'NIP harus diisi.',
             'nip.digits' => 'NIP harus terdiri dari 18 digit.',
             'nip.regex' => 'NIP hanya boleh terdiri dari angka.',
+            
             'nama_pic.required' => 'Nama PIC harus diisi.',
+            'nama_pic.regex' => 'Nama PIC harus berupa huruf dan spasi.',
+            
             'jabatan.required' => 'Jabatan harus diisi.',
+            
             'opd.required' => 'OPD harus diisi.',
+            
             'email.required' => 'Email harus diisi.',
             'email.email' => 'Format email tidak valid.',
+            
             'no_telp.required' => 'Nomor telepon harus diisi.',
-            'no_telp.regex' => 'Nomor telepon hanya boleh terdiri dari angka.',
+            'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
+            
             'nama_app.required' => 'Nama aplikasi harus diisi.',
+            
             'deskripsi.required' => 'Deskripsi aplikasi harus diisi',
+            
             'tipe.required' => 'Tipe aplikasi harus dipilih.',
+            
             'bahasa_pemograman.required' => 'Bahasa pemograman harus diisi.',
+            
             'framework.required' => 'Framework harus diisi.',
+            
             'database.required' => 'Database harus diisi.',
+            
             'sistem_operasi.required' => 'Sistem operasi harus diisi.',
+            
             'instalasi.required' => 'Server instalasi harus dipilih.',
+            
             'tahun_pembuatan.required' => 'Tahun pembuatan harus diisi.',
             'tahun_pembuatan.integer' => 'Tahun pembuatan harus berupa angka.',
             'tahun_pembuatan.min' => 'Tahun pembuatan tidak boleh kurang dari 2020.',
             'tahun_pembuatan.max' => 'Tahun pembuatan tidak boleh lebih dari tahun ini.',
+            
             'dokumen.required' => 'Dokumen harus diisi',
             'dokumen.mimes' => 'Dokumen harus berupa file PDF.',
             'dokumen.max' => 'Dokumen tidak boleh lebih dari 1 MB.',

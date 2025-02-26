@@ -242,7 +242,7 @@
         // Validasi untuk URL
         $('#url').on('input', function() {
             const validIcon = $('#valid-url');
-            const regex = /^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)$/i; // Cek format URL
+            const regex = /^(https?:\/\/)?[a-z0-9-]+\.semarangkota\.go\.id$/i; // Cek format URL
             const value = $(this).val();
     
             if (value.length > 0 && value.length <= 255 && regex.test(value)) {

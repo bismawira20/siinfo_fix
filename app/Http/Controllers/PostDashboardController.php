@@ -34,6 +34,11 @@ class PostDashboardController extends Controller
             'title' => 'required|max:255',
             'image' => 'image|file|max:1024',
             'body' => 'required'
+        ], [
+            'title.required' => 'title harus diisi.',
+            'title.max' => 'title harus terdiri dari 18 digit.',
+            
+            'body.required' => 'body harus diisi.',
         ]);
         
         $category = Category::where('name', 'Berita Kunjungan')->first();
@@ -126,8 +131,15 @@ class PostDashboardController extends Controller
             'category_id' =>'required',
             'image' => 'image|file|max:1024',
             'body' => 'required'
-        ]);
+        ], [
+            'title.required' => 'title harus diisi.',
+            'title.max' => 'title maximal terdiri dari  255 huruf.',
 
+            'category_id.required' => 'Kategori harus diisi.',
+            
+            'body.required' => 'body harus diisi.',
+        ]);
+        
         if($request->file('image')){
             $validatedData['image'] = $request->file('image')->store('post-image');
         }
@@ -162,6 +174,13 @@ class PostDashboardController extends Controller
             'category_id' =>'required',
             'body' => 'required',
             'image' => 'image|file|max:1024',
+        ], [
+            'title.required' => 'title harus diisi.',
+            'title.max' => 'title maximal terdiri dari  255 huruf.',
+
+            'category_id.required' => 'category_id harus diisi.',
+            
+            'body.required' => 'body harus diisi.',
         ]);
 
         $validatedData['user_id'] = Auth::id();
