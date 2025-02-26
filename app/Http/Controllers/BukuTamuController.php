@@ -256,7 +256,7 @@ class BukuTamuController extends Controller
     }
 
     public function setujuSemua(){
-        BukuTamu::where('status', 'pending')->update([
+        BukuTamu::where('status', 'diproses')->update([
             'status' => 'disetujui'
         ]);
 

@@ -134,7 +134,8 @@
 
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
-      <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline">
+      <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline"
+      onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
           @csrf
           @method('put')
           <button class="btn btn-success rounded mt-1 me-2">Setujui Semua</button>
@@ -160,6 +161,10 @@
           title = 'Apakah Anda yakin?';
           text = 'Anda akan menolak entri ini.';
           icon = 'warning';
+      } else if (action === 'setujuSemua') {
+            title = 'Apakah Anda yakin?';
+            text = 'Anda akan menyetujui semua entri ini.';
+            icon = 'warning';
       }
 
       return Swal.fire({
