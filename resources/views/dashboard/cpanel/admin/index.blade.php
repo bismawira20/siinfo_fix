@@ -1,4 +1,6 @@
 @extends('dashboard.layouts.main')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -89,24 +91,33 @@
           </td>
           <td>
             <div class="d-flex align-items-center gap-1">
-            <a href="{{ route('cpanel.admin.tanggapan', $p->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
-              <i class="bi bi-pencil-square fs-6 m-0"></i>
-            </a>
-            <a href="{{ route('cpanel.admin.show', $p->id) }}" class="badge bg-primary"><i class="bi bi-eye fs-6"></i></a>
-            <form action="/dashboard/cpanel/admin/{{ $p->id }}/selesai" method="POST" class="d-inline">
-            @csrf
-            @method('put')
-            <button class="badge bg-success border-0">
-                <i class="bi bi-check-lg fs-6"></i></button>
-            </form>
-            <form action="/dashboard/cpanel/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
-              @csrf
-              @method('put')
-              <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
-                <i class="bi bi-x-lg fs-6 m-0"></i>
-              </button>
-            </form>
-            </div>
+              <a href="{{ route('cpanel.admin.tanggapan', $p->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
+                  <i class="bi bi-pencil-square fs-6"></i>
+              </a>
+              <a href="{{ route('cpanel.admin.show', $p->id) }}" class="badge bg-primary d-flex align-items-center justify-content-center">
+                  <i class="bi bi-eye fs-6"></i>
+              </a>
+          
+              @if ($p->status !== 'disetujui' && $p->status !== 'ditolak')
+                  <form action="/dashboard/cpanel/admin/{{ $p->id }}/selesai" method="POST" class="d-inline m-0" 
+                      onsubmit="event.preventDefault(); confirmAction('setuju').then((result) => { if (result) this.submit(); })">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-check-lg fs-6"></i>
+                      </button>
+                  </form>
+                  <form action="/dashboard/cpanel/admin/{{ $p->id }}/tolak" method="POST" class="d-inline m-0" 
+                      onsubmit="event.preventDefault(); confirmAction('tolak').then((result) => { if (result) this.submit(); })">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-x-lg fs-6"></i>
+                      </button>
+                  </form>
+              @endif
+          </div>
+          
           </td>
         </tr>
         @endforeach
@@ -115,7 +126,8 @@
   </div>
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
-    <form action="/dashboard/cpanel/admin/selesaiSemua" method="POST" class="d-inline">
+    <form action="/dashboard/cpanel/admin/selesaiSemua" method="POST" class="d-inline" 
+    onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
       @csrf
       @method('put')
       <button class="btn btn-success rounded mt-1 me-2">Setujui Semua</button>
@@ -129,4 +141,41 @@
     
     <div class="d-inline">{{ $cpanel->links() }}</div>
 </div>
+
+<script>
+  function confirmAction(action) {
+      let title, text, icon;
+
+      if (action === 'setuju') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menyetujui entri ini.';
+          icon = 'warning';
+      } else if (action === 'tolak') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menolak entri ini.';
+          icon = 'warning';
+      } else if (action === 'setujuSemua') {
+            title = 'Apakah Anda yakin?';
+            text = 'Anda akan menyetujui semua entri ini.';
+            icon = 'warning';
+      }
+
+      return Swal.fire({
+          title: title,
+          text: text,
+          icon: icon,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              return true; // Form akan dikirim
+          } else {
+              return false; // Form tidak akan dikirim
+          }
+      });
+  }
+</script>
 @endsection
