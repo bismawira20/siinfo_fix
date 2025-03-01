@@ -64,7 +64,7 @@
             </label>
             <div class="d-flex align-items-center">
             <input type="text" class="form-control @error('instansi') is-invalid @enderror" 
-            id="instansi" name="instansi" value="{{ old('instasi') }}">
+            id="instansi" name="instansi" value="{{ old('instansi') }}">
             <span class="valid-icon" id="valid-instansi"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('instansi')
@@ -87,7 +87,7 @@
             <span class="valid-icon" id="valid-bidang_id"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('bidang_id')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror

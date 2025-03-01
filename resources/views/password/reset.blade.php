@@ -111,7 +111,7 @@
                 <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" placeholder="Konfirmasi Password" required>
                 <label for="password_confirmation">Konfirmasi Password</label>
             </div>
-            <button class="btn btn-danger w-100 py-2" type="submit">Reset Password</button>
+            <button class="btn w-100 py-2" type="submit" style="background-color: #ad1717; color: white; border: none;">Reset Password</button>
         </form>
               <small class="d-block text-center mt-2">Belum punya akun?
             <a href="/register" class="text-danger">Daftar Akun</a></small>

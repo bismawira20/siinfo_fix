@@ -2,6 +2,8 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -92,48 +94,92 @@
             ($b->status == 'ditolak' ? 'bg-danger' : 'bg-secondary')) 
             }}" style="font-size: 0.9em;">
             {{ $b->status }}
-            </span>
-          </td>
-          <td>
-            <div class="d-flex align-items-center gap-2">
-              <a href="{{ route('bukutamu.admin.tanggapan', $b->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
-                <i class="bi bi-pencil-square fs-6 m-0"></i>
-              </a>
-              <a href="{{ route('bukutamu.admin.show', $b->id) }}" class="badge bg-primary d-flex align-items-center justify-content-center">
-                <i class="bi bi-eye fs-6 m-0"></i>
-              </a>
-            </div>
-            <div class="d-flex align-items-center gap-2 mt-1">
-              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline">
-                @csrf
-                @method('put')
-                <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
-                  <i class="bi bi-check-lg fs-6 m-0"></i>
-                </button>
+          </span>
+        </td>
+        <td>
+          <div class="d-flex align-items-center gap-1">
+            <a href="{{ route('bukutamu.admin.tanggapan', $b->id) }}" class="badge bg-warning d-flex align-items-center justify-content-center">
+              <i class="bi bi-pencil-square fs-6 m-0"></i>
+            </a>
+            <a href="{{ route('bukutamu.admin.show', $b->id) }}" class="badge bg-primary"><i class="bi bi-eye fs-6"></i></a>
+            
+            @if ($b->status !== 'disetujui' && $b->status !== 'ditolak')
+              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/setuju" method="POST" class="d-inline m-0" 
+                  onsubmit="event.preventDefault(); confirmAction('setuju').then((result) => { if (result) this.submit(); })">
+                  @csrf
+                  @method('put')
+                  <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                      <i class="bi bi-check-lg fs-6"></i>
+                  </button>
               </form>
-              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline">
-                @csrf
-                @method('put')
-                <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
-                  <i class="bi bi-x-lg fs-6 m-0"></i>
-                </button>
+              <form action="/dashboard/bukutamu/admin/{{ $b->id }}/tolak" method="POST" class="d-inline m-0" 
+                  onsubmit="event.preventDefault(); confirmAction('tolak').then((result) => { if (result) this.submit(); })">
+                  @csrf
+                  @method('put')
+                  <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                      <i class="bi bi-x-lg fs-6"></i>
+                  </button>
               </form>
+            @endif
             </div>
           </td>
-          
         </tr>
         @endforeach
-      </tbody>
-    </table>
-  </div>
-
-  <div class="d-flex justify-content-between align-items-center">
-    <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline">
+    </tbody>
+  </table>
+</div>
+<div class="d-flex justify-content-between align-items-center">
+  <div class="d-flex align-items-center">
+  <form action="/dashboard/bukutamu/admin/setujuSemua" method="POST" class="d-inline"
+  onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
       @csrf
       @method('put')
-      <button class="btn btn-success rounded mt-1">Setujui Semua</button>
-    </form>
+      <button class="btn btn-success rounded mt-1 me-2">Setujui Semua</button>
+  </form>
 
-    <div class="d-inline">{{ $bukutamu->links() }}</div>
+  <form action="/dashboard/bukutamu/admin/export-excel" method="GET" class="d-inline">
+    <button class="btn btn-success rounded mt-1">Export Excel</button>
+  </form>
+  </div>
+  
+  <div class="d-inline">{{ $bukutamu->links() }}</div>
 </div>
+
+<script>
+function confirmAction(action) {
+    let title, text, icon;
+
+    if (action === 'setuju') {
+        title = 'Apakah Anda yakin?';
+        text = 'Anda akan menyetujui entri ini.';
+        icon = 'warning';
+    } else if (action === 'tolak') {
+        title = 'Apakah Anda yakin?';
+        text = 'Anda akan menolak entri ini.';
+        icon = 'warning';
+    } else if (action === 'setujuSemua') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menyetujui semua entri ini.';
+          icon = 'warning';
+    }
+
+
+    return Swal.fire({
+        title: title,
+        text: text,
+        icon: icon,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            return true; // Form akan dikirim
+        } else {
+            return false; // Form tidak akan dikirim
+        }
+    });
+}
+</script>
 @endsection

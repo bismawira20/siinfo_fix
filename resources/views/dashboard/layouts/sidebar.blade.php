@@ -86,7 +86,7 @@
           <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2 {{ Request::is('dashboard/bidangs*') ? 'active' : '' }}" 
             aria-current="page" href="/dashboard/bidangs">
-              <svg class="bi"><use xlink:href="#puzzle"/></svg>
+              <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>
               Bidang
             </a>
           </li>

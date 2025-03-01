@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailDinas;
 use Illuminate\Http\Request;
+use App\Exports\ExportEmailDinas;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class EmailDinasController extends Controller
@@ -24,25 +26,25 @@ class EmailDinasController extends Controller
     public function store(Request $request){
         $validatedData = $request->validate([
             'nama_opd' => 'required|max:255',
-            'nama_pic' => 'required|max:255',
-            'no_telp_pic' => 'required|max:15',
+            'nama_pic' => 'required|max:255|regex:/^[\p{L} ]+$/u',
+            'no_telp_pic' => 'required|digits_between:10,15',
             'surat_rekomendasi' => 'required|file|mimes:pdf|max:1024',
             'form_pengajuan' => 'required|file|mimes:pdf|max:1024',
-            'nama_pemohon' => 'required|max:255',
-            'nip_pemohon' => 'required|max:255',
-            'no_telp_pemohon' => 'required|max:255',
-            'nama_2' => 'nullable|max:255',
-            'nip_2' => 'nullable|max:255',
-            'no_telp_2' => 'nullable|max:255',
-            'nama_3' => 'nullable|max:255',
-            'nip_3' => 'nullable|max:255',
-            'no_telp_3' => 'nullable|max:255',
-            'nama_4' => 'nullable|max:255',
-            'nip_4' => 'nullable|max:255',
-            'no_telp_4' => 'nullable|max:255',
-            'nama_5' => 'nullable|max:255',
-            'nip_5' => 'nullable|max:255',
-            'no_telp_5' => 'nullable|max:255',
+            'nama_pemohon' => 'required|max:255|regex:/^[\p{L} ]+$/u',
+            'nip_pemohon' => 'required|digits:18',
+            'no_telp_pemohon' => 'required|digits_between:10,15',
+            'nama_2' => 'nullable|max:255|regex:/^[\p{L} ]+$/u',
+            'nip_2' => 'nullable|digits:18',
+            'no_telp_2' => 'nullable|digits_between:10,15',
+            'nama_3' => 'nullable|max:255|regex:/^[\p{L} ]+$/u',
+            'nip_3' => 'nullable|digits:18',
+            'no_telp_3' => 'nullable|digits_between:10,15',
+            'nama_4' => 'nullable|max:255|regex:/^[\p{L} ]+$/u',
+            'nip_4' => 'nullable|digits:18',
+            'no_telp_4' => 'nullable|digits_between:10,15',
+            'nama_5' => 'nullable|max:255|regex:/^[\p{L} ]+$/u',
+            'nip_5' => 'nullable|digits:18',
+            'no_telp_5' => 'nullable|digits_between:10,15',
         ], [
             'nama_opd.required' => 'Nama harus diisi.',
             'nama_opd.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
@@ -188,7 +190,7 @@ class EmailDinasController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
+        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas disetujui!");
     }
 
     public function selesaiSemua(){
@@ -196,7 +198,7 @@ class EmailDinasController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas selesai!");
+        return redirect('/dashboard/emaildinas/admin')->with("success", "Pengajuan Email Dinas disetujui!");
     }
     public function tolak(EmailDinas $emaildinas){
         EmailDinas::where('id', $emaildinas->id)->update([
@@ -232,5 +234,8 @@ class EmailDinasController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect('/dashboard/emaildinas/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+    public function export_excel(){
+        return Excel::download(new ExportEmailDinas, 'pembuatan-email-dinas.xlsx');
     }
 }

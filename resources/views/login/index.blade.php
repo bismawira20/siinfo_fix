@@ -95,7 +95,7 @@
                 <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
                 <label for="password">Password</label>
             </div>
-            <button class="btn btn-danger w-100 py-2" type="submit">LOGIN</button>
+            <button class="btn w-100 py-2" type="submit" style="background-color: #ad1717; color: white; border: none;">LOGIN</button>
         </form>
         <small class="d-block mt-3">Lupa Password? 
             <a href="/password/reset">Reset Password</a></small>

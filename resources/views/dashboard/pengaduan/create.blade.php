@@ -72,7 +72,7 @@
                 <span class="valid-icon" id="valid-jenis_id" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('jenis_id')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -110,9 +110,9 @@
                 <span class="valid-icon" id="valid-deskripsi" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('deskripsi')
-                <p class="text-danger">
-                    {{ $message }}
-                </p>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
             @enderror
         </div>
 

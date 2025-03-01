@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Passphrase;
 use Illuminate\Http\Request;
+use App\Exports\ExportPassphrase;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class PassphraseController extends Controller
@@ -34,22 +36,31 @@ class PassphraseController extends Controller
         ], [
             'nama.required' => 'Nama harus diisi.',
             'nama.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
+
             'no_telp.required' => 'Nomor telepon harus diisi.',
             'no_telp.digits_between' => 'Nomor telepon harus terdiri dari antara 10 hingga 15 digit.',
+            
             'nip.required' => 'NIP harus diisi.',
             'nip.digits' => 'NIP harus terdiri dari 18 digit.',
+            
             'nik.required' => 'NIK harus diisi.',
             'nik.digits' => 'NIK harus terdiri dari 16 digit.',
+            
             'email_domain.required' => 'Email harus diisi.',
-            'email_domain.digits' => 'Email harus @semarangkota.go.id.',
+            'email_domain.regex' => 'Format email tidak valid.',
+            
             'alasan.required' => 'Alasan harus diisi',
             'alasan.digits' =>'Alasan harus diisi huruf',
+            
             'nama_user.required' => 'Nama harus diisi.',
-            'nama_user.regex' => 'Nama tidak boleh mengandung angka atau simbol.',
-            'nip_user.required' => 'NIP harus diisi.',
+            'nama_user.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            '
+            nip_user.required' => 'NIP harus diisi.',
             'nip_user.digits' => 'NIP harus terdiri dari 18 digit.',
+            
             'nik_user.required' => 'NIK harus diisi.',
             'nik_user.digits' => 'NIK harus terdiri dari 16 digit.',
+            
             'nip_pemohon.required' => 'NIP harus diisi.',
             'nip_pemohon.digits' => 'NIP harus terdiri dari 18 digit.',
         ]);
@@ -145,7 +156,7 @@ class PassphraseController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE selesai diproses!");
+        return redirect('/dashboard/passphrase/admin')->with("success", "Passphrase TTE disetujui!");
     }
 
     public function tolak(passphrase $passphrase){
@@ -182,5 +193,8 @@ class PassphraseController extends Controller
 
         // Redirect dengan pesan sukses
         return redirect('/dashboard/passphrase/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+    public function export_excel(){
+        return Excel::download(new ExportPassphrase, 'pembuatan-passphrase.xlsx');
     }
 }
