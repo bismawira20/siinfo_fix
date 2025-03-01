@@ -67,7 +67,8 @@
                     class="badge bg-primary d-flex align-items-center justify-content-center text-decoration-none">
                     <i class="bi bi-eye fs-6"></i>
                 </a>
-                
+
+                <!-- @if($p->status != 'ditolak' && $p->status != 'disetujui') -->
                 <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline">
                     @csrf
                     @method('put')
@@ -83,6 +84,7 @@
                         <i class="bi bi-x-lg fs-6 m-0"></i>
                     </button>
                 </form>
+                <!-- @endif -->
             </div>
         </td>
         </tr>
@@ -99,4 +101,65 @@
     
     <div class="d-inline">{{ $pengaduan->links() }}</div>
 </div>
+
+<!-- Approve Modal -->
+<!-- <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="approveModalLabel">Konfirmasi Persetujuan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menyetujui pengaduan ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form id="approveForm" method="POST" class="d-inline">
+                    @csrf
+                    @method('put')
+                    <button type="submit" class="btn btn-success">Ya, Setujui</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- Reject Modal -->
+<!-- <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel">Konfirmasi Penolakan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin menolak pengaduan ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form id="rejectForm" method="POST" class="d-inline">
+                    @csrf
+                    @method('put')
+                    <button type="submit" class="btn btn-danger">Ya, Tolak</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showApproveModal(id) {
+    document.getElementById('approveForm').action = `/dashboard/pengaduan/admin/${id}/setuju`;
+    var modal = new bootstrap.Modal(document.getElementById('approveModal'));
+    modal.show();
+}
+
+function showRejectModal(id) {
+    document.getElementById('rejectForm').action = `/dashboard/pengaduan/admin/${id}/tolak`;
+    var modal = new bootstrap.Modal(document.getElementById('rejectModal'));
+    modal.show();
+}
+</script> -->
+
 @endsection
