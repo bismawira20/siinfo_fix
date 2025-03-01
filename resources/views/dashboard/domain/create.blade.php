@@ -127,6 +127,7 @@
         <div class="mt-5 mb-3">
             <h6>Deskripsi Layanan</h6>
         </div>
+        
         <div class="mb-3">
             <label for="paket" class="form-label">Paket Layanan</label>
             <div class="d-flex align-items-center">
@@ -139,7 +140,7 @@
                 <span class="valid-icon" id="valid-paket" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('paket')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -166,15 +167,15 @@
         <div class="mb-3">
             <label for="fungsi_app" class="form-label">Fungsi Aplikasi</label>
             <div class="d-flex align-items-center">
-            <textarea class="form-control @error('fungsi_app') is-invalid @enderror" 
-                  name="fungsi_app" 
-                  id="fungsi_app" 
-                  rows="5" 
-                  placeholder="Masukkan fungsi aplikasi">{{ old('fungsi_app') }}</textarea>
-            <span class="valid-icon" id="valid-fungsi_app" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
+                <textarea class="form-control @error('fungsi_app') is-invalid @enderror" 
+                          name="fungsi_app" 
+                          id="fungsi_app" 
+                          rows="5" 
+                          placeholder="Masukkan fungsi aplikasi">{{ old('fungsi_app') }}</textarea>
+                <span class="valid-icon" id="valid-fungsi_app" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('fungsi_app')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -191,7 +192,7 @@
                 <span class="valid-icon" id="valid-bahasa_pemograman" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('bahasa_pemograman')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -399,9 +400,10 @@ $(document).ready(function() {
     // Validasi Fungsi Aplikasi
     $('#fungsi_app').on('input', function() {
         const validIcon = $('#valid-fungsi_app');
+        const regex = /^[\p{L} ]+$/u;
         const value = $(this).val();
         
-        if (value.length > 0 && value.length <= 1000) {
+        if (value.length > 0 && value.length <= 1000 && regex.test(value)) {
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {

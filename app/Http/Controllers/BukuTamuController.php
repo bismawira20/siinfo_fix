@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use App\Models\Bidang;
 use App\Models\BukuTamu;
 use Illuminate\Http\Request;
+use App\Exports\ExportBukuTamu;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BukuTamuController extends Controller
 {
@@ -254,7 +256,7 @@ class BukuTamuController extends Controller
     }
 
     public function setujuSemua(){
-        BukuTamu::where('status', 'pending')->update([
+        BukuTamu::where('status', 'diproses')->update([
             'status' => 'disetujui'
         ]);
 
@@ -287,5 +289,9 @@ class BukuTamuController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/bukutamu/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportBukuTamu, 'kunjungan.xlsx');
     }
 }

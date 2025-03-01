@@ -24,6 +24,9 @@ use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PostDashboardController;
 use App\Models\Aplikasi;
 use App\Models\BukuTamu;
+use App\Models\Cpanel;
+use App\Models\Domain;
+use App\Models\Passphrase;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
@@ -189,6 +192,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::get('/{bukutamu}/show', [BukuTamuController::class, 'adminShow'])->name('bukutamu.admin.show');
         Route::get('/{bukutamu}/tanggapi',[BukuTamuController::class, 'adminTanggapi'])->name('bukutamu.admin.tanggapan');
         Route::put('/{bukutamu}/update', [BukuTamuController::class, 'adminUpdate'])->name('bukutamu.admin.update');
+        Route::get('/export-excel',[BukuTamuController::class, 'export_excel'])->name('bukutamu.admin.export');
     });
     //Route untuk Berita
     Route::prefix('dashboard/post/admin')->group(function(){
@@ -209,6 +213,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{pengaduan}/setuju',[PengaduanController::class,'setuju'])->name('pengaduan.admin.setuju');
         Route::put('/{pengaduan}/tolak',[PengaduanController::class,'tolak'])->name('pengaduan.admin.tolak');
         Route::put('/setujuSemua',[PengaduanController::class,'setujuSemua'])->name('pengaduan.admin.setujuSemua');
+        Route::get('/export-excel',[PengaduanController::class, 'export_excel'])->name('pengaduan.admin.export');
     });
     //Route Pengajuan TTE
     Route::prefix('dashboard/pengajuan/admin')->group(function () {
@@ -219,6 +224,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{pengajuan}/tolak',[PengajuanController::class,'tolak'])->name('pengajuan.admin.tolak');
         Route::put('/{pengajuan}/selesai',[PengajuanController::class,'selesai'])->name('pengajuan.admin.selesai');
         Route::put('/selesaiSemua',[PengajuanController::class,'selesaiSemua'])->name('pengajuan.admin.selesaiSemua');
+        Route::get('/export-excel',[PengajuanController::class, 'export_excel'])->name('pengajuan.admin.export');
     });
     //Route untuk Passphrase TTE
     Route::prefix('dashboard/passphrase/admin')->group(function () {
@@ -229,7 +235,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{passphrase}/tolak',[PassphraseController::class,'tolak'])->name('passphrase.admin.tolak');
         Route::get('/{passphrase}/tanggapi',[PassphraseController::class, 'adminTanggapi'])->name('passphrase.admin.tanggapan');
         Route::put('/{passphrase}/update', [PassphraseController::class, 'adminUpdate'])->name('passphrase.admin.update');
-
+        Route::get('/export-excel',[PassphraseController::class, 'export_excel'])->name('passphrase.admin.export');
     });
     //Route untuk CPANEL
     Route::prefix('dashboard/cpanel/admin')->group(function () {
@@ -240,6 +246,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{cpanel}/tolak',[CpanelController::class,'tolak'])->name('cpanel.admin.tolak');
         Route::get('/{cpanel}/tanggapi',[CpanelController::class, 'adminTanggapi'])->name('cpanel.admin.tanggapan');
         Route::put('/{cpanel}/update', [CpanelController::class, 'adminUpdate'])->name('cpanel.admin.update');
+        Route::get('/export-excel',[CpanelController::class, 'export_excel'])->name('cpanel.admin.export');
     });
     //Route untuk EmailDinas
     Route::prefix('dashboard/emaildinas/admin')->group(function () {
@@ -250,6 +257,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{emaildinas}/tolak',[EmailDinasController::class,'tolak'])->name('emaildinas.admin.tolak');
         Route::get('/{emaildinas}/tanggapi',[EmailDinasController::class, 'adminTanggapi'])->name('emaildinas.admin.tanggapan');
         Route::put('/{emaildinas}/update', [EmailDinasController::class, 'adminUpdate'])->name('emaildinas.admin.update');
+        Route::get('/export-excel',[EmailDinasController::class, 'export_excel'])->name('emaildinas.admin.export');
     });
     //Route untuk Aplikasi
     Route::prefix('dashboard/aplikasi/admin')->group(function () {
@@ -260,6 +268,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{aplikasi}/tolak',[AplikasiController::class,'tolak'])->name('aplikasi.admin.tolak');
         Route::get('/{aplikasi}/tanggapi',[AplikasiController::class, 'adminTanggapi'])->name('aplikasi.admin.tanggapan');
         Route::put('/{aplikasi}/update', [AplikasiController::class, 'adminUpdate'])->name('aplikasi.admin.update');
+        Route::get('/export-excel',[AplikasiController::class, 'export_excel'])->name('aplikasi.admin.export');
     });
     //Route untuk Domain
     Route::prefix('dashboard/domain/admin')->group(function () {
@@ -270,6 +279,7 @@ Route::middleware(['auth', IsAdmin::class])->group(function (){
         Route::put('/{domain}/tolak',[DomainController::class,'tolak'])->name('domain.admin.tolak');
         Route::put('/{domain}/selesai',[DomainController::class,'selesai'])->name('domain.admin.selesai');
         Route::put('/selesaiSemua',[DomainController::class,'selesaiSemua'])->name('domain.admin.selesaiSemua');
+        Route::get('/export-excel',[DomainController::class, 'export_excel'])->name('domain.admin.export');
     });
 });
 

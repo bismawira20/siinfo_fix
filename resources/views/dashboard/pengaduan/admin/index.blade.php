@@ -1,5 +1,8 @@
 @extends('dashboard.layouts.main')
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard Pengaduan</h1>
@@ -67,24 +70,24 @@
                     class="badge bg-primary d-flex align-items-center justify-content-center text-decoration-none">
                     <i class="bi bi-eye fs-6"></i>
                 </a>
-
-                <!-- @if($p->status != 'ditolak' && $p->status != 'disetujui') -->
-                <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline">
-                    @csrf
-                    @method('put')
-                    <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-check-lg fs-6"></i>
-                    </button>
-                </form>
-                
-                <form action="/dashboard/pengaduan/admin/{{ $p->id }}/tolak" method="POST" class="d-inline">
-                    @csrf
-                    @method('put')
-                    <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-x-lg fs-6 m-0"></i>
-                    </button>
-                </form>
-                <!-- @endif -->
+                @if ($p->status !== 'disetujui' && $p->status !== 'ditolak')
+                  <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline m-0" 
+                      onsubmit="event.preventDefault(); confirmAction('setuju').then((result) => { if (result) this.submit(); })">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-success border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-check-lg fs-6"></i>
+                      </button>
+                  </form>
+                  <form action="/dashboard/pengaduan/admin/{{ $p->id }}/tolak" method="POST" class="d-inline m-0" 
+                      onsubmit="event.preventDefault(); confirmAction('tolak').then((result) => { if (result) this.submit(); })">
+                      @csrf
+                      @method('put')
+                      <button class="badge bg-danger border-0 d-flex align-items-center justify-content-center">
+                          <i class="bi bi-x-lg fs-6"></i>
+                      </button>
+                  </form>
+                @endif
             </div>
         </td>
         </tr>
@@ -93,73 +96,57 @@
     </table>
   </div>
   <div class="d-flex justify-content-between align-items-center">
-    <form action="/dashboard/pengaduan/admin/setujuSemua" method="POST" class="d-inline">
+    <div class="d-flex align-items-center">
+    <form action="/dashboard/pengaduan/admin/setujuSemua" method="POST" class="d-inline"
+    onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
       @csrf
       @method('put')
-      <button class="btn btn-success rounded">Setujui Semua</button>
+      <button class="btn btn-success rounded mt-1 me-2">Setujui Semua</button>
     </form>
+
+    <form action="/dashboard/pengaduan/admin/export-excel" method="GET" class="d-inline">
+        <button class="btn btn-success rounded mt-1">Export Excel</button>
+    </form>
+    </div>
     
     <div class="d-inline">{{ $pengaduan->links() }}</div>
 </div>
 
-<!-- Approve Modal -->
-<!-- <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="approveModalLabel">Konfirmasi Persetujuan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menyetujui pengaduan ini?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <form id="approveForm" method="POST" class="d-inline">
-                    @csrf
-                    @method('put')
-                    <button type="submit" class="btn btn-success">Ya, Setujui</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- Reject Modal -->
-<!-- <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rejectModalLabel">Konfirmasi Penolakan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Apakah Anda yakin ingin menolak pengaduan ini?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <form id="rejectForm" method="POST" class="d-inline">
-                    @csrf
-                    @method('put')
-                    <button type="submit" class="btn btn-danger">Ya, Tolak</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-function showApproveModal(id) {
-    document.getElementById('approveForm').action = `/dashboard/pengaduan/admin/${id}/setuju`;
-    var modal = new bootstrap.Modal(document.getElementById('approveModal'));
-    modal.show();
-}
+  function confirmAction(action) {
+      let title, text, icon;
 
-function showRejectModal(id) {
-    document.getElementById('rejectForm').action = `/dashboard/pengaduan/admin/${id}/tolak`;
-    var modal = new bootstrap.Modal(document.getElementById('rejectModal'));
-    modal.show();
-}
-</script> -->
+      if (action === 'setuju') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menyetujui entri ini.';
+          icon = 'warning';
+      } else if (action === 'tolak') {
+          title = 'Apakah Anda yakin?';
+          text = 'Anda akan menolak entri ini.';
+          icon = 'warning';
+      }  else if (action === 'setujuSemua') {
+            title = 'Apakah Anda yakin?';
+            text = 'Anda akan menyetujui semua entri ini.';
+            icon = 'warning';
+      }
 
+
+      return Swal.fire({
+          title: title,
+          text: text,
+          icon: icon,
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Batal'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              return true; // Form akan dikirim
+          } else {
+              return false; // Form tidak akan dikirim
+          }
+      });
+  }
+</script>
 @endsection

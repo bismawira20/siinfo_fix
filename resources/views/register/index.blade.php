@@ -45,7 +45,7 @@
         font-weight: bold;
     }
     .login-card button {
-        background-color: red;
+        background-color: #ad1717;
         border: none;
     }
     .login-card a {

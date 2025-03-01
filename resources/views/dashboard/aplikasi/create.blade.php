@@ -144,7 +144,7 @@
             <span class="valid-icon" id="valid-deskripsi" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('deskripsi')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -161,7 +161,7 @@
             <span class="valid-icon" id="valid-tipe" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('tipe')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror
@@ -174,9 +174,9 @@
             <span class="valid-icon" id="valid-tahun_pembuatan" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('tahun_pembuatan')
-                <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
            @enderror
         </div>
         <div class="mb-3">
@@ -187,9 +187,9 @@
             <span class="valid-icon" id="valid-bahasa_pemograman" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('bahasa_pemograman')
-               <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
            @enderror
         </div>
         <div class="mb-3">
@@ -200,9 +200,9 @@
             <span class="valid-icon" id="valid-framework" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('framework')
-                <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
            @enderror
         </div>
         <div class="mb-3">
@@ -213,9 +213,9 @@
             <span class="valid-icon" id="valid-database" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('database')
-               <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
            @enderror
         </div>
         <div class="mb-3">
@@ -226,9 +226,9 @@
             <span class="valid-icon" id="valid-sistem_operasi" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('sistem_operasi')
-               <div class="invalid-feedback">
-                   {{ $message }}
-               </div>
+            <div class="invalid-feedback d-block">
+                {{ $message }}
+            </div>
             @enderror
         </div>
         <div class="mb-3">
@@ -243,7 +243,7 @@
                 <span class="valid-icon" id="valid-instalasi" style="display: none;"><i class="fas fa-check" style="color: green;"></i></span>
             </div>
             @error('instalasi')
-            <div class="invalid-feedback">
+            <div class="invalid-feedback d-block">
                 {{ $message }}
             </div>
             @enderror

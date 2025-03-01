@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Domain;
 use Illuminate\Http\Request;
+use App\Exports\ExportDomain;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class DomainController extends Controller
@@ -31,7 +33,7 @@ class DomainController extends Controller
             'no_telp' => 'required|digits_between:10,15|regex:/^[0-9]+$/',
             'paket' => 'required',
             'nama_domain' => 'required|regex:/^[a-zA-Z0-9._%+-]+\.semarangkota\.go\.id$/',
-            'fungsi_app' => 'required',
+            'fungsi_app' => 'required|regex:/^[\p{L} ]+$/u',
             'bahasa_pemograman' => 'required',
             'dokumen' => 'required|file|mimes:pdf|max:1024',
         ], [
@@ -62,6 +64,7 @@ class DomainController extends Controller
             'nama_domain.regex' => 'Nama domain harus dalam format nama.semarangkota.go.id.',
             
             'fungsi_app.required' => 'Fungsi aplikasi harus diisi.',
+            'fungsi_app.regex' => 'Fungsi harus berupa huruf dan spasi',
             
             'bahasa_pemograman.required' => 'Bahasa pemrograman harus diisi.',
             
@@ -142,7 +145,7 @@ class DomainController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
+        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain disetujui!");
     }
 
     public function selesaiSemua(){
@@ -150,7 +153,7 @@ class DomainController extends Controller
             'status' => 'disetujui'
         ]);
 
-        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain selesai!");
+        return redirect('/dashboard/domain/admin')->with("success", "Pengajuan Domain disetujui!");
     }
 
     public function tolak(Domain $domain){
@@ -187,5 +190,9 @@ class DomainController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/domain/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportDomain, 'pembuatan-domain.xlsx');
     }
 }

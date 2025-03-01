@@ -13,6 +13,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     {{-- My Style --}}
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="{{ "https://semarangkota.go.id/assets/img/logo-icon.png" }}">
+
     <title>SI-INFO | {{ $title }}</title>
   </head>
   <body>

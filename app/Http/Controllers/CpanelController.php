@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cpanel;
 use Illuminate\Http\Request;
+use App\Exports\ExportCpanel;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 
 class CpanelController extends Controller
@@ -29,7 +31,7 @@ class CpanelController extends Controller
             'nip' => 'required|digits:18', // NIP harus terdiri dari 18 digit
             'jabatan' => 'required|max:255',
             'asal_opd' => 'required|max:255',
-            'url' => 'required|max:255|regex:/^(https?:\/\/)?([a-z0-9]+(\.[a-z0-9]+)+)$/i', // Pastikan URL valid
+            'url' => 'required|max:255|regex:/^(https?:\/\/)?[a-z0-9-]+\.semarangkota\.go\.id$/i', // Pastikan URL valid
             'file' => 'required|file|mimes:pdf|max:1024',
         ], [
             'nama.required' => 'Nama harus diisi.',
@@ -159,5 +161,9 @@ class CpanelController extends Controller
     
         // Redirect dengan pesan sukses
         return redirect('/dashboard/cpanel/admin')->with('success', 'Tanggapan berhasil disimpan!');
+    }
+
+    public function export_excel(){
+        return Excel::download(new ExportCpanel, 'pembuatan-cpanel.xlsx');
     }
 }

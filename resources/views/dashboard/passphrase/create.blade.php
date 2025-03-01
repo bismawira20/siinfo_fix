@@ -185,48 +185,48 @@ $(document).ready(function() {
         }
     });
 
-    // Validasi untuk NIP Pemohon
-    $('#nip_pemohon').on('input', function() {
-        const validIcon = $('#valid-nip_pemohon');
-        const value = $(this).val();
-        
-        if (/^\d{18}$/.test(value)) { // Cek panjang dan format
-            validIcon.show(); // Tampilkan centang hijau
-            $(this).removeClass('is-invalid'); // Hapus kelas invalid
-        } else {
-            validIcon.hide(); // Sembunyikan centang hijau
-            $(this).addClass('is-invalid'); // Tambahkan kelas invalid
-        }
-    });
-
-    // Validasi untuk Nomor Telepon
-    $('#no_telp').on('input', function() {
-        const validIcon = $('#valid-no_telp');
-        const value = $(this).val();
-        
-        if (/^\d{10,15}$/.test(value)) { // Cek panjang dan format
-            validIcon.show(); // Tampilkan centang hijau
-            $(this).removeClass('is-invalid'); // Hapus kelas invalid
-        } else {
-            validIcon.hide(); // Sembunyikan centang hijau
-            $(this).addClass('is-invalid'); // Tambahkan kelas invalid
-        }
-    });
-
-    // Validasi untuk Nama user
-    $('#nama_user').on('input', function() {
-        const validIcon = $('#valid-nama_user');
-        const regex = /^[\p{L} ]+$/u; // Hanya huruf dan spasi
-        const value = $(this).val();
-        
-        if (value.length > 0 && value.length <= 255 && regex.test(value)) {
-            validIcon.show(); // Tampilkan centang hijau
-            $(this).removeClass('is-invalid'); // Hapus kelas invalid
-        } else {
-            validIcon.hide(); // Sembunyikan centang hijau
-            $(this).addClass('is-invalid'); // Tambahkan kelas invalid
-        }
-    });
+                // Validasi untuk NIP Pemohon
+                $('#nip_pemohon').on('input', function() {
+                    const validIcon = $('#valid-nip_pemohon');
+                    const value = $(this).val();
+            
+                    if (/^\d{18}$/.test(value)) { // Cek panjang dan format
+                        validIcon.show(); // Tampilkan centang hijau
+                        $(this).removeClass('is-invalid'); // Hapus kelas invalid
+                    } else {
+                        validIcon.hide(); // Sembunyikan centang hijau
+                        $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+                    }
+                });
+            
+                // Validasi untuk Nomor Telepon
+                $('#no_telp').on('input', function() {
+                    const validIcon = $('#valid-no_telp');
+                    const value = $(this).val();
+            
+                    if (/^\d{10,15}$/.test(value)) { // Cek panjang dan format
+                        validIcon.show(); // Tampilkan centang hijau
+                        $(this).removeClass('is-invalid'); // Hapus kelas invalid
+                    } else {
+                        validIcon.hide(); // Sembunyikan centang hijau
+                        $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+                    }
+                });
+            
+                // Validasi untuk Nama user
+                $('#nama_user').on('input', function() {
+                    const validIcon = $('#valid-nama_user');
+                    const regex = /^[\p{L} ]+$/u; // Hanya huruf dan spasi
+                    const value = $(this).val();
+            
+                    if (value.length > 0 && value.length <= 255 && regex.test(value)) {
+                        validIcon.show(); // Tampilkan centang hijau
+                        $(this).removeClass('is-invalid'); // Hapus kelas invalid
+                    } else {
+                        validIcon.hide(); // Sembunyikan centang hijau
+                        $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+                    }
+                });
 
     //Validasi untuk nip user
     $('#nip_user').on('input', function() {
