@@ -165,11 +165,10 @@
                 <div class="invalid-feedback">
                     {{ $message }}</div>
             @enderror
-
         </div>
 
-        <script>
-$(document).ready(function() {
+<script>
+    $(document).ready(function() {
     // Validasi untuk Nama
     $('#nama').on('input', function() {
         const validIcon = $('#valid-nama');
@@ -226,7 +225,6 @@ $(document).ready(function() {
             $(this).addClass('is-invalid'); // Tambahkan kelas invalid
         }
     });
->>>>>>> c17c702b37816e61612ebfd12449953d07bcd4e7
 
     //Validasi untuk nip user
     $('#nip_user').on('input', function() {
@@ -297,18 +295,6 @@ $(document).ready(function() {
     }); 
 });
 </script>
-
-        <!-- Terms and Conditions Section -->
-        <!-- <div class="mb-3">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="termsCheckbox" required>
-                <label class="form-check-label" for="termsCheckbox">
-                    Saya telah membaca dan menyetujui 
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Syarat dan Ketentuan</a>
-                </label>
-            </div>
-        </div> -->
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <!-- Confirmation Modal with Terms and Conditions -->
