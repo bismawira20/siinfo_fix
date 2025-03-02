@@ -247,14 +247,8 @@ $(document).ready(function() {
     $('#nama_opd').on('input', function() {
         const value = $(this).val();
         const validIcon = $('#valid-nama_opd');
-        const regex = /^[\p{L} ]+$/u;
 
-        // Remove any non-letter characters (except spaces)
-        if (!regex.test(value)) {
-            $(this).val(value.replace(/[^A-Za-z\s]/g, ''));
-        }
-
-        if (value.length > 0 && value.length <= 255 && regex.test(value)) {
+        if (value.length > 0 && value.length <= 255) {
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {

@@ -299,13 +299,14 @@ $(document).ready(function() {
     $('#jabatan').on('input', function() {
         const validIcon = $('#valid-jabatan');
         const value = $(this).val();
+        const regex = /^[\p{L} ]+$/u;
         
         // Remove any non-letter characters (except spaces)
         if (!regex.test(value)) {
             $(this).val(value.replace(/[^A-Za-z\s]/g, ''));
         }
         
-        if (value.length > 0 && value.length <= 255) {
+        if (value.length > 0 && value.length <= 255 && regex.test(value)) { // Add regex test
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {
@@ -318,13 +319,14 @@ $(document).ready(function() {
     $('#opd').on('input', function() {
         const validIcon = $('#valid-opd');
         const value = $(this).val();
+        const regex = /^[\p{L} ]+$/u;
 
         // Remove any non-letter characters (except spaces)
         if (!regex.test(value)) {
             $(this).val(value.replace(/[^A-Za-z\s]/g, ''));
         }        
 
-        if (value.length > 0 && value.length <= 255) {
+        if (value.length > 0 && value.length <= 255 && regex.test(value)) { // Add regex test
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {
@@ -400,10 +402,9 @@ $(document).ready(function() {
     // Validasi Fungsi Aplikasi
     $('#fungsi_app').on('input', function() {
         const validIcon = $('#valid-fungsi_app');
-        const regex = /^[\p{L} ]+$/u;
         const value = $(this).val();
         
-        if (value.length > 0 && value.length <= 1000 && regex.test(value)) {
+        if (value.length > 0) {
             validIcon.show();
             $(this).removeClass('is-invalid');
         } else {
