@@ -105,7 +105,6 @@
   </div>
   <div class="d-flex justify-content-between align-items-center">
     <div class="d-flex align-items-center">
-    <form action="/dashboard/pengajuan/admin/selesaiSemua" method="POST" class="d-inline">
     <form action="/dashboard/pengajuan/admin/selesaiSemua" method="POST" class="d-inline"
     onsubmit="event.preventDefault(); confirmAction('setujuSemua').then((result) => { if (result) this.submit(); })">
       @csrf

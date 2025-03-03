@@ -70,7 +70,6 @@
                     class="badge bg-primary d-flex align-items-center justify-content-center text-decoration-none">
                     <i class="bi bi-eye fs-6"></i>
                 </a>
-                
                 @if ($p->status !== 'disetujui' && $p->status !== 'ditolak')
                   <form action="/dashboard/pengaduan/admin/{{ $p->id }}/setuju" method="POST" class="d-inline m-0" 
                       onsubmit="event.preventDefault(); confirmAction('setuju').then((result) => { if (result) this.submit(); })">
