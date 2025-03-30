@@ -3,22 +3,22 @@
     
     <div class="terms-section">
         <h6>Otorisasi:</h6>
-        <p>Pemohon mengonfirmasi bahwa Pemohon memiliki otorisasi yang sah untuk memohon reset password atas nama user/pemilik akun yang diinput.</p>
+        <p>Pemohon mengonfirmasi bahwa Pemohon memiliki otorisasi yang sah untuk memohon layanan bersangkutan atas nama user/pemilik akun yang diinput.</p>
     </div>
 
     <div class="terms-section">
         <h6>Kerahasiaan Informasi:</h6>
-        <p>Pemohon memahami dan setuju bahwa informasi yang Pemohon peroleh melalui proses reset password ini harus dijaga kerahasiaannya. Pemohon tidak akan memberikan informasi ini kepada pihak ketiga tanpa izin tertulis dari pemilik akun.</p>
+        <p>Pemohon memahami dan setuju bahwa informasi yang Pemohon peroleh melalui proses layanan bersangkutan ini harus dijaga kerahasiaannya. Pemohon tidak akan memberikan informasi ini kepada pihak ketiga tanpa izin tertulis dari pemilik akun.</p>
     </div>
 
     <div class="terms-section">
         <h6>Penggunaan Informasi:</h6>
-        <p>Informasi yang diperoleh melalui proses reset password hanya boleh digunakan untuk keperluan reset password tersebut dan tidak boleh disalahgunakan untuk tujuan lain. Pihak Diskominfo tidak bertanggungjawab jika terjadi penyalahgunaan informasi oleh pemohon.</p>
+        <p>Informasi yang diperoleh melalui proses layanan bersangkutan hanya boleh digunakan untuk keperluan layanan bersangkutan tersebut dan tidak boleh disalahgunakan untuk tujuan lain. Pihak Diskominfo tidak bertanggungjawab jika terjadi penyalahgunaan informasi oleh pemohon.</p>
     </div>
 
     <div class="terms-section">
         <h6>Keamanan Akun:</h6>
-        <p>Pemohon bertanggung jawab untuk memberitahukan pemilik akun terkait tentang reset password ini dan mendukung pemilik akun dalam menjaga keamanan akun tersebut.</p>
+        <p>Pemohon bertanggung jawab untuk memberitahukan pemilik akun terkait tentang layanan bersangkutan ini dan mendukung pemilik akun dalam menjaga keamanan akun tersebut.</p>
     </div>
 
     <div class="terms-section">

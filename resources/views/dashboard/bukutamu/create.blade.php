@@ -7,6 +7,8 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
 <style>
     .is-invalid {
@@ -211,21 +213,28 @@
             }
         ],
         onChange: function(selectedDates, dateStr, instance) {
-            // Cek tanggal yang dipilih
-            $.ajax({
-                url: "{{ route('bukutamu.check-tanggal') }}",
-                method: 'GET',
-                data: { tanggal: dateStr },
-                success: function(response) {
-                    if (response.count >= 3) {
-                        alert('Tanggal sudah terdaftar 3 kali, silakan pilih tanggal lain.');
-                        instance.clear();
-                    } else {
-                        // Tampilkan opsi waktu
-                        showWaktuOptions(dateStr);
-                    }
+        // Cek tanggal yang dipilih
+        $.ajax({
+            url: "{{ route('bukutamu.check-tanggal') }}",
+            method: 'GET',
+            data: { tanggal: dateStr },
+            success: function(response) {
+                if (response.count >= 3) {
+                    // Menggunakan SweetAlert untuk menampilkan pesan
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Tanggal sudah terdaftar!',
+                        text: 'Tanggal sudah terdaftar 3 kali, silakan pilih tanggal lain.',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        instance.clear(); // Menghapus tanggal yang dipilih
+                    });
+                } else {
+                    // Tampilkan opsi waktu
+                    showWaktuOptions(dateStr);
                 }
-            });
+            }
+        });
         }
     });
 
